@@ -34,11 +34,13 @@ A working [nginx](https://nginx.org) configuration is available [in the test set
 
 ### Storage
 
-All microservices have access to a database to manage sessions/authentication and objects of the o2r API, e.g. compendia or jobs. 
+All microservices have access to a database to manage sessions/authentication and objects of the o2r API, e.g. compendia or jobs.
 
 To access the content of compendia, all microservices need access to a shared file-based storage.
 
-### Integration via reverse proxy
+### Eventing
+
+MongoDB's [replica-set oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) is misused as an eventing engine to synchronize MondoDB and Elasticsearch and also to implement real-time WebSocket-based notifications. This is expected to be replaced by a proper eventing layer for productive deployments.
 
 ## Run all microservices
 
