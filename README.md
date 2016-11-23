@@ -6,7 +6,7 @@ Opening Reproducible Research (o2r) is a DFG-funded research project by Institut
 
 ## Microservice architecture
 
-o2r applies a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to seperate functions of the [o2r API](http://o2r.info/o2r-web-api) into seperate software projects.
+o2r applies a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to seperate functions of the [o2r API](http://o2r.info/o2r-web-api) into seperate software projects. Each microservice is encapsulated as a [Docker](http://docker.com/) container.
 
 The remainder of this document is an overview of the existing o2r services and how they are integrated.
 
@@ -20,9 +20,17 @@ A working [nginx](https://nginx.org) configuration is available [in the test set
 
 ### Microservices
 
-| **project** | **api path(s)** | **description** |
-|  | |
-| | |
+**project** | **api path(s)** | **language** | **description**
+------ | ------ | ------ | ------
+[platform](https://github.com/o2r-project/o2r-platform) | `/` | HTML, JavaScript | the client project, based on AngularJS
+[muncher](https://github.com/o2r-project/o2r-muncher) | `/api/v1/compendium`, `/api/v1/job` | JavaScript | core component for container execution and CRUD for compendia and jobs
+[bouncer](https://github.com/o2r-project/o2r-bouncer) | `/api/v1/auth`, `/api/v1/user/` | JavaScript | authentication service and user information (whoami)
+[informer](https://github.com/o2r-project/o2r-informer) | `~* \.io` | JavaScript | [socket.io](http://socket.io/)-based WebSockets for live updates
+[finder](https://github.com/o2r-project/o2r-finder) | `/api/v1/search` | JavaScript | discovery and search, synchronizes the database with a search database (Elasticsearch) and exposes read-only search endpoints
+[contentbutler](https://github.com/o2r-project/o2r-contentbutler) | `~ /data/` | JavaScript | access to content of compendia, reads file-base storage
+[transportar](https://github.com/o2r-project/o2r-transportar) | `~* \.(zip|tar|tar.gz)` | downloads of compendia in zip or (gzipped) tar formats
+[meta](https://github.com/o2r-project/o2r-meta) | `n/a` | Python | metadata tools for extraction and validation, used internally by microservices via Docker containers
+[shipper](https://github.com/o2r-project/o2r-shipper) | `under development` | load and save ERC from/to repositories and archives
 
 ### Storage
 
