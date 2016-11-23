@@ -28,9 +28,9 @@ A working [nginx](https://nginx.org) configuration is available [in the test set
 [informer](https://github.com/o2r-project/o2r-informer) | `~* \.io` | JavaScript | [socket.io](http://socket.io/)-based WebSockets for live updates
 [finder](https://github.com/o2r-project/o2r-finder) | `/api/v1/search` | JavaScript | discovery and search, synchronizes the database with a search database (Elasticsearch) and exposes read-only search endpoints
 [contentbutler](https://github.com/o2r-project/o2r-contentbutler) | `~ /data/` | JavaScript | access to content of compendia, reads file-base storage
-[transportar](https://github.com/o2r-project/o2r-transportar) | `~* \.(zip|tar|tar.gz)` | downloads of compendia in zip or (gzipped) tar formats
+[transportar](https://github.com/o2r-project/o2r-transportar) | `~* \.(zip|tar|tar.gz)` | JavaScript | downloads of compendia in zip or (gzipped) tar formats
 [meta](https://github.com/o2r-project/o2r-meta) | `n/a` | Python | metadata tools for extraction and validation, used internally by microservices via Docker containers
-[shipper](https://github.com/o2r-project/o2r-shipper) | `under development` | load and save ERC from/to repositories and archives
+[shipper](https://github.com/o2r-project/o2r-shipper) | `under development` | Python | load and save ERC from/to repositories and archives
 
 ### Storage
 
