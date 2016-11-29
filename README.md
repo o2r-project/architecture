@@ -6,7 +6,7 @@ Opening Reproducible Research (o2r) is a DFG-funded research project by Institut
 
 ## Microservice architecture
 
-o2r applies a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to seperate functions of the [o2r API](http://o2r.info/o2r-web-api) into seperate software projects. Each microservice is encapsulated as a [Docker](http://docker.com/) container.
+o2r applies a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functions of the [o2r API](http://o2r.info/o2r-web-api) into independent software projects. Each microservice is encapsulated as a [Docker](http://docker.com/) container.
 
 The remainder of this document is an overview of the existing o2r services and how they are integrated.
 
@@ -46,9 +46,9 @@ To access the content of compendia, all microservices need access to a shared fi
 
 ### Eventing
 
-MongoDB's [replica-set oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) is misused as an eventing engine to synchronize MondoDB and Elasticsearch and also to implement real-time WebSocket-based notifications. This is expected to be replaced by a proper eventing layer for productive deployments.
+MongoDB's [replica-set oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) is misused as an eventing engine to synchronize MongoDB and Elasticsearch and also to implement real-time WebSocket-based notifications. This is expected to be replaced by a proper eventing layer for productive deployments.
 
 ## Run all microservices
 
-For testing or development the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see `o2r-platform/test`. Please check the projects README.md for instructions.
+For testing or developing the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see the repository's directory `/test` and check the projects README.md for instructions.
 
