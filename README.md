@@ -30,13 +30,13 @@ A working [nginx](https://nginx.org) configuration is available [in the test set
 [contentbutler](https://github.com/o2r-project/o2r-contentbutler) | `~ /data/` | JavaScript | access to content of compendia, reads file-base storage
 [transportar](https://github.com/o2r-project/o2r-transportar) | `~* \.(zip|tar|tar.gz)` | JavaScript | downloads of compendia in zip or (gzipped) tar formats
 [meta](https://github.com/o2r-project/o2r-meta) | `n/a` | Python | metadata tools for extraction and validation, used internally by microservices via Docker containers
+[shipper](https://github.com/o2r-project/o2r-shipper) | `/api/v1/shipment` | Python | save compendia to repositories and archives
 
 The following microservices are currently under development.
 
 **project** | **api path(s)** | **language** | **description**
 ------ | ------ | ------ | ------
-[shipper](https://github.com/o2r-project/o2r-shipper) | `under development` | Python | save ERC to repositories and archives
-[loader](https://github.com/o2r-project/o2r-loader) | `under development` | ??? | load ERC or workspaces from repositories and cloud platforms
+[loader](https://github.com/o2r-project/o2r-loader) | `under development` | ??? | load workspaces from repositories and cloud platforms
 
 ### Storage
 
