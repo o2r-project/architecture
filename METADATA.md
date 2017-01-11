@@ -23,7 +23,7 @@ The creation from the metadata perspective is as follows:
 
 1. `init` stores the files for a new ERC in a directory.
 1. `extract` uses `metaextract.py` ([docs](https://github.com/o2r-project/o2r-meta#2-metaextract)) to analyse the incoming ERC and creates new files with _raw_ metadata for each of the scanned files. Currently the following types of files will be considered: _.r, .rmd, .shp, "bagit.txt"_. Future releases of the extractor will be likely to consider _.tex, .json (geojson), .jp2, .tiff_ and more.
-This raw metadata itself is _schemaless_ and non-semantic. The processed files are in conceptual competetion for the best representative of the working directory's meta information, i.e. there will be only one output, ideally represented by the most complete set of metadata.
+This raw metadata itself is _schemaless_ and non-semantic. The processed files are in conceptual competetion for the best representative of the working directory's meta information, i.e. there will be only one main output, ideally represented by the most complete set of metadata. By default the competing bits of information will also be preserved in `.erc/metadata_raw_<filename>.json` where _filename_ is an ide based on the original source file.
   - output file: `.erc/metadata_raw.json`
   - database field: `<compendium>.metadata.raw`
 1. `broker` uses `metabroker.py` ([docs](https://github.com/o2r-project/o2r-meta#5-metabroker)) to translate the _raw_ metadata in `json` to _o2r_ metadata in `json` as being compliant to the o2r json-schema.
