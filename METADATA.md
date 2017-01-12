@@ -12,9 +12,9 @@ For ease of access via web API, the information is also stored within the databa
 
 **The files in the compendium are always the normative source of information.**
 
-Mtadata workflows are **conducted on-demand**, i.e. when first needed.
+Metadata workflows are **conducted on-demand**, i.e. when first needed.
+The term _brokering_ means the translation from schemaless to schema-specific as well as inter-schema mapping.
 The brokering output is then stored in respective files and the database.
-By the term _brokering_ the translation from schemaless to schema-specific as well as inter-schema mapping is meant.
 
 ## Metadata extraction and brokering during creation of ERC
 
