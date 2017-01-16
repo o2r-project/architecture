@@ -10,7 +10,13 @@ To implement this new approach the project members create Open Source software p
 
 o2r applies a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functions of the [o2r API](http://o2r.info/o2r-web-api) into independent software projects. Each microservice is encapsulated as a [Docker](http://docker.com/) container.
 
-The remainder of this section is an overview of the existing o2r services and how they are integrated.
+## Metadata processes
+
+See [METADATA](METADATA.md).
+
+## o2r Services
+
+This section is an overview of the existing o2r services and how they are integrated.
 
 ### Integration
 
