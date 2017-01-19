@@ -3,7 +3,7 @@
 ### Requirements Overview
 
 The system must provide a reliable way to create, execute, and manipulate reproducibility packages of computational resesearch.
-It is based on the **Executable Research Compendium (ERC) [specification](http://o2r.info/erc-spec)**.
+At its core is the **Executable Research Compendium (ERC)**, see [specification](http://o2r.info/erc-spec).
 
 ### Quality Goals
 
