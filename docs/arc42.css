@@ -1,0 +1,59 @@
+/* readthedocs */
+.wy-side-nav-search {
+    background-color: #004286;
+}
+
+.wy-nav-side {
+    background-color: #434553;
+}
+
+.wy-menu a {
+    color: #ffffff;
+}
+
+.wy-menu-vertical a:hover {
+	background:#004286;
+}
+
+/* cinder */
+.navbar-default {
+    background-color: #004286;
+}
+
+footer small {
+    font-size: 0.7em;
+}
+
+.navbar-brand {
+    font-weight: 500;
+}
+
+.nav {
+    font-weight: 500;
+}
+
+.alert {
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    font-size: 1em;
+}
+
+.alert a {
+    color: #008cba;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #00526e;
+    text-decoration: underline;
+}
+
+.note::before {
+    content: "NOTE: ";
+    font-weight: 700;
+}
+
+.buildinfo {
+    font-size: 0.7em;
+    color: #343838;
+}

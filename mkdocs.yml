@@ -1,0 +1,13 @@
+site_name: Architecture for o2r
+site_description: Software architecture for Opening Reproducible Research
+site_author: "Daniel Nüst, Matthias Schutzeichel, Jörg Lorenz"
+pages:
+  - Architecture: index.md
+  - Glossary: glossary.md
+theme: cinder # readthedocs # flatly
+site_author: o2r project
+site_dir: site
+extra_css: [arc42.css]
+markdown_extensions:
+  - markdown_include.include
+  - def_list

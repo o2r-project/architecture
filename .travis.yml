@@ -1,0 +1,17 @@
+language: python
+python:
+  - "3.5"
+script: true
+install:
+  - "pip install mkdocs"
+  - "pip install mkdocs-cinder"
+  - "pip install markdown-include"
+after_success:
+  - if [[ $TRAVIS_BRANCH == 'arc42' && $TRAVIS_PULL_REQUEST == 'false' ]]; then ./.deploy.sh ; fi
+env:
+  global:
+    - SITE_URL: https://o2r.info/architecture
+    - GH_USER_NAME: "Opening Reproducible Research"
+    - GH_USER_EMAIL: openingrr@uni-muenster.de
+    - GH_REF: github.com/o2r-project/architecture
+    - secure: "Efeh2Pn31vxeNZHn+qWrGJfoD1FOoHDyrcAb9pRSbU5qDHKsUCxVukZEzpzgqRo0ZWciz4OCpNSDMErPxRIEYKdTAXDhTOwp9D1Fl6I6bNMDO0TSyKA7m3SMhrBfV6hyVaNnxkjEHYbYlfKTbl4TNJt966dHdesqqb4bffQUypAEnoV+L38KDRaobzwSmgFQQ6/h1VVpdE2KMMU8chwJ6uDyFiwmIPgOrIzijwCj+gYXmmefrVLsrjAbiWPsbbrFW6t0pWkwKy831M9UT9IgZHHgjpUNL4MbQoAMbn54erXe2g18nafIClVCEMCgFCkP3OiPyGe1ZgY/BN6j8TsUi6RYHF/TfNr6nbxvxeD90eOsiTd/Q3+hY0OB9WxdusiNkLrT0FoTFunyGxlo6ByL8HNxddL0Fg6s6Y4D9T8UWQ9FF9ymRS+geEPwxxkaigyUWmTwy6kanTxluYeowxkaKC5RAF4k4vHNf8Lyao/o6JZLI6tAO9Pd7TW1cVfcKJFx5N7ZUOlQcv3GB3YY/XHfjj74w2vvNlaS3IAatZUnzZPlXHc2Og31kzNm6hP34qOhpyT2a6cDtt2u5uc13OEGTx6P4zazNlLyG9Q5EDjqad4q+zAQlmfFakIMnP7AdBsmlO+Gjew/SGCv5v8WB5k5HQklnh1MCvNKrbmxxYzcPZc="

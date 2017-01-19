@@ -1,68 +1,45 @@
-# o2r Architecture
+# Software architecture for Opening Reproducible Research
 
-## The project
+Project description: [http://o2r.info](http://o2r.info)
 
-Opening Reproducible Research (o2r) is a DFG-funded research project by Institute for Geoinformatics ([ifgi](http://www.uni-muenster.de/Geoinformatics/en/)) and University and Regional Library ([ULB](http://www.ulb.uni-muenster.de/)), University of Münster, Germany. Building on recent advances in mainstream IT, o2r envisions a new architecture for storing, executing and interacting with the original analysis environment alongside the corresponding research data and manuscript. This architecture evolves around so called Executable Research Compendia (ERC) as the container for both research, review, and archival.
+**Read online: [http://o2r.info/architecture](http://o2r.info/architecture)**
 
-To implement this new approach the project members create Open Source software projects for [a web API](https://github.com/o2r-project/architecture#web-api) and [standalone tools](https://github.com/o2r-project/architecture#standalone-tools).
+## Guidelines
 
-## Web API
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-o2r applies a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functions of the [o2r API](http://o2r.info/o2r-web-api) into independent software projects. Each microservice is encapsulated as a [Docker](http://docker.com/) container.
+## Build
 
-## Metadata processes
+This specification is written in [Markdown](https://daringfireball.net/projects/markdown/), rendered with [MkDocs](http://www.mkdocs.org/) using a few [Python Markdown extensions](https://pythonhosted.org/Markdown/extensions/index.html), and deployed automatically using Travis CI.
 
-See [METADATA](METADATA.md).
+[![Build Status](https://travis-ci.org/o2r-project/architecture.svg?branch=master)](https://travis-ci.org/o2r-project/architecture)
 
-## o2r Services
+Use `mkdocs` to render it locally.
 
-This section is an overview of the existing o2r services and how they are integrated.
+```bash
+# pip install mkdocs mkdocs-cinder
+mkdocs serve
+```
 
-### Integration
+### Automated Builds
 
-The unifying component **in the back** currently is the database ([MongoDB](https://www.mongodb.com)). All information that must be shared between microservices is stored in the DB.
+Our combination of the `.travis.yml` and `.deploy.sh` will run the `mkdocs` command on every direct commit or merge on the master branch and deploy the rendered HTML documents to the `gh-pages` branch in this repository.
 
-In the **front**, a reverse proxy maps the different parts of the API to the respective microservices.
+Travis authenticates its push to the `gh-pages` branch using a [personal access token](https://github.com/settings/tokens) of the user [@o2r-user](https://github.com/o2r-user), who has write access to this repository.
+The access token is encrypted in the `.travis.yml` [using Travis CLI](https://docs.travis-ci.com/user/encryption-keys/):
 
-A working [nginx](https://nginx.org) configuration is available [in the test setup](https://github.com/o2r-project/o2r-platform/blob/master/test/nginx.conf).
+```bash
+travis encrypt GH_TOKEN=<token here>
+```
 
-### Microservices
+The variable `GH_TOKEN` is used in the deploy script.
+The token generated on the GitHub website should not be stored anywhere, simply generate a new one if needed.
 
-**project** | **api path(s)** | **language** | **description**
------- | ------ | ------ | ------
-[platform](https://github.com/o2r-project/o2r-platform) | `/` | HTML, JavaScript (AngularJS) | the client project, based on AngularJS
-[muncher](https://github.com/o2r-project/o2r-muncher) | `/api/v1/compendium`, `/api/v1/job` | JavaScript (Node.js) | core component for container execution and CRUD for compendia and jobs
-[bouncer](https://github.com/o2r-project/o2r-bouncer) | `/api/v1/auth`, `/api/v1/user/` | JavaScript (Node.js) | authentication service and user information (whoami)
-[informer](https://github.com/o2r-project/o2r-informer) | `~* \.io` | JavaScript (Node.js) | [socket.io](http://socket.io/)-based WebSockets for live updates
-[finder](https://github.com/o2r-project/o2r-finder) | `/api/v1/search` | JavaScript (Node.js) | discovery and search, synchronizes the database with a search database (Elasticsearch) and exposes read-only search endpoints
-[contentbutler](https://github.com/o2r-project/o2r-contentbutler) | `~ /data/` | JavaScript (Node.js) | access to content of compendia, reads file-base storage
-[transportar](https://github.com/o2r-project/o2r-transportar) | `~* \.(zip|tar|tar.gz)` | JavaScript (Node.js) | downloads of compendia in zip or (gzipped) tar formats
-[shipper](https://github.com/o2r-project/o2r-shipper) | `/api/v1/shipment` | Python | save compendia to repositories and archives
+This has some security risks, as described [here](https://gist.github.com/domenic/ec8b0fc8ab45f39403dd#sign-up-for-travis-and-add-your-project).
+To mitigate these risks, the option "Build pull requests" on the [Travis configuration page for this repo](https://travis-ci.org/o2r-project/erc-spec/settings) must be disabled so malicious changes to the Travis configuration file will not be build before maintainer inspection.
 
-The following microservices are currently under development.
+## License
 
-**project** | **api path(s)** | **language** | **description**
------- | ------ | ------ | ------
-[loader](https://github.com/o2r-project/o2r-loader) | `under development` | JavaScript | load workspaces from repositories and cloud platforms
-
-### Storage
-
-All microservices have access to a database to manage sessions/authentication and objects of the o2r API, e.g. compendia or jobs.
-
-To access the content of compendia, all microservices need access to a shared file-based storage.
-
-### Eventing
-
-MongoDB's [replica-set oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) is misused as an eventing engine to synchronize MongoDB and Elasticsearch and also to implement real-time WebSocket-based notifications. This is expected to be replaced by a proper eventing layer for productive deployments.
-
-### Run all microservices
-
-For testing or developing the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see the repository's directory `/test` and check the projects README.md for instructions.
-
-## Standalone tools
-
-Some functionality is not limited to the o2r web API or developed independently for practical reasons. This section lists these standalone libraries and tools.
-
-**project** | **language** | **description**
------- | ------ | ------
-[meta](https://github.com/o2r-project/o2r-meta) | Python | scripts for extraction, translation and validation of metadata, used by Node.js microservices using CLI calls
+The o2r Executable Research Compendium specification is licensed under [Creative Commons CC0 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0/), see file `LICENSE`.
+To the extent possible under law, the people who associated CC0 with this work have waived all copyright and related or neighboring rights to this work.
+This work is published from: Germany.
