@@ -3,6 +3,7 @@ site_description: Software architecture for Opening Reproducible Research
 site_author: "Daniel Nüst, Matthias Schutzeichel, Jörg Lorenz"
 pages:
   - Architecture: index.md
+  - User scenarios: user-scenarios.md
   - Glossary: glossary.md
 theme: cinder # readthedocs # flatly
 site_author: o2r project
