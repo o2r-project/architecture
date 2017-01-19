@@ -9,6 +9,9 @@ theme: cinder # readthedocs # flatly
 site_author: o2r project
 site_dir: site
 extra_css: [arc42.css]
+repo_url: https://github.com/o2r-project/architecture
+repo_name: GitHub
+edit_uri: edit/master/docs/
 markdown_extensions:
   - markdown_include.include
   - def_list
