@@ -15,6 +15,8 @@ Core components are developed using server-side JavaScript based on Node.js whil
 
 We accept that this diversification _increases complexity_ of both development and testing environments and the deployment of said services.
 
+Required documentation is minimal. The typical structure should follow common practices.
+
 ### Storage and intra-service communication
 
 In accordance with the system scope, there is no reliable storage solution implemented.
@@ -36,3 +38,10 @@ _OAuth 2.0_ is used for authentication and minimal information, which is already
 This information is shared between all services that require authentication via the database.
 
 _The client application manages the control flow_ of all user interactions.
+
+### Tools
+
+If standalone tools are developed, they should provide a command-line interface (CLI) that allows integration into microservices when needed.
+Thanks to the container architecture and the controlled, we don't need to worry about documentattion for or distribution/packaging of these tools.
+It must only be ensured they are correctly installed using the microservice's Dockerfile.
+The only required documentation is for the installation into a container and usage of the CLI.
