@@ -6,7 +6,6 @@ rev=$(git rev-parse --short HEAD)
 
 # Checkout docs branch
 branch=arc42
-git checkout $branch
 
 # Initialize gh-pages checkout
 mkdir -p site
@@ -18,6 +17,7 @@ mkdir -p site
   git remote add upstream "https://${GH_TOKEN}@${GH_REF}"
   git fetch upstream
   git reset upstream/gh-pages
+  git checkout $branch
 )
 
 # Build the documentation
