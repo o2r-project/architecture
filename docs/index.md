@@ -6,9 +6,7 @@
 
 {!docs/03_system-scope-and-context.md!}
 
-<!--
 {!docs/04_solution-strategy.md!}
--->
 
 {!docs/05_building-block-view.md!}
 
