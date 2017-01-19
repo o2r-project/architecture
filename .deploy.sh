@@ -38,5 +38,5 @@ mkdocs build --clean
   touch .
   git add -A .
   git commit -m "Rebuild pages at ${rev} with branch ${branch}"
-  git push -q upstream HEAD:gh-pages
+  git push -q -f upstream HEAD:gh-pages
 )
