@@ -1,11 +1,11 @@
-## Introduction and Goals
+## 1. Introduction and Goals
 
-### Requirements Overview
+### 1.1 Requirements Overview
 
 The system must provide a reliable way to create, execute, and manipulate reproducibility packages of computational resesearch.
 At its core is the **Executable Research Compendium (ERC)**, see [specification](http://o2r.info/erc-spec).
 
-### Quality Goals
+### 1.2 Quality Goals
 
 Transparency
 : The system must be transparent to allow scrutiny required by a rigorous scientific process.
@@ -16,7 +16,7 @@ Separation of concern
 Flexibility & modularity
 : In regard to the research project setting, the system components must be well seperated, so that functions can be developed independently, e.g. using different programming languages. This allows different developers to contribute effeciently.
 
-### Stakeholders
+### 1.3 Stakeholders
 
 Role/Name | Goal/point of contact | Required interaction
 --------- | ------- | ------------

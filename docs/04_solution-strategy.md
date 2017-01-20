@@ -1,4 +1,4 @@
-## Solution strategy
+## 4. Solution strategy
 
 This section provides a short overview of architecture decisions and for some the reasoning behind them.
 
@@ -32,7 +32,7 @@ This is a clear _misuse of an internal feature_, but a lot simpler than maintain
 
 ### Demonstration, user data & authentication
 
-To be able to demonstrate these new features, a _browser-based client application_ is developed.
+To be able to demonstrate the system, a _browser-based client application_ is developed.
 It uses the RESTful API to control the system.
 _OAuth 2.0_ is used for authentication and minimal information, which is already public, is stored for each user.
 This information is shared between all services that require authentication via the database.

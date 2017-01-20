@@ -1,8 +1,8 @@
-## Architecture constraints
+## 2. Architecture constraints
 
 The few constraints on this project are reflected in the final solution. This section shows them and if applicable, their motivation. (based on [biking2](https://biking.michael-simons.eu/docs/index.html#section-architecture-constraints))
 
-### Technical constraints
+### 2.1 Technical constraints
 
 &nbsp; | Constraint | Background and/or motivation
 ------ | ---------- | ----------------------------
@@ -10,7 +10,7 @@ TECH.1 | Only open licenses | All third party software or used data must be avai
 TECH.2 | OS independent development and deployment | Server applications must run in well defined [Docker](https://docker.com) containers to allow installation on any host system and not limit developers to a specific language or environment.
 TECH.3 | Lower security risks, do not store secure information | The team members experience and available resources do not allow for handling information with security concerns, so no critial data, such as passwords, must be stored in the system.
 
-### Organizational constraints
+### 2.2 Organizational constraints
 
 &nbsp; | Constraint | Background and/or motivation
 ------ | ---------- | ----------------------------
@@ -19,7 +19,7 @@ ORG.2 | Do not interfere with existing well-established peer-review process | Th
 ORG.3 | Only open licenses | All created software must be available under an [OSI-approved](https://opensource.org/licenses) license, documentation and specifiction under a [CC license](https://creativecommons.org/licenses).
 ORG.3 | Version control/management | Code must be versioned using `git` and published on [GitHub](https://github.com/o2r-project).
 
-### Conventions
+### 2.3 Conventions
 
 &nbsp; | Constraint | Background and/or motivation
 ------ | ---------- | ----------------------------
