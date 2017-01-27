@@ -53,7 +53,17 @@ a:hover, a:focus {
     font-weight: 700;
 }
 
+.note {
+    border-left: 2px solid rgb(0,66,134);
+    padding: 0.5em;
+    background-color: rgba(0,66,134,0.05);
+}
+
 .buildinfo {
     font-size: 0.7em;
     color: #343838;
+}
+
+div[role=main] img {
+    max-width: 90%;
 }
