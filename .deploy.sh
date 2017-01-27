@@ -5,7 +5,7 @@ set -o errexit -o nounset
 rev=$(git rev-parse --short HEAD)
 
 # Checkout docs branch
-branch=arc42
+branch=master
 
 # Initialize gh-pages checkout
 mkdir -p site
