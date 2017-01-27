@@ -156,6 +156,7 @@ The file structure is known to each microservice and read/write operations happe
 #### 5.3.1 Whitebox µservices
 
 Each microservice is encapsulated as a [Docker](http://docker.com/) container running at its own port on an internal network and only serving its respective API path.
+For testing or developing the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see the repository's directory `/test` and check the projects `README.md` for instructions.
 
 ##### ERC loading, building, and access
 

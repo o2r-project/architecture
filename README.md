@@ -1,8 +1,12 @@
 # Software architecture for Opening Reproducible Research
 
-Project description: [http://o2r.info](http://o2r.info)
+Project website: [http://o2r.info](http://o2r.info)
 
-**Read online: [http://o2r.info/architecture](http://o2r.info/architecture)**
+**Read architecture description online: [http://o2r.info/architecture](http://o2r.info/architecture)**
+
+## The project
+
+Opening Reproducible Research (o2r) is a DFG-funded research project by Institute for Geoinformatics ([ifgi](http://www.uni-muenster.de/Geoinformatics/en/)) and University and Regional Library ([ULB](http://www.ulb.uni-muenster.de/)), University of Münster, Germany. Building on recent advances in mainstream IT, o2r envisions a new architecture for storing, executing and interacting with the original analysis environment alongside the corresponding research data and manuscript. This architecture evolves around so called _Executable Research Compendia_ (ERC) as the container for both research, review, and archival.
 
 ## Guidelines
 
