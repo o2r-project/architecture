@@ -85,7 +85,7 @@ The reproducibility service _does not persistently store anything_.
 
 Protocols: (authenticated) `HTTP` APIs
 
-**Archives**, e.g. [DA NRW](https://www.danrw.de/) or instances of [Archivematica](https://www.archivematica.org/), provide long-term preservation of ERC. Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.
+**Archives**, e.g. using an installation of [Archivematica](https://www.archivematica.org/), might provide long-term preservation of ERC. Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.
 
 Protocol: `HTTP` carrying bitstreams and metadata
 
@@ -118,7 +118,7 @@ A working [nginx](https://nginx.org) configuration is available [in the test set
 ##### 5.2.7.2 Blackbox UI
 
 The UI is a web application based on [Angular JS](https://angularjs.org/), see [o2r-platform](https://github.com/o2r-project/o2r-platform).
-It connects to an execution µservice for real-time WebSocket-based notifications.
+It connects to an execution microservice (µservice) for real-time WebSocket-based notifications.
 
 ##### 5.2.7.3 Blackbox microservices
 
@@ -142,7 +142,7 @@ A search database/index is used for full-text search and advanced search queries
 The database's operation log, normally used for synchronization between database nodes, is also used for 
 
 - event-driven communication between microservices, and
-- synchronisation between main document database and search index.
+- synchronization between main document database and search index.
 
 <div class="note">This "eventing hack" is expected to be replaced by a proper eventing layer for productive deployments.</div>
 
