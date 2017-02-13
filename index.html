@@ -82,6 +82,12 @@
                 
                 
                     <li >
+                        <a href="preservation-workflows/">Preservation workflows</a>
+                    </li>
+                
+                
+                
+                    <li >
                         <a href="glossary/">Glossary</a>
                     </li>
                 
@@ -194,7 +200,7 @@
 <h2 id="1-introduction-and-goals">1. Introduction and Goals</h2>
 <h3 id="11-requirements-overview">1.1 Requirements Overview</h3>
 <p>The system must provide a reliable way to create, execute, and manipulate reproducibility packages of computational resesearch.
-At its core is the <strong>Executable Research Compendium (ERC)</strong>, see <a href="http://o2r.info/erc-spec">specification</a>.</p>
+At its core is the <strong>Executable Research Compendium (ERC)</strong>, see <a href="http://o2r.info/erc-spec">specification</a> and the publication <em><a href="https://doi.org/10.1045/january2017-nuest">"Opening the Publication Process with Executable Research Compendia"</a></em></p>
 <h3 id="12-quality-goals">1.2 Quality Goals</h3>
 <dl>
 <dt>Transparency</dt>
@@ -496,7 +502,7 @@ Allowing access to data repositories reduces data duplication but requires contr
 <p>Generic <strong>Repositories</strong>, e.g. <a href="https://zenodo.org/">Zenodo</a>, <a href="https://data.mendeley.com/">Mendeley Data</a>, <a href="http://figshare.com/">Figshare</a>, <a href="https://osf.io/">OSF</a>, provide (a) access to complete ERC stored in repositories for inspection and execution by the reproducibility service, and (b) storage of created ERC. repositories.</p>
 <p>The reproducibility service <em>does not persistently store anything</em>.</p>
 <p>Protocols: (authenticated) <code>HTTP</code> APIs</p>
-<p><strong>Archives</strong>, e.g. <a href="https://www.danrw.de/">DA NRW</a> or instances of <a href="https://www.archivematica.org/">Archivematica</a>, provide long-term preservation of ERC. Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.</p>
+<p><strong>Archives</strong>, e.g. using an installation of <a href="https://www.archivematica.org/">Archivematica</a>, might provide long-term preservation of ERC. Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.</p>
 <p>Protocol: <code>HTTP</code> carrying bitstreams and metadata</p>
 <h4 id="525-whitebox-registries">5.2.5 Whitebox Registries</h4>
 <p>TBD (<a href="https://www.uni-muenster.de/FB7_MultimediaSupport/CRIS_Infoseite/Forschungsdatenbank_Infoseite.html">CRIS</a>, <a href="https://www.datacite.org/">DataCite</a>, <a href="https://scholar.google.de/">Google Scholar</a>, <a href="https://www.scopus.com/">Scopus</a>, ...)</p>
@@ -514,7 +520,7 @@ They can be used to distribute the runtime environments across the execution inf
 A working <a href="https://nginx.org">nginx</a> configuration is available <a href="https://github.com/o2r-project/o2r-platform/blob/master/test/nginx.conf">in the test setup</a>.</p>
 <h5 id="5272-blackbox-ui">5.2.7.2 Blackbox UI</h5>
 <p>The UI is a web application based on <a href="https://angularjs.org/">Angular JS</a>, see <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a>.
-It connects to an execution µservice for real-time WebSocket-based notifications.</p>
+It connects to an execution microservice (µservice) for real-time WebSocket-based notifications.</p>
 <h5 id="5273-blackbox-microservices">5.2.7.3 Blackbox microservices</h5>
 <p>The reproducibility service uses a <a href="https://en.wikipedia.org/wiki/Microservices">microservice architecture</a> to seperate functionality defined by the <strong><a href="http://o2r.info/o2r-web-api">web API specification</a></strong> into manageable units.</p>
 <p>This allows scalability (selected µservices can be deployed as much as needed) and technology independence for each use case and developer.
@@ -529,7 +535,7 @@ All information shared between µservices or transactions between microservices 
 <p>The database's operation log, normally used for synchronization between database nodes, is also used for </p>
 <ul>
 <li>event-driven communication between microservices, and</li>
-<li>synchronisation between main document database and search index.</li>
+<li>synchronization between main document database and search index.</li>
 </ul>
 <div class="note">This "eventing hack" is expected to be replaced by a proper eventing layer for productive deployments.</div>
 
@@ -538,7 +544,8 @@ All information shared between µservices or transactions between microservices 
 The file structure is known to each microservice and read/write operations happen as needed.</p>
 <h3 id="53-refinement-level-3">5.3 Refinement Level 3</h3>
 <h4 id="531-whitebox-services">5.3.1 Whitebox µservices</h4>
-<p>Each microservice is encapsulated as a <a href="http://docker.com/">Docker</a> container running at its own port on an internal network and only serving its respective API path.</p>
+<p>Each microservice is encapsulated as a <a href="http://docker.com/">Docker</a> container running at its own port on an internal network and only serving its respective API path.
+For testing or developing the <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a> GitHub project contains <a href="https://docs.docker.com/compose/compose-file/">docker-compose</a> configurations to run all microservices, see the repository's directory <code>/test</code> and check the projects <code>README.md</code> for instructions.</p>
 <h5 id="erc-loading-building-and-access">ERC loading, building, and access</h5>
 <table>
 <thead>
@@ -729,7 +736,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build 29beead @ 2017-01-27 19:40:40 +0100</div</div>
+<div class="buildinfo">Build 2f37fbd @ 2017-02-13 15:18:56 +0100</div</div>
         
     </div>
 
@@ -782,5 +789,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.16.1
-Build Date UTC : 2017-01-27 18:43:14
+Build Date UTC : 2017-02-13 14:24:22
 -->
