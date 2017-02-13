@@ -7,7 +7,7 @@ install:
   - "pip install mkdocs-cinder"
   - "pip install markdown-include"
 after_success:
-  - if [[ $TRAVIS_BRANCH == 'arc42' && $TRAVIS_PULL_REQUEST == 'false' ]]; then ./.deploy.sh ; fi
+  - if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then ./.deploy.sh ; fi
 env:
   global:
     - SITE_URL: https://o2r.info/architecture
