@@ -16,6 +16,41 @@
     color: #ffffff;
 }
 
+.wy-side-nav-search {
+    background-color: #004286;
+}
+
+.wy-nav-top {
+    background-color: #004286;
+}
+
+.wy-menu a {
+    color: #ffffff;
+}
+
+.wy-menu-vertical a:hover {
+	background:#004286;
+}
+
+.subnav {
+    margin-left: 1em;
+}
+
+.caption-text {
+    font-weight: bolder;
+}
+
+.rst-content dl:not(.docutils) dt {
+    display: inline-block;
+    margin: 6px 0;
+        margin-top: 6px;
+    font-size: 90%;
+    line-height: normal;
+    background: #e7f2fa;
+    color: #004286;
+    border-top: solid 2px #004286;
+}
+
 /* cinder */
 .navbar-default {
     background-color: #004286;
