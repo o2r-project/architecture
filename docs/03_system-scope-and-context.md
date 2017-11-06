@@ -2,7 +2,7 @@
 
 ### 3.1 Business context
 
-![business context](img/3.1-business-context.png)
+[![business context](img/3.1-business-context.png)](img/3.1-business-context.png)
 
 <!-- Specification of *all* communication partners (users, IT-systems, ...) with explanations of domain specific inputs and outputs or interfaces. Optionally you can add domain specific formats or communication protocols. -->
 
