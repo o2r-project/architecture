@@ -6,13 +6,15 @@ pages:
   - User scenarios: user-scenarios.md
   - Preservation workflows: preservation-workflows.md
   - Glossary: glossary.md
-theme: cinder # readthedocs # flatly
+theme: readthedocs # flatly
 site_author: o2r project
+site_dir: site
+theme_dir: custom_theme
 site_dir: site
 extra_css: [arc42.css]
 repo_url: https://github.com/o2r-project/architecture
 repo_name: GitHub
-edit_uri: edit/master/docs/
+edit_uri: tree/master/docs/
 markdown_extensions:
   - markdown_include.include
   - def_list
