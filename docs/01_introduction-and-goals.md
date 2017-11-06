@@ -2,8 +2,9 @@
 
 ### 1.1 Requirements Overview
 
-The system must provide a reliable way to create, execute, and manipulate reproducibility packages of computational resesearch.
-At its core is the **Executable Research Compendium (ERC)**, see [ERC specification](http://o2r.info/erc-spec) and the publication _["Opening the Publication Process with Executable Research Compendia"](https://doi.org/10.1045/january2017-nuest)_. A draft of a web API implementing the requirements can be found [here](http://o2r.info/o2r-web-api/).
+The system must provide a reliable way to create, execute, and manipulate reproducibility packages of computational research.
+At its core is the **Executable Research Compendium (ERC)**, see [ERC specification](http://o2r.info/erc-spec) and the publication _["Opening the Publication Process with Executable Research Compendia"](https://doi.org/10.1045/january2017-nuest)_.
+A web **API** describing the reproducibility service can be found [here](http://o2r.info/o2r-web-api/), and its **reference implementation** [here](https://github.com/o2r-project/reference-implementation).
 
 ### 1.2 Quality Goals
 
@@ -11,10 +12,12 @@ Transparency
 : The system must be transparent to allow scrutiny required by a rigorous scientific process.
 
 Separation of concern
-: The system must integrate with existing platforms and focus on the core functionality. It must not replicate existing functionality such as storage or persistent identification.
+: The system must integrate with existing platforms and focus on the core functionality.
+It must not replicate existing functionality such as storage or persistent identification.
 
 Flexibility & modularity
-: In regard to the research project setting, the system components must be well seperated, so that functions can be developed independently, e.g. using different programming languages. This allows different developers to contribute effeciently.
+: In regard to the research project setting, the system components must be well seperated, so that functions can be developed independently, e.g. using different programming languages.
+This allows different developers to contribute effeciently.
 
 ### 1.3 Stakeholders
 

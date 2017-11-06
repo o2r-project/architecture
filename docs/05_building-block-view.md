@@ -62,7 +62,7 @@ Internally, the user's public `ORCID` is the main identifier.
 
 #### 5.2.3 Whitebox Execution Infrastructure
 
-Such an infrastructure could be either self-hosted, e.g. [Docker Swarm](https://www.docker.com/products/docker-swarm)-based, or use a cloud service provide, such as [Amazon EC2](https://aws.amazon.com/ec2/), [Docker Cloud](http://cloud.docker.com/), or even use contrinuous integration platforms such as [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/gitlab-ci/).
+Such an infrastructure could be either self-hosted, e.g. [Docker Swarm](https://www.docker.com/products/docker-swarm)-based, or use a cloud service provide, such as [Amazon EC2](https://aws.amazon.com/ec2/), [Docker Cloud](http://cloud.docker.com/), or even use continuous integration platforms such as [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/gitlab-ci/).
 
 #### 5.2.4 Whitebox Data Repositories
 
@@ -122,7 +122,7 @@ It connects to an execution microservice (µservice) for real-time WebSocket-bas
 
 ##### 5.2.7.3 Blackbox microservices
 
-The reproducibility service uses a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to seperate functionality defined by the **[web API specification](http://o2r.info/o2r-web-api)** into manageable units.
+The reproducibility service uses a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functionality defined by the **[web API specification](http://o2r.info/o2r-web-api)** into manageable units.
 
 This allows scalability (selected µservices can be deployed as much as needed) and technology independence for each use case and developer.
 The µservices all access one main database and a shared file storage.
@@ -158,35 +158,30 @@ The file structure is known to each microservice and read/write operations happe
 Each microservice is encapsulated as a [Docker](http://docker.com/) container running at its own port on an internal network and only serving its respective API path.
 For testing or developing the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see the repository's directory `/test` and check the projects `README.md` for instructions.
 
-##### ERC loading, building, and access
+##### ERC creation and examination
 
 **Project** | **API path** | **Language** | **Description**
 ------ | ------ | ------ | ------
-_[muncher](https://github.com/o2r-project/o2r-muncher)_ | `/api/v1/compendium` | JavaScript (Node.js) | core component for container execution and CRUD for compendia and jobs
+[muncher](https://github.com/o2r-project/o2r-muncher) | `/api/v1/compendium` and `/api/v1/job`  | JavaScript (Node.js) | core component for CRUD of compendia and jobs (ERC execution)
+[loader](https://github.com/o2r-project/o2r-loader) | `/api/v1/compendium` (`HTTP POST` only) |  JavaScript (Node.js) | load workspaces from repositories and cloud platforms
 [finder](https://github.com/o2r-project/o2r-finder) | `/api/v1/search` | JavaScript (Node.js) | discovery and search, synchronizes the database with a search database (Elasticsearch) and exposes read-only search endpoints
-[contentbutler](https://github.com/o2r-project/o2r-contentbutler) | `~ /data/` | JavaScript (Node.js) | access to content of compendia, reads file-base storage
-[transportar](https://github.com/o2r-project/o2r-transportar) | `~* \.(zip|tar|tar.gz)` | JavaScript (Node.js) | downloads of compendia in zip or (gzipped) tar formats
-[loader](https://github.com/o2r-project/o2r-loader) | `under development` | JavaScript | load workspaces from repositories and cloud platforms
-[manipulator](#) | `under development` | JavaScript | provide backend containers for interactive ERCs
+[transporter](https://github.com/o2r-project/o2r-transporter) | `~ /data/` and `~* \.(zip|tar|tar.gz)` | JavaScript (Node.js) | downloads of compendia in zip or (gzipped) tar formats
+[informer](https://github.com/o2r-project/o2r-informer) | `~* \.io` | JavaScript (Node.js) | [socket.io](http://socket.io/)-based WebSockets for live updates to the UI based on database event log, e.g. job progress
+[substituter](https://github.com/o2r-project/o2r-substituter) | `/api/v1/substitution` |  JavaScript (Node.js) | create new ERCs based on existing ones by substituting files
+[manipulater](https://github.com/o2r-project/o2r-manipulater/) | `under development` | -- | provide back-end containers for interactive ERCs
+[inspecter](https://github.com/o2r-project/o2r-inspecter) | `under development` | -- | allow inspection of non-text-based file formats, e.g. `.Rdata`
 
 ##### ERC exporting
 
 **Project** | **API path** | **Language** | **Description**
 ------ | ------ | ------ | ------
-[shipper](https://github.com/o2r-project/o2r-shipper) | `/api/v1/shipment` | Python | save compendia to repositories and archives
-
-##### ERC execution
-
-**Project** | **API path** | **Language** | **Description**
------- | ------ | ------ | ------
-_[muncher](https://github.com/o2r-project/o2r-muncher)_ | `/api/v1/job` | JavaScript (Node.js) | core component for container execution and CRUD for compendia and jobs
-[informer](https://github.com/o2r-project/o2r-informer) | `~* \.io` | JavaScript (Node.js) | [socket.io](http://socket.io/)-based WebSockets for live updates to the UI based on database event log
+[shipper](https://github.com/o2r-project/o2r-shipper) | `/api/v1/shipment` | Python | ship ERCs, including packaging, and their metadata to third party repositories and archives
 
 ##### Authentication
 
 **Project** | **API path** | **Language** | **Description**
 ------ | ------ | ------ | ------
-[bouncer](https://github.com/o2r-project/o2r-bouncer) | `/api/v1/auth`, `/api/v1/user/` | JavaScript (Node.js) | authentication service and user information (whoami)
+[bouncer](https://github.com/o2r-project/o2r-bouncer) | `/api/v1/auth`, `/api/v1/user/` | JavaScript (Node.js) | authentication service and user management (whoami, level changing)
 
 #### 5.3.2 Whitebox database
 
@@ -202,7 +197,7 @@ Collections:
 - `jobs`
 - `shipments`
 
-The MongoDB API is used by connecing µservices via suitable client packages, which are available for all required languages.
+The MongoDB API is used by connecting µservices via suitable client packages, which are available for all required languages.
 
 **[Elasticsearch](https://elastic.co) search index**, kept in sync with the main document database by the µservice `finder`.
 The ids are mapped to support update and delete operations.
@@ -214,14 +209,14 @@ Types:
 - `compendia`
 - `jobs`
 
-The search index is read by the UI via a read-only proxy to the regular Elasticsearch API.
+The search index is accessed by the UI through the search endpoint provided by `finder`.
 
 #### 5.3.3 Whitebox tools
 
 **project** | **language** | **description**
 ------ | ------ | ------
 [meta](https://github.com/o2r-project/o2r-meta) | Python | scripts for extraction, translation and validation of metadata
-[containeRit](https://github.com/o2r-project/containerit) | R | generation of Dockerfiles based on R sessions and scripts
+[containerit](https://github.com/o2r-project/containerit) | R | generation of Dockerfiles based on R sessions and scripts
 
 #### 5.3.4 Whitebox ephemeral file storage
 

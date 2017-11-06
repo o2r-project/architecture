@@ -9,7 +9,7 @@ These features are provided via a _well-defined RESTful API_.
 
 ### Microservices
 
-To allow a dynamic development and support the large variety of skills, all server-side features are developed in independend _[microservices](https://en.wikipedia.org/wiki/Microservices)_.
+To allow a dynamic development and support the large variety of skills, all server-side features are developed in independent _[microservices](https://en.wikipedia.org/wiki/Microservices)_.
 These microservices handle only specific functional parts of the API and allow independent development and deployment cycles.
 Core components are developed using server-side JavaScript based on Node.js while other components are implemented Python.
 
@@ -42,6 +42,6 @@ _The client application manages the control flow_ of all user interactions.
 ### Tools
 
 If standalone tools are developed, they should provide a command-line interface (CLI) that allows integration into microservices when needed.
-Thanks to the container architecture and the controlled, we don't need to worry about documentattion for or distribution/packaging of these tools.
+Thanks to the container architecture and the controlled, we don't need to worry about documentation for or distribution/packaging of these tools.
 It must only be ensured they are correctly installed using the microservice's Dockerfile.
 The only required documentation is for the installation into a container and usage of the CLI.

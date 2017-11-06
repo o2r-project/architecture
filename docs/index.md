@@ -10,20 +10,6 @@
 
 {!docs/05_building-block-view.md!}
 
-<!--
-{!docs/06_runtime-view.md!}
-
-{!docs/07_deployment-view.md!}
-
-{!docs/08_cross-cutting-concepts.md!}
-
-{!docs/09_design-decisions.md!}
-
-{!docs/10_quality-requirements.md!}
-
-{!docs/11_Risks-and-technical-debts.md!}
--->
-
-{!docs/gloassary.md!}
+{!docs/glossary.md!}
 
 {!docs/credits.md!}
