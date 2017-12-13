@@ -101,5 +101,5 @@ a:hover, a:focus {
 }
 
 div[role=main] img {
-    max-width: 90%;
+    max-width: 100%;
 }
