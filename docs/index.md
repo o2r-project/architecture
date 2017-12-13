@@ -10,6 +10,4 @@
 
 {!docs/05_building-block-view.md!}
 
-{!docs/glossary.md!}
-
 {!docs/credits.md!}

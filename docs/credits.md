@@ -2,11 +2,11 @@
 
 ## Credits
 
-This specification and guides are developed by the members of the DFG-funded project Opening Reproducible Research.
+This specification and guides are developed by the members of the project Opening Reproducible Research ([Offene Reproduzierbare Forschung](https://www.uni-muenster.de/forschungaz/project/9520)) funded by the German Research Foundation (Deutsche Forschungsgemeinschaft (DFG) - Projektnummer [274927273](http://gepris.dfg.de/gepris/projekt/274927273)) under grant numbers PE 1632/10-1, KR 3930/3-1, and TR 864/6-1).
 
-[![Opening Reproducible Research](img/o2r-logo.png)](http://o2r.info)
-
-> Opening Reproducible Research (o2r) is a DFG-funded research project by Institute for Geoinformatics ([ifgi](http://www.uni-muenster.de/Geoinformatics/)) and University and Regional Library ([ULB](https://www.ulb.uni-muenster.de/)), University of Münster, Germany. Building on recent advances in mainstream IT, o2r envisions a new architecture for storing, executing and interacting with the original analysis environment alongside the corresponding research data and manuscript. This architecture evolves around so called Executable Research Compendia (ERC) as the container for both research, review, and archival.
+> [![Opening Reproducible Research](img/o2r-logo.png)](http://o2r.info)
+> 
+> _Opening Reproducible Research (o2r, [http://o2r.info/about](http://o2r.info/about)) is a DFG-funded research project by Institute for Geoinformatics ([ifgi](http://www.uni-muenster.de/Geoinformatics/)) and University and Regional Library ([ULB](https://www.ulb.uni-muenster.de/)), University of Münster, Germany. Building on recent advances in mainstream IT, o2r envisions a new architecture for storing, executing and interacting with the original analysis environment alongside the corresponding research data and manuscript. This architecture evolves around so called Executable Research Compendia (ERC) as the container for both research, review, and archival._
 
 ------
 
