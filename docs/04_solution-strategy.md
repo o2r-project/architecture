@@ -13,7 +13,7 @@ To allow a dynamic development and support the large variety of skills, all serv
 These microservices handle only specific functional parts of the API and allow independent development and deployment cycles.
 Core components are developed using server-side JavaScript based on Node.js while other components are implemented Python.
 
-We accept that this diversification _increases complexity_ of both development and testing environments and the deployment of said services.
+We accept this diversification _increases complexity_ of both development and testing environments and the deployment of said services.
 
 Required documentation is minimal. The typical structure should follow common practices.
 
@@ -35,13 +35,14 @@ This is a clear _misuse of an internal feature_, but a lot simpler than maintain
 To be able to demonstrate the system, a _browser-based client application_ is developed.
 It uses the RESTful API to control the system.
 _OAuth 2.0_ is used for authentication and minimal information, which is already public, is stored for each user.
-This information is shared between all services that require authentication via the database.
+This information is shared between all services which require authentication via the database.
 
 _The client application manages the control flow_ of all user interactions.
 
 ### Tools
 
-If standalone tools are developed, they should provide a command-line interface (CLI) that allows integration into microservices when needed.
+If standalone tools are developed, they should provide a command-line interface (CLI).
+The CLI allows integration into microservices when needed and to package tools including their dependencies as containers.
 Thanks to the container architecture and the controlled, we don't need to worry about documentation for or distribution/packaging of these tools.
 It must only be ensured they are correctly installed using the microservice's Dockerfile.
 The only required documentation is for the installation into a container and usage of the CLI.

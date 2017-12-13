@@ -17,7 +17,7 @@ Separation of concern
 It must not replicate existing functionality such as storage or persistent identification.
 
 Flexibility & modularity
-: In regard to the research project setting, the system components must be well separated, so that functions can be developed independently, e.g. using different programming languages.
+: In regard to the research project setting, the system components must be well separated, so functions can be developed independently, e.g. using different programming languages.
 This allows different developers to contribute efficiently.
 
 ### 1.3 Stakeholders
