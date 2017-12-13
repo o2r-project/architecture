@@ -4,9 +4,9 @@
 
 #### 5.1.1 Blackbox Publication Platforms
 
-Publications platforms are the primary online interaction point of users with scientific works.
-Users consume publications, e.g. browsing, searching, and reading.
-Users create publications, e.g. submitting to a scientific journal.
+Publications platforms are the online interaction points of users with scientific works.
+Users create publications, e.g. submitting to a scientific journal, publishing on a pre-print server or archive, or collaborating in online repositories.
+Users examine publications, e.g. browsing, searching, reading, downloading, or reviewing.
 
 #### 5.1.2 Blackbox ID Provider
 
@@ -16,11 +16,8 @@ Identification information of distributed systems is crucial, and for security r
 - _authentication_ of users, and
 - metadata on a user's _works_, e.g. publications or ERC.
 
-<!--
-**artifact IDs** (if needed)
-
-A URI provider, e.g. [ePIC](http://www.pidconsortium.eu/?page_id=74) allows the reproducibility service to retrieve persistent identifiers for own landing pages, retrieved via and `HTTP` API, see [ePIC docs](http://doc.pidconsortium.eu/guides/overview/).
--->
+Persistent identifiers for artifacts in the reproducibility service itself are _not required_, as these are provided by data storage and registries.
+However, services such as [ePIC](http://www.pidconsortium.eu/) could allow to retrieve persistent IDs.
 
 #### 5.1.3 Blackbox Execution Infrastructure
 
@@ -28,8 +25,11 @@ The execution infrastructure provides CPU time and temporary result storage spac
 
 #### 5.1.4 Blackbox Data Repositories
 
-Data repositories are all services and platforms that store data but not software. They may be self-hosted or public free platforms.
-They are used both for loading content that is used to build an ERC and for storing the ERC created by the reproducibility service.
+Data repositories are all services storing data but not software.
+More specifically, they may store software "as data", but not with software-specific features such as code versioning or installation binaries for different computer architectures.
+Data repositories may be self-hosted or public/free, domain-specific or generic.
+They typically provide persistent identifiers or handles, e.g. a [DOI](https://www.doi.org/) or [URN](https://en.wikipedia.org/wiki/Uniform_Resource_Name).
+They are used both for loading created ERC and for storing the ERC created by the reproducibility service.
 
 #### 5.1.5 Blackbox Registries
 
@@ -51,9 +51,11 @@ They are a sink for executable images of software, which comprise a number of so
 #### 5.2.1 Whitebox Publication Platforms
 
 Publication platforms can be roughly divided into two groups.
-They can be specific journals hosted independently, such as [JStatSoft](http://www.jstatsoft.org/), or be a larger platform provided by a publisher to multiple journals, such as [ScienceDirect](http://sciencedirect.com/), [MDPI](http://www.mdpi.com/), [SpringerLink](https://link.springer.com/), or [PLOS](https://plos.org/).
+They can be either specific journals hosted independently, such as [JStatSoft](http://www.jstatsoft.org/) or [JOSS](http://joss.theoj.org/), or a larger platform provided by a publisher to multiple journals, such as [ScienceDirect](http://sciencedirect.com/), [MDPI](http://www.mdpi.com/), [SpringerLink](https://link.springer.com/), or [PLOS](https://plos.org/).
+To some extend, pre-print servers, for example [OSF](https://osf.io/) or [arXiv.org](https://arxiv.org/), can also fall into the latter category.
 
-Integration with the reproducibility service can happen via plug-ins to open platforms, e.g. [OJS](https://pkp.sfu.ca/ojs/), or by bespoke extensions based on the service's public API.
+Integration with the reproducibility service can happen via plug-ins to generic software, e.g. [OJS](https://pkp.sfu.ca/ojs/), or by bespoke extensions.
+Integrations are based on the service's public API.
 
 #### 5.2.2 Whitebox ID Provider
 
@@ -62,17 +64,17 @@ Internally, the user's public `ORCID` is the main identifier.
 
 #### 5.2.3 Whitebox Execution Infrastructure
 
-Such an infrastructure could be either self-hosted, e.g. [Docker Swarm](https://www.docker.com/products/docker-swarm)-based, or use a cloud service provide, such as [Amazon EC2](https://aws.amazon.com/ec2/), [Docker Cloud](http://cloud.docker.com/), or even use continuous integration platforms such as [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/gitlab-ci/).
+Such an infrastructure could be either self-hosted, e.g. [Docker Swarm](https://www.docker.com/products/docker-swarm)-based, or use a cloud service provide, such as [Amazon EC2](https://aws.amazon.com/ec2/), [Docker Cloud](http://cloud.docker.com/), or even use continuous integration services such as [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/gitlab-ci/).
 
 #### 5.2.4 Whitebox Data Repositories
 
 [![whitebox data repositories](img/5.2-whitebox-data-repos.png)](img/5.2-whitebox-data-repos.png)
 
-**Collaboration platforms**, e.g. ownCloud/Sciebo, GitHub, ShareLatex, [OSF](https://osf.io/), allow users to create, store, and share their research.
-The reproducibility service fetches contents for building an ERC from these platforms based on public links, e.g. GitHub repository or Sciebo shared folder.
-It is possible that ERC creation is linked persistently to such collaboration platforms and updates to a shared storage cause ERC creation, execution etc.
+**Collaboration platforms**, e.g. [ownCloud/Sciebo](http://sciebo.de/), [GitHub](http://github.com/), [ShareLatex](http://sharelatex.com/), [OSF](https://osf.io/), allow users to create, store, and share their research (code, text, data, et cetera).
+The reproducibility service fetches contents for building an ERC from them based on public links, e.g. a public GitHub repository or shared Sciebo folder.
+It is possible that ERC creation is linked to a project/repository on a collaboration platform and updates trigger an ERC (re-)creation or execution.
 
-Protocols: `WebDAV`, `ownCloud`, `HTTP`, `git`
+Protocols: `WebDAV`, `ownCloud`, `HTTP` (including [webhooks](https://en.wikipedia.org/wiki/Webhook)), `git`
 
 **Domain data repositories**, e.g. [PANGAEA](https://www.pangaea.de/) or [GFZ Data Services](http://dataservices.gfz-potsdam.de/portal/), can be accessed by the reproducibility service during creation and execution of ERC to download data.
 Allowing access to data repositories reduces data duplication but requires control over/trust in the respective repository.
@@ -91,7 +93,13 @@ Protocol: `HTTP` carrying bitstreams and metadata
 
 #### 5.2.5 Whitebox Registries
 
-TBD ([CRIS](https://www.uni-muenster.de/FB7_MultimediaSupport/CRIS_Infoseite/Forschungsdatenbank_Infoseite.html), [DataCite](https://www.datacite.org/), [Google Scholar](https://scholar.google.de/), [Scopus](https://www.scopus.com/), ...)
+Research data registries and websites, for example ([CRIS](https://www.uni-muenster.de/FB7_MultimediaSupport/CRIS_Infoseite/Forschungsdatenbank_Infoseite.html), [DataCite](https://www.datacite.org/), [Google Scholar](https://scholar.google.de/), [Scopus](https://www.scopus.com/), [Altmetric](https://www.altmetric.com/), to name just a few, collect metadata on publications and provide services with this data.
+Services comprise discovery but also derivation of citation data and creating networks of researchers and publications.
+
+The listed examples include open platforms, commercial solutions, and institution-specific platforms.
+Some of the registries offer a public, well-defined API to retrieve structured metadata and to create new records.
+
+Protocol: `HTTP` APIs
 
 #### 5.2.6 Whitebox Software Repositories
 
@@ -163,7 +171,7 @@ For testing or developing the [o2r-platform](https://github.com/o2r-project/o2r-
 **Project** | **API path** | **Language** | **Description**
 ------ | ------ | ------ | ------
 [muncher](https://github.com/o2r-project/o2r-muncher) | `/api/v1/compendium` and `/api/v1/job`  | JavaScript (Node.js) | core component for CRUD of compendia and jobs (ERC execution)
-[loader](https://github.com/o2r-project/o2r-loader) | `/api/v1/compendium` (`HTTP POST` only) |  JavaScript (Node.js) | load workspaces from repositories and cloud platforms
+[loader](https://github.com/o2r-project/o2r-loader) | `/api/v1/compendium` (`HTTP POST` only) |  JavaScript (Node.js) | load workspaces from repositories and collaboration platforms
 [finder](https://github.com/o2r-project/o2r-finder) | `/api/v1/search` | JavaScript (Node.js) | discovery and search, synchronizes the database with a search database (Elasticsearch) and exposes read-only search endpoints
 [transporter](https://github.com/o2r-project/o2r-transporter) | `~ /data/` and `~* \.(zip|tar|tar.gz)` | JavaScript (Node.js) | downloads of compendia in zip or (gzipped) tar formats
 [informer](https://github.com/o2r-project/o2r-informer) | `~* \.io` | JavaScript (Node.js) | [socket.io](http://socket.io/)-based WebSockets for live updates to the UI based on database event log, e.g. job progress
