@@ -138,7 +138,7 @@ This architecture describes the relationship of the reproducibility service with
 <dd>The system must integrate with existing services and focus on the core functionality.
 It must not replicate existing functionality such as storage or persistent identification.</dd>
 <dt>Flexibility &amp; modularity</dt>
-<dd>In regard to the research project setting, the system components must be well separated, so that functions can be developed independently, e.g. using different programming languages.
+<dd>In regard to the research project setting, the system components must be well separated, so functions can be developed independently, e.g. using different programming languages.
 This allows different developers to contribute efficiently.</dd>
 </dl>
 <h3 id="13-stakeholders">1.3 Stakeholders</h3>
@@ -362,7 +362,7 @@ These features are provided via a <em>well-defined RESTful API</em>.</p>
 <p>To allow a dynamic development and support the large variety of skills, all server-side features are developed in independent <em><a href="https://en.wikipedia.org/wiki/Microservices">microservices</a></em>.
 These microservices handle only specific functional parts of the API and allow independent development and deployment cycles.
 Core components are developed using server-side JavaScript based on Node.js while other components are implemented Python.</p>
-<p>We accept that this diversification <em>increases complexity</em> of both development and testing environments and the deployment of said services.</p>
+<p>We accept this diversification <em>increases complexity</em> of both development and testing environments and the deployment of said services.</p>
 <p>Required documentation is minimal. The typical structure should follow common practices.</p>
 <h3 id="storage-and-intra-service-communication">Storage and intra-service communication</h3>
 <p>In accordance with the system scope, there is no reliable storage solution implemented.
@@ -377,10 +377,11 @@ This is a clear <em>misuse of an internal feature</em>, but a lot simpler than m
 <p>To be able to demonstrate the system, a <em>browser-based client application</em> is developed.
 It uses the RESTful API to control the system.
 <em>OAuth 2.0</em> is used for authentication and minimal information, which is already public, is stored for each user.
-This information is shared between all services that require authentication via the database.</p>
+This information is shared between all services which require authentication via the database.</p>
 <p><em>The client application manages the control flow</em> of all user interactions.</p>
 <h3 id="tools">Tools</h3>
-<p>If standalone tools are developed, they should provide a command-line interface (CLI) that allows integration into microservices when needed.
+<p>If standalone tools are developed, they should provide a command-line interface (CLI).
+The CLI allows integration into microservices when needed and to package tools including their dependencies as containers.
 Thanks to the container architecture and the controlled, we don't need to worry about documentation for or distribution/packaging of these tools.
 It must only be ensured they are correctly installed using the microservice's Dockerfile.
 The only required documentation is for the installation into a container and usage of the CLI.</p>
@@ -651,7 +652,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build 8d27f26 @ 2017-12-13 18:19:59 +0100</div
+<div class="buildinfo">Build f671430 @ 2017-12-13 18:34:18 +0100</div
               
             </div>
           </div>
@@ -703,5 +704,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2017-12-13 17:21:53
+Build Date UTC : 2017-12-13 17:36:09
 -->
