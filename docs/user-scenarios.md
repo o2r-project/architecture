@@ -53,8 +53,54 @@ Obviously, none of these were an option. Change had to come gradually and inclus
 
 ## Richard the reviewer
 
-TBD
+Richard is a successful researcher.
+After getting tenure a few years back, he embraces the chance to support students and collaborate with other scientists instead of hunting for the next easy publication to get his name on.
+A big part of his time is taken up by his membership in the editorial boards of two journals and his engagement with several more journals as a reviewer.
+
+Richard is "senior" in some ways, and he as well as his colleagues know his value lies in experience, not in hunting the latest hot new things.
+Therefore Richard never came around to catch up practically with the latest technologies, and while he has a good understanding of computer science and used to be a very capable programmer, this new stuff the kids are doing is beyond his means.
+
+As the next paper review request lands in his inbox, he skims the abstract and soon thinks "I will never be able to thoroughly evaluate this work, the code must be too complex to run on my machine".
+But the content is so interesting! What a shame.
+He almost replies with a negative answer and then sees a new link at the bottom of the notification.
+The publisher must have added a new feature.
+The link's title is "Click here to examine and manipulate code and data".
+
+Richard clicks the link.
+He is taken to a website looking partially similar to the old review system he is used to.
+One the one side there is the well-known article view where he can read, add highlights and make comments.
+But on the other side, there is a new menu he enthusiastically explores.
+It allows him to edit parameters and re-run analysis of the paper!
+Without even downloading any data or code.
+He immediately sees the benefits: What a relief for his work, and what a chance to dig deeper into the article and conduct a thorough review.
+
+After some brief inspections of the article figures and manipulation of some parameters, Richard feels confident he can actually do the review properly.
+He let's the editor know about his decision and wants to dive right back into the article, but then stops himself.
+First, he writes an email to his fellow editors about this new review system for evaluating code and data - they need it for their journal, too.
 
 ## Rachel the reader
 
-TBD
+Rachel is a second year graduate student in geoinformatics.
+She's eager to learn and has left all struggles with the technical side of research, and has become a trusted programmer in her group and is seen as an expert in more than one programming language.
+
+When she starts one of her final courses in advanced geoinformatics, the lecturer sends out a long list of reading material.
+_How is she supposed to get through all of it?_
+Never faltering, she starts reading all the documents...
+
+After the third article, she is annoyed and underwhelmed by the fancy descriptions and high-level diagrams.
+Although they all make sense, she feels like there is more to see and understand than is presented in the article.
+
+She shares her thoughts with her teacher Teresa during the next seminar.
+Teresa can relate to Rachel's frustration and quickly points her to items 8 and 9 on the reading list.
+"These are different", she says.
+
+Rachel gets back to reading.
+The next articles start out the same as the others, but she soon realizes something is different.
+The website takes a bit longer to load, and the graphics do not seem like they are compressed images at all.
+She needs some time to explore the relatively complex navigation, but then is excited to discover that she can read and even download all the code and data that was used to generate the figures.
+Even more, she can interact with the present methods and play around with the algorithms.
+Finally she can immediately test her own understanding, challenge her criticism, and resolve misunderstandings.
+
+She plays around with the articles on the website for a little while and spends a lot longer on trying to understand the bits and pieces.
+Eventually she sees a close relation of one aspect of the analysis with the research project she though about doing for her thesis.
+Rachel is enthusiastic and directly downloads the whole article with its code to her own laptop to try the code out with her own dataset. 
