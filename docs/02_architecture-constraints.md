@@ -18,6 +18,7 @@ ORG.1 | Team and schedule | [http://o2r.info/about](http://o2r.info/about)
 ORG.2 | Do not interfere with existing well-established peer-review process | This software is _not_ going to change how scientific publishing works, nor should it. While intentioned to support public peer-reviews, open science etc., the software should be agnostic of these aspects.
 ORG.3 | Only open licenses | All created software must be available under an [OSI-approved](https://opensource.org/licenses) license, documentation and specification under a [CC license](https://creativecommons.org/licenses).
 ORG.3 | Version control/management | Code must be versioned using `git` and published on [GitHub](https://github.com/o2r-project).
+ORG.5 | Transfer from group domain to persistent domain | The ERC bundles artifacts coming from a private or group domain for a transfer to a public and persistent domain (cf. [Curation Domain Model](http://www.forschungsdaten.org/index.php/Curation_Domain_Model)), which imposes requirements on the availability and enrichment of metadata
 
 ### 2.3 Conventions
 
