@@ -27,7 +27,7 @@ This raw metadata itself is _schemaless_ and non-semantic. The processed files a
   - output file: `.erc/metadata_raw.json`
   - database field: `<compendium>.metadata.raw`
 1. `broker` uses `metabroker.py` ([docs](https://github.com/o2r-project/o2r-meta#5-metabroker)) to translate the _raw_ metadata in `json` to _o2r_ metadata in `json` as being compliant to the o2r json-schema.
-  - output file: `.erc/metadata_o2r.json`
+  - output file: `.erc/metadata_o2r_X.json` (where `X` is the version number as set in the [o2r-map.json](https://github.com/o2r-project/o2r-meta/blob/master/broker/mappings/o2r-map.json) mapping file, e.g. _1_)
   - database field: `<compendium>.metadata.o2r`
 1. (`harvest` TBD; will connect to third party database endpoint via OAI-PMH to gather additional information for the enrichment of the o2r metadata collected via extraction)
 1. `save` stores the new ERC to the database including the aforementioned metadata fields.
@@ -62,5 +62,5 @@ Therefore the fields required by shipping destinations are not mandatory in the 
 `datacite` | [DataCite Metadata Schema 4.0](http://schema.datacite.org/meta/kernel-4.0/) | `xml` | for metadata export 
 `datacite` | [DataCite Metadata Schema 3.1](http://schema.datacite.org/meta/kernel-3.1/) | `xml` | (still in wide spread use for OAI-PMH) 
 `ORCID` (TBD) | [XML for orcid-works](https://members.orcid.org/api/xml-orcid-works) | `xml` | for adding ERC as works to an ORCID profile
-`CRIS` (TBD) | (local adaptation of the [CERIF model](http://www.eurocris.org/cerif/main-features-cerif) | `xml` | ...
+`CRIS` (TBD) | local adaptation of the [CERIF model](http://www.eurocris.org/cerif/main-features-cerif) | `xml` | ...
 `codemeta` (TBD) | [codemeta 1.0](https://github.com/codemeta/codemeta/releases/tag/1.0) | `json` | ...
