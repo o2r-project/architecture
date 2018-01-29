@@ -175,9 +175,9 @@ For testing or developing the [o2r-platform](https://github.com/o2r-project/o2r-
 [finder](https://github.com/o2r-project/o2r-finder) | `/api/v1/search` | JavaScript (Node.js) | discovery and search, synchronizes the database with a search database (Elasticsearch) and exposes read-only search endpoints
 [transporter](https://github.com/o2r-project/o2r-transporter) | `~ /data/` and `~* \.(zip|tar|tar.gz)` | JavaScript (Node.js) | downloads of compendia in zip or (gzipped) tar formats
 [informer](https://github.com/o2r-project/o2r-informer) | `~* \.io` | JavaScript (Node.js) | [socket.io](http://socket.io/)-based WebSockets for live updates to the UI based on database event log, e.g. job progress
+[inspecter](https://github.com/o2r-project/o2r-inspecter) | `/api/v1/inspection` | R ([plumber](https://www.rplumber.io/)) | allow inspection of non-text-based file formats, e.g. `.Rdata`
 [substituter](https://github.com/o2r-project/o2r-substituter) | `/api/v1/substitution` |  JavaScript (Node.js) | create new ERCs based on existing ones by substituting files
 [manipulater](https://github.com/o2r-project/o2r-manipulater/) | `under development` | -- | provide back-end containers for interactive ERCs
-[inspecter](https://github.com/o2r-project/o2r-inspecter) | `under development` | -- | allow inspection of non-text-based file formats, e.g. `.Rdata`
 
 ##### ERC exporting
 
@@ -210,12 +210,10 @@ The MongoDB API is used by connecting µservices via suitable client packages, w
 **[Elasticsearch](https://elastic.co) search index**, kept in sync with the main document database by the µservice `finder`.
 The ids are mapped to support update and delete operations.
 
-Index: `o2r`
+The two main resources of the API are kept in separate indices due to [their different structure/mappings](https://www.elastic.co/blog/index-vs-type):
 
-Types:
-
-- `compendia`
-- `jobs`
+- `compendia` with type `compendia`
+- `jobs` with type `jobs`
 
 The search index is accessed by the UI through the search endpoint provided by `finder`.
 
