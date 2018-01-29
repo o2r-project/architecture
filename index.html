@@ -319,38 +319,14 @@ This allows different developers to contribute efficiently.</dd>
 <td>users access ERC status and metadata via search results and paper landing pages; review process integrates ERC details and supports manipulation;</td>
 <td>system's API using <code>HTTP</code> with <code>JSON</code> payload</td>
 </tr>
-<tr>
-<td><strong>ID provider</strong></td>
-<td>retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider</td>
-<td><code>HTTP</code></td>
-</tr>
-<tr>
-<td><strong>Execution infrastructure</strong></td>
-<td>ERC can be executed using a shared/distributed infrastructure</td>
-<td><code>HTTP</code></td>
-</tr>
-<tr>
-<td><strong>Data repository</strong></td>
-<td>the reproducibility service fetches (a) content for ERC creation, or (b) complete ERC, from different sources and stores crated ERC persistently at suitable repositories</td>
-<td><code>HTTP</code>, <code>FTP</code>, <code>WebDAV</code>, <code>git</code></td>
-</tr>
-<tr>
-<td><strong>Registry</strong></td>
-<td>the reproducibility service can deliver metadata on published ERC to registries/catalogues/search portals, but also retrieve/harvest contextual metadata during ERC creation; users discover ERC via registries</td>
-<td>(proprietary) <code>HTTP</code> APIs, persistent identifiers (<code>DOI</code>), <code>OAI-PMH</code></td>
-</tr>
-<tr>
-<td><strong>Software repository</strong></td>
-<td>software repository provide software artifacts during ERC creation and store executable runtime environments</td>
-<td><code>HTTP</code> APIs</td>
-</tr>
-<tr>
-<td><strong>Archives and digital preservation systems</strong></td>
-<td>when information is transferred from the private (research group, single researcher) or group domain (collaborations) to a public and persistent domain (archives, repositories), then extended data and metadata management is needed but also different access and re-use is enabled; these concerns are only relevant in so far as <em>data repositories</em> must be supported, but further aspects such as access rights in archives are only mediately relevant for the reproducibility service</td>
-<td>metadata in <code>JSON</code> and <code>XML</code> provided via <code>HTTP</code> or as files</td>
-</tr>
 </tbody>
 </table>
+<p><strong>ID provider</strong> | retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider | <code>HTTP</code>
+<strong>Execution infrastructure</strong> | ERC can be executed using a shared/distributed infrastructure | <code>HTTP</code>
+<strong>Data repository</strong> | the reproducibility service fetches (a) content for ERC creation, or (b) complete ERC, from different sources and stores crated ERC persistently at suitable repositories | <code>HTTP</code>, <code>FTP</code>, <code>WebDAV</code>, <code>git</code>
+<strong>Registry</strong> | the reproducibility service can deliver metadata on published ERC to registries/catalogues/search portals, but also retrieve/harvest contextual metadata during ERC creation; users discover ERC via registries | (proprietary) <code>HTTP</code> APIs, persistent identifiers (<code>DOI</code>), <code>OAI-PMH</code>
+<strong>Software repository</strong> | software repository provide software artifacts during ERC creation and store executable runtime environments | <code>HTTP</code> APIs
+<strong>Archives and digital preservation systems</strong> | when information is transferred from the private (research group, single researcher) or group domain (collaborations) to a public and persistent domain (archives, repositories), then extended data and metadata management is needed but also different access and re-use is enabled; these concerns are only relevant in so far as <em>data repositories</em> must be supported, but further aspects such as access rights in archives are only mediately relevant for the reproducibility service | metadata in <code>JSON</code> and <code>XML</code> provided via <code>HTTP</code> or as files</p>
 <h3 id="32-technical-context">3.2 Technical context</h3>
 <p>All components use <code>HTTP</code> over cable networks connections for communication of all exchanged data (metadata documents, ERC, Linux containers, etc.).</p>
 <h2 id="4-solution-strategy">4. Solution strategy</h2>
@@ -480,8 +456,10 @@ All information shared between µservices or transactions between microservices 
 <li>event-driven communication between microservices, and</li>
 <li>synchronization between main document database and search index.</li>
 </ul>
-<div class="note">This "eventing hack" is expected to be replaced by a proper eventing layer for productive deployments.</div>
-
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This eventing "hack" is expected to be replaced by a proper eventing layer for productive deployments.</p>
+</div>
 <h5 id="5276-blackbox-ephemeral-file-storage">5.2.7.6 Blackbox Ephemeral file storage</h5>
 <p>After loading from external sources and during creation of ERC, the files are stored in a file storage shared between the µservices.
 The file structure is known to each microservice and read/write operations happen as needed.</p>
@@ -531,6 +509,12 @@ For testing or developing the <a href="https://github.com/o2r-project/o2r-platfo
 <td><a href="http://socket.io/">socket.io</a>-based WebSockets for live updates to the UI based on database event log, e.g. job progress</td>
 </tr>
 <tr>
+<td><a href="https://github.com/o2r-project/o2r-inspecter">inspecter</a></td>
+<td><code>/api/v1/inspection</code></td>
+<td>R (<a href="https://www.rplumber.io/">plumber</a>)</td>
+<td>allow inspection of non-text-based file formats, e.g. <code>.Rdata</code></td>
+</tr>
+<tr>
 <td><a href="https://github.com/o2r-project/o2r-substituter">substituter</a></td>
 <td><code>/api/v1/substitution</code></td>
 <td>JavaScript (Node.js)</td>
@@ -541,12 +525,6 @@ For testing or developing the <a href="https://github.com/o2r-project/o2r-platfo
 <td><code>under development</code></td>
 <td>--</td>
 <td>provide back-end containers for interactive ERCs</td>
-</tr>
-<tr>
-<td><a href="https://github.com/o2r-project/o2r-inspecter">inspecter</a></td>
-<td><code>under development</code></td>
-<td>--</td>
-<td>allow inspection of non-text-based file formats, e.g. <code>.Rdata</code></td>
 </tr>
 </tbody>
 </table>
@@ -602,11 +580,10 @@ For testing or developing the <a href="https://github.com/o2r-project/o2r-platfo
 <p>The MongoDB API is used by connecting µservices via suitable client packages, which are available for all required languages.</p>
 <p><strong><a href="https://elastic.co">Elasticsearch</a> search index</strong>, kept in sync with the main document database by the µservice <code>finder</code>.
 The ids are mapped to support update and delete operations.</p>
-<p>Index: <code>o2r</code></p>
-<p>Types:</p>
+<p>The two main resources of the API are kept in separate indices due to <a href="https://www.elastic.co/blog/index-vs-type">their different structure/mappings</a>:</p>
 <ul>
-<li><code>compendia</code></li>
-<li><code>jobs</code></li>
+<li><code>compendia</code> with type <code>compendia</code></li>
+<li><code>jobs</code> with type <code>jobs</code></li>
 </ul>
 <p>The search index is accessed by the UI through the search endpoint provided by <code>finder</code>.</p>
 <h4 id="533-whitebox-tools">5.3.3 Whitebox tools</h4>
@@ -652,7 +629,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build f671430 @ 2017-12-13 18:34:18 +0100</div
+<div class="buildinfo">Build 46796d0 @ 2018-01-29 16:35:22 +0100</div
               
             </div>
           </div>
@@ -704,5 +681,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2017-12-13 17:36:09
+Build Date UTC : 2018-01-29 15:37:37
 -->
