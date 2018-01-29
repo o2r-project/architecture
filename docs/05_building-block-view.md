@@ -152,7 +152,8 @@ The database's operation log, normally used for synchronization between database
 - event-driven communication between microservices, and
 - synchronization between main document database and search index.
 
-<div class="note">This "eventing hack" is expected to be replaced by a proper eventing layer for productive deployments.</div>
+!!! Note
+    This eventing "hack" is expected to be replaced by a proper eventing layer for productive deployments.
 
 ##### 5.2.7.6 Blackbox Ephemeral file storage
 

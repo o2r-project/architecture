@@ -16,4 +16,5 @@ repo_name: GitHub
 edit_uri: tree/master/docs/
 markdown_extensions:
   - markdown_include.include
+  - markdown.extensions.admonition
   - def_list
