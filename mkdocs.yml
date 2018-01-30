@@ -5,11 +5,11 @@ pages:
   - Architecture: index.md
   - User scenarios: user-scenarios.md
   - Glossary: glossary.md
-theme: readthedocs # flatly
+  - Metadata: metadata.md
+theme: readthedocs
 site_author: o2r project
 site_dir: site
 theme_dir: custom_theme
-site_dir: site
 extra_css: [arc42.css]
 repo_url: https://github.com/o2r-project/architecture
 repo_name: GitHub
