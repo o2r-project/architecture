@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="o2r project">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Metadata - Architecture for o2r</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  <link href="../arc42.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Metadata";
+    var mkdocs_page_input_path = "metadata.md";
+    var mkdocs_page_url = "/metadata/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Architecture for o2r</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Architecture</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../user-scenarios/">User scenarios</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../glossary/">Glossary</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Metadata</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#metadata-workflows">Metadata workflows</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#files-vs-database">Files vs. database</a></li>
+        
+            <li><a class="toctree-l3" href="#metadata-extraction-and-brokering-during-creation">Metadata extraction and brokering during creation</a></li>
+        
+            <li><a class="toctree-l3" href="#metadata-for-shipments">Metadata for shipments</a></li>
+        
+            <li><a class="toctree-l3" href="#metadata-mappings">Metadata mappings</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Architecture for o2r</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Metadata</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/o2r-project/architecture/tree/master/docs/metadata.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="metadata-workflows">Metadata workflows<a class="headerlink" href="#metadata-workflows" title="Permanent link">&para;</a></h1>
+<p>This document describes the internal processes handling metadata for ERC.
+For information on the metadata model for ERC as part of the o2r web API please see <a href="http://o2r.info/o2r-web-api/compendium/metadata">the API specification</a>.</p>
+<p>The remainder of this document describes <em>who</em> handles metadata <em>when</em> and <em>how</em> within the <a href="../">o2r architecture</a>.</p>
+<h2 id="files-vs-database">Files vs. database<a class="headerlink" href="#files-vs-database" title="Permanent link">&para;</a></h2>
+<p>In all workflows files are created within ERC in a specific subdirectory <code>.erc</code> holding different kinds, formats, or versions of metadata.
+For ease of access via web API, the information is also stored within the database.</p>
+<p><strong>The files in the compendium are always the normative source of information.</strong></p>
+<p>The term <em>brokering</em> means the translation from schema-less to schema-specific metadata, as well as inter-schema mappings.
+The brokering output is then stored in respective files and mirrored to the database by the reproducibility service.</p>
+<h2 id="metadata-extraction-and-brokering-during-creation">Metadata extraction and brokering during creation<a class="headerlink" href="#metadata-extraction-and-brokering-during-creation" title="Permanent link">&para;</a></h2>
+<p><code>muncher</code> is the main <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> component for compedia.
+It controls the creation workflow.</p>
+<p>The creation from the metadata perspective is as follows:</p>
+<ol>
+<li><code>init</code> stores the files for a new ERC in a directory.</li>
+<li><code>extract</code> uses <code>metaextract.py</code> (<a href="https://github.com/o2r-project/o2r-meta#2-metaextract">docs</a>) to analyse the incoming ERC and creates new files with <em>raw</em> metadata for each of the scanned files. Currently the following types of files will be considered: <em>.r, .rmd, .shp, "bagit.txt"</em>. Future releases of the extractor will be likely to consider <em>.tex, .json (geojson), .jp2, .tiff</em> and more.
+This raw metadata itself is <em>schema-less</em> and non-semantic.
+The processed files are in conceptual competition for the best representative of the working directory's meta information, i.e. there will be only one main output, ideally represented by the most complete set of metadata.
+By default the competing bits of information will also be preserved in <code>.erc/metadata_raw_&lt;filename&gt;.json</code> where <em>filename</em> is an identifier based on the original source file.</li>
+<li>output file: <code>.erc/metadata_raw.json</code></li>
+<li>database field: <code>&lt;compendium&gt;.metadata.raw</code></li>
+<li><code>broker</code> uses <code>metabroker.py</code> (<a href="https://github.com/o2r-project/o2r-meta#5-metabroker">docs</a>) to translate the <em>raw</em> metadata in <code>json</code> to <em>o2r</em> metadata in <code>json</code> as being compliant to the o2r json-schema.</li>
+<li>output file: <code>.erc/metadata_o2r.json</code></li>
+<li>database field: <code>&lt;compendium&gt;.metadata.o2r</code></li>
+<li>(<code>harvest</code> TBD; will connect to third party database endpoint via OAI-PMH to gather additional information for the enrichment of the o2r metadata collected via extraction)</li>
+<li><code>save</code> stores the new ERC to the database including the aforementioned metadata fields.</li>
+<li><code>user check</code> provides an interactive form to the uploading user to control and edit the suggested metadata.
+Suggestions are based on <em>o2r</em> metadata.
+The check workflow is handled in the web client project.</li>
+<li><code>update</code> updates the metadata in both database and file with the user's edits.
+This step creates <em>valid o2r</em> metadata.
+The metadata update includes <em>all brokering</em> to the configured metadata formats, meaning the brokered metadata is always up-to-date and based on the same source, the <em>o2r</em> metadata.</li>
+</ol>
+<p>By design there is no metadata brokering during shipments or job executions.
+Because it is likely that not all information can be brokered automatically, the metadata required by shipping destinations are mandatory in the o2r metadata model to reduce the user involvement to a minimum, i.e. when updating the metadata.
+In the same vein, all <em>validation</em> takes place during metadata updates, because that is the only time a user can react to validation errors.</p>
+<h2 id="metadata-for-shipments">Metadata for shipments<a class="headerlink" href="#metadata-for-shipments" title="Permanent link">&para;</a></h2>
+<p>The <code>shipper</code> uses the metadata stored in the ERC directory <code>.erc</code> to start a shipment of data or metadata to third-party repositories.
+It does not do any updating, brokering, or validation.</p>
+<h2 id="metadata-mappings">Metadata mappings<a class="headerlink" href="#metadata-mappings" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>destination</strong></th>
+<th><strong>model</strong></th>
+<th><strong>format(s)</strong></th>
+<th><strong>description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zenodo</code></td>
+<td><a href="https://zenodo.org/dev#collapse-list16">Deposition metadata</a></td>
+<td><code>json</code></td>
+<td>for storing full ERC in the Zenodo data repository; Zenodo also publishes metadata on <a href="https://datacite.org/">DataCite</a></td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../glossary/" class="btn btn-neutral" title="Glossary"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../glossary/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
