@@ -11,3 +11,13 @@ Executable Research Compendium, see this [scientific article](https://doi.org/10
 ## Executable Research Compendium
 
 See [ERC](#erc)
+
+## JavaScript Promises
+
+> _A Promise is an object representing the eventual completion or failure of an asynchronous operation. [...] Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function._
+> via [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
+
+## Literate Programming
+
+> _Literate programming is a programming paradigm [..] in which a program is given as an explanation of the program logic in a natural language, such as English, interspersed with snippets of macros and traditional source code, from which a compilable source code can be generated._
+> via [Wikipedia](https://en.wikipedia.org/wiki/Literate_programming)

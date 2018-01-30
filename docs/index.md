@@ -10,4 +10,6 @@
 
 {!docs/05_building-block-view.md!}
 
+{!docs/06_runtime-view.md!}
+
 {!docs/credits.md!}
