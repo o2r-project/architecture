@@ -222,7 +222,7 @@ The search index is accessed by the UI through the search endpoint provided by `
 
 **project** | **language** | **description**
 ------ | ------ | ------
-[meta](https://github.com/o2r-project/o2r-meta) | Python | scripts for extraction, translation and validation of metadata
+[meta](https://github.com/o2r-project/o2r-meta) | Python | scripts for extraction, translation and validation of metadata; for details see [metadata documentation](/metadata)
 [containerit](https://github.com/o2r-project/containerit) | R | generation of Dockerfiles based on R sessions and scripts
 
 #### 5.3.4 Whitebox ephemeral file storage
