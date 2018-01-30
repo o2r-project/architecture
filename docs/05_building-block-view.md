@@ -70,9 +70,14 @@ Such an infrastructure could be either self-hosted, e.g. [Docker Swarm](https://
 
 [![whitebox data repositories](img/5.2-whitebox-data-repos.png)](img/5.2-whitebox-data-repos.png)
 
+The reproducibility service _does not persistently store anything_.
+It only keeps copies of files during creation and inspection.
+So where are ERCs saved and where is their data coming from?
+
 **Collaboration platforms**, e.g. [ownCloud/Sciebo](http://sciebo.de/), [GitHub](http://github.com/), [ShareLatex](http://sharelatex.com/), [OSF](https://osf.io/), allow users to create, store, and share their research (code, text, data, et cetera).
+Besides being an interaction platform for users, they can also be seen simply as a data repository.
 The reproducibility service fetches contents for building an ERC from them based on public links, e.g. a public GitHub repository or shared Sciebo folder.
-It is possible that ERC creation is linked to a project/repository on a collaboration platform and updates trigger an ERC (re-)creation or execution.
+It is possible to link ERC creation to an project/repository under development on a collaboration platform as to trigger an ERC (re-)creation or execution when changes are made.
 
 Protocols: `WebDAV`, `ownCloud`, `HTTP` (including [webhooks](https://en.wikipedia.org/wiki/Webhook)), `git`
 
@@ -83,11 +88,10 @@ Protocol: `HTTP` APIs
 
 Generic **Repositories**, e.g. [Zenodo](https://zenodo.org/), [Mendeley Data](https://data.mendeley.com/), [Figshare](http://figshare.com/), [OSF](https://osf.io/), provide (a) access to complete ERC stored in repositories for inspection and execution by the reproducibility service, and (b) storage of created ERC. repositories.
 
-The reproducibility service _does not persistently store anything_.
-
 Protocols: (authenticated) `HTTP` APIs
 
-**Archives**, e.g. using an installation of [Archivematica](https://www.archivematica.org/), might provide long-term preservation of ERC. Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.
+**Archives** and digital preservation solutions, e.g. using an installation of [Archivematica](https://www.archivematica.org/), might provide long-term preservation of ERC.
+Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.
 
 Protocol: `HTTP` carrying bitstreams and metadata
 
