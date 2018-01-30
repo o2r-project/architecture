@@ -5,7 +5,7 @@
 #### 5.1.1 Blackbox Publication Platforms
 
 Publications platforms are the online interaction points of users with scientific works.
-Users create publications, e.g. submitting to a scientific journal, publishing on a pre-print server or archive, or collaborating in online repositories.
+Users create publications, e.g. submitting to a scientific journal, publishing on a pre-print server, publishing on a self-hosted website, or collaborating in online repositories.
 Users examine publications, e.g. browsing, searching, reading, downloading, or reviewing.
 
 #### 5.1.2 Blackbox ID Provider
@@ -61,6 +61,7 @@ Integrations are based on the service's public API.
 
 The reproducibility service uses [ORCID](http://orcid.org/) to authenticate users and retrieve user and works metadata.
 Internally, the user's public `ORCID` is the main identifier.
+User have different levels, which allow different actions, such as "registered user" or "administrator".
 
 #### 5.2.3 Whitebox Execution Infrastructure
 
@@ -130,24 +131,24 @@ A working [nginx](https://nginx.org) configuration is available [in the test set
 ##### 5.2.7.2 Blackbox UI
 
 The UI is a web application based on [Angular JS](https://angularjs.org/), see [o2r-platform](https://github.com/o2r-project/o2r-platform).
-It connects to an execution microservice (µservice) for real-time WebSocket-based notifications.
+It connects to an execution microservice (microservice) for real-time WebSocket-based notifications.
 
 ##### 5.2.7.3 Blackbox microservices
 
 The reproducibility service uses a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functionality defined by the **[web API specification](http://o2r.info/o2r-web-api)** into manageable units.
 
-This allows scalability (selected µservices can be deployed as much as needed) and technology independence for each use case and developer.
-The µservices all access one main database and a shared file storage.
+This allows scalability (selected microservices can be deployed as much as needed) and technology independence for each use case and developer.
+The microservices all access one main database and a shared file storage.
 
 ##### 5.2.7.4 Blackbox Tools
 
-Some functionality is developed as standalone tools and used as such in the µservices instead of re-implementing features.
+Some functionality is developed as standalone tools and used as such in the microservices instead of re-implementing features.
 These tools are integrated via their command line interface (CLI).
 
 ##### 5.2.7.5 Blackbox Database
 
 The main database is the unifying element of the microservice architecture.
-All information shared between µservices or transactions between microservices are made via the database, including session state handling (= authentication).
+All information shared between microservices or transactions between microservices are made via the database, including session state handling (= authentication).
 
 A search database/index is used for full-text search and advanced search queries.
 
@@ -161,21 +162,24 @@ The database's operation log, normally used for synchronization between database
 
 ##### 5.2.7.6 Blackbox Ephemeral file storage
 
-After loading from external sources and during creation of ERC, the files are stored in a file storage shared between the µservices.
+After loading from external sources and during creation of ERC, the files are stored in a file storage shared between the microservices.
 The file structure is known to each microservice and read/write operations happen as needed.
 
 ### 5.3 Refinement Level 3
 
-#### 5.3.1 Whitebox µservices
+#### 5.3.1 Whitebox microservices
 
 Each microservice is encapsulated as a [Docker](http://docker.com/) container running at its own port on an internal network and only serving its respective API path.
-For testing or developing the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see the repository's directory `/test` and check the projects `README.md` for instructions.
+
+For **testing**, the [reference implementation](https://github.com/o2r-project/reference-implementation) provides instructions on running a local instance ofr the microservices and the demonstration UI.
+
+For **development** the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see repository file `docker-compose.yml` and the project's `README.md` for instructions.
 
 ##### ERC creation and examination
 
 **Project** | **API path** | **Language** | **Description**
 ------ | ------ | ------ | ------
-[muncher](https://github.com/o2r-project/o2r-muncher) | `/api/v1/compendium` and `/api/v1/job`  | JavaScript (Node.js) | core component for CRUD of compendia and jobs (ERC execution)
+[muncher](https://github.com/o2r-project/o2r-muncher) | `/api/v1/compendium` and `/api/v1/job`  | JavaScript (Node.js) | core component for [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) of compendia and jobs (ERC execution)
 [loader](https://github.com/o2r-project/o2r-loader) | `/api/v1/compendium` (`HTTP POST` only) |  JavaScript (Node.js) | load workspaces from repositories and collaboration platforms
 [finder](https://github.com/o2r-project/o2r-finder) | `/api/v1/search` | JavaScript (Node.js) | discovery and search, synchronizes the database with a search database (Elasticsearch) and exposes read-only search endpoints
 [transporter](https://github.com/o2r-project/o2r-transporter) | `~ /data/` and `~* \.(zip|tar|tar.gz)` | JavaScript (Node.js) | downloads of compendia in zip or (gzipped) tar formats
@@ -210,9 +214,9 @@ Collections:
 - `jobs`
 - `shipments`
 
-The MongoDB API is used by connecting µservices via suitable client packages, which are available for all required languages.
+The MongoDB API is used by connecting microservices via suitable client packages, which are available for all required languages.
 
-**[Elasticsearch](https://elastic.co) search index**, kept in sync with the main document database by the µservice `finder`.
+**[Elasticsearch](https://elastic.co) search index**, kept in sync with the main document database by the microservice `finder`.
 The ids are mapped to support update and delete operations.
 
 The two main resources of the API are kept in separate indices due to [their different structure/mappings](https://www.elastic.co/blog/index-vs-type):
@@ -220,7 +224,7 @@ The two main resources of the API are kept in separate indices due to [their dif
 - `compendia` with type `compendia`
 - `jobs` with type `jobs`
 
-The search index is accessed by the UI through the search endpoint provided by `finder`.
+The search index is accessed by clients through the search endpoint provided by `finder`.
 
 #### 5.3.3 Whitebox tools
 
@@ -231,4 +235,4 @@ The search index is accessed by the UI through the search endpoint provided by `
 
 #### 5.3.4 Whitebox ephemeral file storage
 
-A host directory is mounted into every container to the same location: `/tmp/o2r:/tmp/o2r`
+A host directory is mounted into every container to the location `/tmp/o2r`.
