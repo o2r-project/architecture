@@ -67,6 +67,8 @@
         
             <li><a class="toctree-l3" href="#5-building-block-view">5. Building block view</a></li>
         
+            <li><a class="toctree-l3" href="#6-runtime-view">6. Runtime view</a></li>
+        
             <li><a class="toctree-l3" href="#credits">Credits</a></li>
         
             <li><a class="toctree-l3" href="#license">License</a></li>
@@ -370,7 +372,7 @@ The only required documentation is for the installation into a container and usa
 <h3 id="51-refinement-level-1">5.1 Refinement Level 1<a class="headerlink" href="#51-refinement-level-1" title="Permanent link">&para;</a></h3>
 <h4 id="511-blackbox-publication-platforms">5.1.1 Blackbox Publication Platforms<a class="headerlink" href="#511-blackbox-publication-platforms" title="Permanent link">&para;</a></h4>
 <p>Publications platforms are the online interaction points of users with scientific works.
-Users create publications, e.g. submitting to a scientific journal, publishing on a pre-print server or archive, or collaborating in online repositories.
+Users create publications, e.g. submitting to a scientific journal, publishing on a pre-print server, publishing on a self-hosted website, or collaborating in online repositories.
 Users examine publications, e.g. browsing, searching, reading, downloading, or reviewing.</p>
 <h4 id="512-blackbox-id-provider">5.1.2 Blackbox ID Provider<a class="headerlink" href="#512-blackbox-id-provider" title="Permanent link">&para;</a></h4>
 <p>Identification information of distributed systems is crucial, and for security reasons as well as for limiting manual reproduction of metadata, a central service can provide all of</p>
@@ -407,22 +409,27 @@ To some extend, pre-print servers, for example <a href="https://osf.io/">OSF</a>
 Integrations are based on the service's public API.</p>
 <h4 id="522-whitebox-id-provider">5.2.2 Whitebox ID Provider<a class="headerlink" href="#522-whitebox-id-provider" title="Permanent link">&para;</a></h4>
 <p>The reproducibility service uses <a href="http://orcid.org/">ORCID</a> to authenticate users and retrieve user and works metadata.
-Internally, the user's public <code>ORCID</code> is the main identifier.</p>
+Internally, the user's public <code>ORCID</code> is the main identifier.
+User have different levels, which allow different actions, such as "registered user" or "administrator".</p>
 <h4 id="523-whitebox-execution-infrastructure">5.2.3 Whitebox Execution Infrastructure<a class="headerlink" href="#523-whitebox-execution-infrastructure" title="Permanent link">&para;</a></h4>
 <p>Such an infrastructure could be either self-hosted, e.g. <a href="https://www.docker.com/products/docker-swarm">Docker Swarm</a>-based, or use a cloud service provide, such as <a href="https://aws.amazon.com/ec2/">Amazon EC2</a>, <a href="http://cloud.docker.com/">Docker Cloud</a>, or even use continuous integration services such as <a href="https://travis-ci.org/">Travis CI</a> or <a href="https://about.gitlab.com/gitlab-ci/">Gitlab CI</a>.</p>
 <h4 id="524-whitebox-data-repositories">5.2.4 Whitebox Data Repositories<a class="headerlink" href="#524-whitebox-data-repositories" title="Permanent link">&para;</a></h4>
 <p><a href="./img/5.2-whitebox-data-repos.png"><img alt="whitebox data repositories" src="./img/5.2-whitebox-data-repos.png" /></a></p>
+<p>The reproducibility service <em>does not persistently store anything</em>.
+It only keeps copies of files during creation and inspection.
+So where are ERCs saved and where is their data coming from?</p>
 <p><strong>Collaboration platforms</strong>, e.g. <a href="http://sciebo.de/">ownCloud/Sciebo</a>, <a href="http://github.com/">GitHub</a>, <a href="http://sharelatex.com/">ShareLatex</a>, <a href="https://osf.io/">OSF</a>, allow users to create, store, and share their research (code, text, data, et cetera).
+Besides being an interaction platform for users, they can also be seen simply as a data repository.
 The reproducibility service fetches contents for building an ERC from them based on public links, e.g. a public GitHub repository or shared Sciebo folder.
-It is possible that ERC creation is linked to a project/repository on a collaboration platform and updates trigger an ERC (re-)creation or execution.</p>
+It is possible to link ERC creation to an project/repository under development on a collaboration platform as to trigger an ERC (re-)creation or execution when changes are made.</p>
 <p>Protocols: <code>WebDAV</code>, <code>ownCloud</code>, <code>HTTP</code> (including <a href="https://en.wikipedia.org/wiki/Webhook">webhooks</a>), <code>git</code></p>
 <p><strong>Domain data repositories</strong>, e.g. <a href="https://www.pangaea.de/">PANGAEA</a> or <a href="http://dataservices.gfz-potsdam.de/portal/">GFZ Data Services</a>, can be accessed by the reproducibility service during creation and execution of ERC to download data.
 Allowing access to data repositories reduces data duplication but requires control over/trust in the respective repository.</p>
 <p>Protocol: <code>HTTP</code> APIs</p>
 <p>Generic <strong>Repositories</strong>, e.g. <a href="https://zenodo.org/">Zenodo</a>, <a href="https://data.mendeley.com/">Mendeley Data</a>, <a href="http://figshare.com/">Figshare</a>, <a href="https://osf.io/">OSF</a>, provide (a) access to complete ERC stored in repositories for inspection and execution by the reproducibility service, and (b) storage of created ERC. repositories.</p>
-<p>The reproducibility service <em>does not persistently store anything</em>.</p>
 <p>Protocols: (authenticated) <code>HTTP</code> APIs</p>
-<p><strong>Archives</strong>, e.g. using an installation of <a href="https://www.archivematica.org/">Archivematica</a>, might provide long-term preservation of ERC. Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.</p>
+<p><strong>Archives</strong> and digital preservation solutions, e.g. using an installation of <a href="https://www.archivematica.org/">Archivematica</a>, might provide long-term preservation of ERC.
+Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.</p>
 <p>Protocol: <code>HTTP</code> carrying bitstreams and metadata</p>
 <h4 id="525-whitebox-registries">5.2.5 Whitebox Registries<a class="headerlink" href="#525-whitebox-registries" title="Permanent link">&para;</a></h4>
 <p>Research data registries and websites, for example (<a href="https://www.uni-muenster.de/FB7_MultimediaSupport/CRIS_Infoseite/Forschungsdatenbank_Infoseite.html">CRIS</a>, <a href="https://www.datacite.org/">DataCite</a>, <a href="https://scholar.google.de/">Google Scholar</a>, <a href="https://www.scopus.com/">Scopus</a>, <a href="https://www.altmetric.com/">Altmetric</a>, to name just a few, collect metadata on publications and provide services with this data.
@@ -444,17 +451,17 @@ They can be used to distribute the runtime environments across the execution inf
 A working <a href="https://nginx.org">nginx</a> configuration is available <a href="https://github.com/o2r-project/o2r-platform/blob/master/test/nginx.conf">in the test setup</a>.</p>
 <h5 id="5272-blackbox-ui">5.2.7.2 Blackbox UI<a class="headerlink" href="#5272-blackbox-ui" title="Permanent link">&para;</a></h5>
 <p>The UI is a web application based on <a href="https://angularjs.org/">Angular JS</a>, see <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a>.
-It connects to an execution microservice (µservice) for real-time WebSocket-based notifications.</p>
+It connects to an execution microservice (microservice) for real-time WebSocket-based notifications.</p>
 <h5 id="5273-blackbox-microservices">5.2.7.3 Blackbox microservices<a class="headerlink" href="#5273-blackbox-microservices" title="Permanent link">&para;</a></h5>
 <p>The reproducibility service uses a <a href="https://en.wikipedia.org/wiki/Microservices">microservice architecture</a> to separate functionality defined by the <strong><a href="http://o2r.info/o2r-web-api">web API specification</a></strong> into manageable units.</p>
-<p>This allows scalability (selected µservices can be deployed as much as needed) and technology independence for each use case and developer.
-The µservices all access one main database and a shared file storage.</p>
+<p>This allows scalability (selected microservices can be deployed as much as needed) and technology independence for each use case and developer.
+The microservices all access one main database and a shared file storage.</p>
 <h5 id="5274-blackbox-tools">5.2.7.4 Blackbox Tools<a class="headerlink" href="#5274-blackbox-tools" title="Permanent link">&para;</a></h5>
-<p>Some functionality is developed as standalone tools and used as such in the µservices instead of re-implementing features.
+<p>Some functionality is developed as standalone tools and used as such in the microservices instead of re-implementing features.
 These tools are integrated via their command line interface (CLI).</p>
 <h5 id="5275-blackbox-database">5.2.7.5 Blackbox Database<a class="headerlink" href="#5275-blackbox-database" title="Permanent link">&para;</a></h5>
 <p>The main database is the unifying element of the microservice architecture.
-All information shared between µservices or transactions between microservices are made via the database, including session state handling (= authentication).</p>
+All information shared between microservices or transactions between microservices are made via the database, including session state handling (= authentication).</p>
 <p>A search database/index is used for full-text search and advanced search queries.</p>
 <p>The database's operation log, normally used for synchronization between database nodes, is also used for </p>
 <ul>
@@ -466,12 +473,13 @@ All information shared between µservices or transactions between microservices 
 <p>This eventing "hack" is expected to be replaced by a proper eventing layer for productive deployments.</p>
 </div>
 <h5 id="5276-blackbox-ephemeral-file-storage">5.2.7.6 Blackbox Ephemeral file storage<a class="headerlink" href="#5276-blackbox-ephemeral-file-storage" title="Permanent link">&para;</a></h5>
-<p>After loading from external sources and during creation of ERC, the files are stored in a file storage shared between the µservices.
+<p>After loading from external sources and during creation of ERC, the files are stored in a file storage shared between the microservices.
 The file structure is known to each microservice and read/write operations happen as needed.</p>
 <h3 id="53-refinement-level-3">5.3 Refinement Level 3<a class="headerlink" href="#53-refinement-level-3" title="Permanent link">&para;</a></h3>
-<h4 id="531-whitebox-services">5.3.1 Whitebox µservices<a class="headerlink" href="#531-whitebox-services" title="Permanent link">&para;</a></h4>
-<p>Each microservice is encapsulated as a <a href="http://docker.com/">Docker</a> container running at its own port on an internal network and only serving its respective API path.
-For testing or developing the <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a> GitHub project contains <a href="https://docs.docker.com/compose/compose-file/">docker-compose</a> configurations to run all microservices, see the repository's directory <code>/test</code> and check the projects <code>README.md</code> for instructions.</p>
+<h4 id="531-whitebox-microservices">5.3.1 Whitebox microservices<a class="headerlink" href="#531-whitebox-microservices" title="Permanent link">&para;</a></h4>
+<p>Each microservice is encapsulated as a <a href="http://docker.com/">Docker</a> container running at its own port on an internal network and only serving its respective API path.</p>
+<p>For <strong>testing</strong>, the <a href="https://github.com/o2r-project/reference-implementation">reference implementation</a> provides instructions on running a local instance ofr the microservices and the demonstration UI.</p>
+<p>For <strong>development</strong> the <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a> GitHub project contains <a href="https://docs.docker.com/compose/compose-file/">docker-compose</a> configurations to run all microservices, see repository file <code>docker-compose.yml</code> and the project's <code>README.md</code> for instructions.</p>
 <h5 id="erc-creation-and-examination">ERC creation and examination<a class="headerlink" href="#erc-creation-and-examination" title="Permanent link">&para;</a></h5>
 <table>
 <thead>
@@ -487,7 +495,7 @@ For testing or developing the <a href="https://github.com/o2r-project/o2r-platfo
 <td><a href="https://github.com/o2r-project/o2r-muncher">muncher</a></td>
 <td><code>/api/v1/compendium</code> and <code>/api/v1/job</code></td>
 <td>JavaScript (Node.js)</td>
-<td>core component for CRUD of compendia and jobs (ERC execution)</td>
+<td>core component for <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> of compendia and jobs (ERC execution)</td>
 </tr>
 <tr>
 <td><a href="https://github.com/o2r-project/o2r-loader">loader</a></td>
@@ -582,15 +590,15 @@ For testing or developing the <a href="https://github.com/o2r-project/o2r-platfo
 <li><code>jobs</code></li>
 <li><code>shipments</code></li>
 </ul>
-<p>The MongoDB API is used by connecting µservices via suitable client packages, which are available for all required languages.</p>
-<p><strong><a href="https://elastic.co">Elasticsearch</a> search index</strong>, kept in sync with the main document database by the µservice <code>finder</code>.
+<p>The MongoDB API is used by connecting microservices via suitable client packages, which are available for all required languages.</p>
+<p><strong><a href="https://elastic.co">Elasticsearch</a> search index</strong>, kept in sync with the main document database by the microservice <code>finder</code>.
 The ids are mapped to support update and delete operations.</p>
 <p>The two main resources of the API are kept in separate indices due to <a href="https://www.elastic.co/blog/index-vs-type">their different structure/mappings</a>:</p>
 <ul>
 <li><code>compendia</code> with type <code>compendia</code></li>
 <li><code>jobs</code> with type <code>jobs</code></li>
 </ul>
-<p>The search index is accessed by the UI through the search endpoint provided by <code>finder</code>.</p>
+<p>The search index is accessed by clients through the search endpoint provided by <code>finder</code>.</p>
 <h4 id="533-whitebox-tools">5.3.3 Whitebox tools<a class="headerlink" href="#533-whitebox-tools" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -614,7 +622,52 @@ The ids are mapped to support update and delete operations.</p>
 </tbody>
 </table>
 <h4 id="534-whitebox-ephemeral-file-storage">5.3.4 Whitebox ephemeral file storage<a class="headerlink" href="#534-whitebox-ephemeral-file-storage" title="Permanent link">&para;</a></h4>
-<p>A host directory is mounted into every container to the same location: <code>/tmp/o2r:/tmp/o2r</code></p>
+<p>A host directory is mounted into every container to the location <code>/tmp/o2r</code>.</p>
+<h2 id="6-runtime-view">6. Runtime view<a class="headerlink" href="#6-runtime-view" title="Permanent link">&para;</a></h2>
+<p>The runtime view describes the interaction between the static building blocks.
+It cannot cover all potential cases and focusses on the following main scenarios.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Scenario</strong></th>
+<th><strong>Purpose and overview</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ERC Creation</td>
+<td>The most important workflow for an author is creating an ERC from his workspace of data, code and documentation. The author can provide these resources as a direct upload, but a more comfortable process is loading the files from a collaboration platform. Three microservices are core to this scenario: <code>loader</code>, <code>muncher</code>, and <code>shipper</code>.</td>
+</tr>
+<tr>
+<td>ERC Inspection</td>
+<td>The most important workflow for a reviewer or reader is executing the analysis encapsulated in an ERC. The execution comprises creation of configuration files (if missing) from metadata, compiling the a display file using the actual analysis, and saving the used runtime environment. The core microservice for this scenario is <code>muncher</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="61-erc-creation">6.1 ERC Creation<a class="headerlink" href="#61-erc-creation" title="Permanent link">&para;</a></h3>
+<p><a href="./img/6.1-runtime-view-creation.png"><img alt="runtime view ERC creation" src="./img/6.1-runtime-view-creation.png" /></a></p>
+<p>First, the user initiates a <em>creation</em> of a new ERC.
+The <code>loader</code> fetches the files, runs some checks, starts metadata extraction, starts metadata brokering from the raw metadata to o2r metadata, and saves the compendium, as a non-public candidate which only the uploading user can see, to the database.</p>
+<p>Then the user opens the candidate compendium, checks and completes the metadata.
+<code>muncher</code> triggers a metadata validation and brokering to several output formats, and loads the brokered metadata from the files to save it in the database.</p>
+<p>Finally the user starts a shipment of the compendium to a data repository.
+The <code>shipper</code> manages this two step process.
+The separate "create" and "publish" steps allow checking the shipped files, and avoid unintentional shipments, because a published shipment creates a unique public resource, which potentially cannot be unpublished.</p>
+<div class="admonition note">
+<p class="admonition-title"><em>In the code</em></p>
+<p>The <code>loader</code> has two core controllers for direct <em>upload</em> and <em>load</em> from a collaboration platform.
+Their core chain of functions are realised as <a href="./glossary#javascript-promises">JavaScript Promises</a>, see the code for <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/loader.js#L48">loader</a> and <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/uploader.js#L44">uploader</a> respectively.
+The respective steps are shared between these two cases where possible, i.e. starting with the step <code>stripSingleBasedir</code>.</p>
+</div>
+<h3 id="62-erc-inspection">6.2 ERC Inspection<a class="headerlink" href="#62-erc-inspection" title="Permanent link">&para;</a></h3>
+<p><a href="./img/6.2-runtime-view-inspection.png"><img alt="runtime view ERC inspection" src="./img/6.2-runtime-view-inspection.png" /></a></p>
+<p>The user initiates and <em>inspection</em> of an existing ERC.
+The ERC ...</p>
+<div class="admonition note">
+<p class="admonition-title"><em>In the code</em></p>
+<p>The <code>muncher</code> has two core resources: a <em>compendium</em> represents an ERC, a <em>job</em> represents an <em>"execution"</em> or a <em>"run"</em> an ERC, i.e. the building, running, and saving of the runtime environment to create outputs (e.g. a viewable file, plots, or data) from the code and instructions provided in the ERC (script, <a href="./glossary#literate-programming">literate programming document</a>).
+The core function for this is the <code>Executor</code>, which chains a number of steps using <a href="./glossary#javascript-promises">JavaScript Promises</a>, see the <a href="https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306">code</a>.</p>
+</div>
 <hr />
 <h2 id="credits">Credits<a class="headerlink" href="#credits" title="Permanent link">&para;</a></h2>
 <p>This specification and guides are developed by the members of the project Opening Reproducible Research (<a href="https://www.uni-muenster.de/forschungaz/project/9520">Offene Reproduzierbare Forschung</a>) funded by the German Research Foundation (Deutsche Forschungsgemeinschaft (DFG) - Projektnummer <a href="http://gepris.dfg.de/gepris/projekt/274927273">274927273</a>) under grant numbers PE 1632/10-1, KR 3930/3-1, and TR 864/6-1).</p>
@@ -634,7 +687,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build af7e2d6 @ 2018-01-30 15:10:06 +0100</div
+<div class="buildinfo">Build 53c2352 @ 2018-01-30 18:00:07 +0100</div
               
             </div>
           </div>
@@ -686,5 +739,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-01-30 14:12:39
+Build Date UTC : 2018-01-30 17:04:28
 -->
