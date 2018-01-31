@@ -42,6 +42,12 @@ The token generated on the GitHub website should not be stored anywhere, simply 
 This has some security risks, as described [here](https://gist.github.com/domenic/ec8b0fc8ab45f39403dd#sign-up-for-travis-and-add-your-project).
 To mitigate these risks, the option "Build pull requests" on the [Travis configuration page for this repo](https://travis-ci.org/o2r-project/erc-spec/settings) must be disabled so malicious changes to the Travis configuration file will not be build before maintainer inspection.
 
+## Diagrams
+
+The diagrams are created with [yEd](https://www.yworks.com/products/yed).
+All source files (`.graphml`) are stored in `/docs/img`.
+The PNG renderings are exported from yEd with `transparent` background, a margin of `5`, and a scaling factor of `1.0`.
+
 ## License
 
 The o2r Executable Research Compendium specification is licensed under [Creative Commons CC0 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0/), see file `LICENSE`.

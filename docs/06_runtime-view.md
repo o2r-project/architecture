@@ -12,14 +12,20 @@ ERC Inspection | The most important workflow for a reviewer or reader is executi
 
 [![runtime view ERC creation](img/6.1-runtime-view-creation.png)](img/6.1-runtime-view-creation.png)
 
-First, the user initiates a _creation_ of a new ERC.
-The `loader` fetches the files, runs some checks, starts metadata extraction, starts metadata brokering from the raw metadata to o2r metadata, and saves the compendium, as a non-public candidate which only the uploading user can see, to the database.
+First, the user initiates a _creation_ of a new ERC based on a workspace containing at least a viewable file (e.g. an HTML document or a plot) based on the code and instructions provided in a either a script or [literate programming document](/glossary#literate-programming)), and any other data.
+The [`loader`](#531-whitebox-microservices) fetches the files, runs some checks, starts metadata extraction, starts metadata brokering from the raw metadata to o2r metadata, and saves the compendium, as a non-public candidate which only the uploading user can see, to the database.
+All metadata processing is based on the tool [`meta`](#533-whitebox-tools).
 
 Then the user opens the candidate compendium, checks and completes the metadata.
-`muncher` triggers a metadata validation and brokering to several output formats, and loads the brokered metadata from the files to save it in the database.
+[`muncher`](#531-whitebox-microservices) triggers a metadata validation and brokering to several output formats (also using [`meta`](#533-whitebox-tools)), and loads the brokered metadata from the files to save a copy in the database for better [searchability](#532-whitebox-database).
+
+Next, the user must start a _job_ to add the ERC configuration and runtime environment to the workspace, which are core elements of an ERC.
+The ERC configuration is a file generated from the user-provided metadata (see [ERC specification](http://o2r.info/erc-spec/spec/#erc-configuration-file)).
+The runtime environment consists of two parts: (a) the runtime manifest, which is created by executing the workflow once in a container based on the tool [`containerit`](#533-whitebox-tools); and (b) the runtime image, which is built from the runtime manifest.
+A user may provide the ERC configuration file and the runtime manifest with the workspace for fine-grained control; the generation steps are skipped then.
 
 Finally the user starts a shipment of the compendium to a data repository.
-The `shipper` manages this two step process.
+The [`shipper`](#531-whitebox-microservices) manages this two step process.
 The separate "create" and "publish" steps allow checking the shipped files, and avoid unintentional shipments, because a published shipment creates a unique public resource, which potentially cannot be unpublished.
 
 !!! Note "_In the code_"
@@ -31,9 +37,23 @@ The separate "create" and "publish" steps allow checking the shipped files, and 
 
 [![runtime view ERC inspection](img/6.2-runtime-view-inspection.png)](img/6.2-runtime-view-inspection.png)
 
-The user initiates and _inspection_ of an existing ERC.
-The ERC ...
+The user initiates an _inspection_ of an existing ERC by providing a reference such as [DOI](/glossary#doi) or URL.
+[`loader`](#531-whitebox-microservices) retrieves the compendium files, saves them locally and loads the contained metadata.
+Then the user can start a new _job_ for the compendium.
+[`muncher`](#531-whitebox-microservices) checks the request, creates a new job in the database and returns the job ID.
+The user's client can use the ID to connect to the live logs provided by [`informer`](#531-whitebox-microservices).
+All following steps by muncher regularly update the database, whose change events `informer` uses to continuously update client via WebSockets.
+
+The job starts with creating a copy of the compendium's files for the job.
+A [copy-on-write filesystem](https://en.wikipedia.org/wiki/Copy-on-write) is advantageous for this step.
+Then the archived runtime image is loaded from the file in the compendium into a runtime repository.
+This repository may be remote (either public or private, e.g. based on [Docker Registry](https://github.com/docker/distribution), [ECR](https://aws.amazon.com/ecr/) or [GitLab](https://docs.gitlab.com/ce/user/project/container_registry.html)) or simply the local image storage.
+Then all files except the runtime image archive are packed so they can be send to a container runtime.
+The container runtime can be local (e.g. the Docker daemon), or a container orchestration such as [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes).
+It provides log updates as a stream to `muncher`, which updates the database, whose changes trigger updates of the user interface via `informer`.
+When the container is finished, `muncher` compares the created outputs with the ones provided in the compendium and provides the result to the user.
 
 !!! Note "_In the code_"
-    The `muncher` has two core resources: a _compendium_ represents an ERC, a _job_ represents an _"execution"_ or a _"run"_ an ERC, i.e. the building, running, and saving of the runtime environment to create outputs (e.g. a viewable file, plots, or data) from the code and instructions provided in the ERC (script, [literate programming document](/glossary#literate-programming)).
+    The `muncher` has two core resources: a _compendium_ represents an ERC, a _job_ represents a _"run"_ of an ERC, i.e. the building, running, and saving of the runtime environment including execution of the contained workflow.
     The core function for this is the `Executor`, which chains a number of steps using [JavaScript Promises](/glossary#javascript-promises), see the [code](https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306).
+    The check uses the tool [`erc-checker`](https://github.com/o2r-project/erc-checker).
