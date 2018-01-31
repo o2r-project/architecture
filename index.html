@@ -317,21 +317,22 @@ This allows different developers to contribute efficiently.</dd>
 </thead>
 <tbody>
 <tr>
-<td><strong>Reproducibility service</strong>, e.g. <a href="http://o2r.info/results">o2r</a></td>
-<td>publication platforms utilize creation and examination services for ERC, reproducibility service uses repositories to retrieve software artifacts, store runtime environment images, and save complete ERC</td>
+<td><strong>Reproducibility service</strong>, e.g. <a href="http://o2r.info/results">o2r reference implementation</a></td>
+<td>publication platforms utilize creation and examination services for ERC, reproducibility service uses different <em>supporting services</em> to retrieve software artifacts, store runtime environment images, execute workflows, and save complete ERC</td>
 <td><code>HTTP</code> APIs</td>
 </tr>
 <tr>
-<td><strong>Publication platform</strong>, e.g. online journal website and review system</td>
+<td><strong>Publishing platform</strong>, e.g. online journal website or review system</td>
 <td>users access ERC status and metadata via search results and paper landing pages; review process integrates ERC details and supports manipulation;</td>
 <td>system's API using <code>HTTP</code> with <code>JSON</code> payload</td>
 </tr>
 </tbody>
 </table>
-<p><strong>ID provider</strong> | retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider | <code>HTTP</code>
+<p><strong>Collaboration platform</strong> | provide means to collaboratively work on data, code, or text; such platforms support both public and private (shared) digital workspaces | <code>HTTP</code>
+<strong>ID provider</strong> | retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider | <code>HTTP</code>
 <strong>Execution infrastructure</strong> | ERC can be executed using a shared/distributed infrastructure | <code>HTTP</code>
-<strong>Data repository</strong> | the reproducibility service fetches (a) content for ERC creation, or (b) complete ERC, from different sources and stores crated ERC persistently at suitable repositories | <code>HTTP</code>, <code>FTP</code>, <code>WebDAV</code>, <code>git</code>
-<strong>Registry</strong> | the reproducibility service can deliver metadata on published ERC to registries/catalogues/search portals, but also retrieve/harvest contextual metadata during ERC creation; users discover ERC via registries | (proprietary) <code>HTTP</code> APIs, persistent identifiers (<code>DOI</code>), <code>OAI-PMH</code>
+<strong>Data repository</strong> | the reproducibility service fetches (a) content for ERC creation, or (b) complete ERC, from different sources; it stores created ERC persistently at suitable repositories, which in turn may connect to long-term archives and preservation systems | <code>HTTP</code>, <code>FTP</code>, <code>WebDAV</code>, <code>git</code>
+<strong>Registry (metadata)</strong> | the reproducibility service can deliver metadata on published ERC to registries/catalogues/search portals directly and mediately via data repositories; the service can also retrieve/harvest contextual metadata during ERC creation to reduce required user inputs; users discover ERC via registries | (proprietary) <code>HTTP</code> APIs, persistent identifiers (<code>DOI</code>), <code>OAI-PMH</code>
 <strong>Software repository</strong> | software repository provide software artifacts during ERC creation and store executable runtime environments | <code>HTTP</code> APIs
 <strong>Archives and digital preservation systems</strong> | when information is transferred from the private (research group, single researcher) or group domain (collaborations) to a public and persistent domain (archives, repositories), then extended data and metadata management is needed but also different access and re-use is enabled; these concerns are only relevant in so far as <em>data repositories</em> must be supported, but further aspects such as access rights in archives are only mediately relevant for the reproducibility service | metadata in <code>JSON</code> and <code>XML</code> provided via <code>HTTP</code> or as files</p>
 <h3 id="32-technical-context">3.2 Technical context<a class="headerlink" href="#32-technical-context" title="Permanent link">&para;</a></h3>
@@ -646,12 +647,17 @@ It cannot cover all potential cases and focusses on the following main scenarios
 </table>
 <h3 id="61-erc-creation">6.1 ERC Creation<a class="headerlink" href="#61-erc-creation" title="Permanent link">&para;</a></h3>
 <p><a href="./img/6.1-runtime-view-creation.png"><img alt="runtime view ERC creation" src="./img/6.1-runtime-view-creation.png" /></a></p>
-<p>First, the user initiates a <em>creation</em> of a new ERC.
-The <code>loader</code> fetches the files, runs some checks, starts metadata extraction, starts metadata brokering from the raw metadata to o2r metadata, and saves the compendium, as a non-public candidate which only the uploading user can see, to the database.</p>
+<p>First, the user initiates a <em>creation</em> of a new ERC based on a workspace containing at least a viewable file (e.g. an HTML document or a plot) based on the code and instructions provided in a either a script or <a href="./glossary#literate-programming">literate programming document</a>), and any other data.
+The <a href="#531-whitebox-microservices"><code>loader</code></a> fetches the files, runs some checks, starts metadata extraction, starts metadata brokering from the raw metadata to o2r metadata, and saves the compendium, as a non-public candidate which only the uploading user can see, to the database.
+All metadata processing is based on the tool <a href="#533-whitebox-tools"><code>meta</code></a>.</p>
 <p>Then the user opens the candidate compendium, checks and completes the metadata.
-<code>muncher</code> triggers a metadata validation and brokering to several output formats, and loads the brokered metadata from the files to save it in the database.</p>
+<a href="#531-whitebox-microservices"><code>muncher</code></a> triggers a metadata validation and brokering to several output formats (also using <a href="#533-whitebox-tools"><code>meta</code></a>), and loads the brokered metadata from the files to save a copy in the database for better <a href="#532-whitebox-database">searchability</a>.</p>
+<p>Next, the user must start a <em>job</em> to add the ERC configuration and runtime environment to the workspace, which are core elements of an ERC.
+The ERC configuration is a file generated from the user-provided metadata (see <a href="http://o2r.info/erc-spec/spec/#erc-configuration-file">ERC specification</a>).
+The runtime environment consists of two parts: (a) the runtime manifest, which is created by executing the workflow once in a container based on the tool <a href="#533-whitebox-tools"><code>containerit</code></a>; and (b) the runtime image, which is built from the runtime manifest.
+A user may provide the ERC configuration file and the runtime manifest with the workspace for fine-grained control; the generation steps are skipped then.</p>
 <p>Finally the user starts a shipment of the compendium to a data repository.
-The <code>shipper</code> manages this two step process.
+The <a href="#531-whitebox-microservices"><code>shipper</code></a> manages this two step process.
 The separate "create" and "publish" steps allow checking the shipped files, and avoid unintentional shipments, because a published shipment creates a unique public resource, which potentially cannot be unpublished.</p>
 <div class="admonition note">
 <p class="admonition-title"><em>In the code</em></p>
@@ -661,12 +667,25 @@ The respective steps are shared between these two cases where possible, i.e. sta
 </div>
 <h3 id="62-erc-inspection">6.2 ERC Inspection<a class="headerlink" href="#62-erc-inspection" title="Permanent link">&para;</a></h3>
 <p><a href="./img/6.2-runtime-view-inspection.png"><img alt="runtime view ERC inspection" src="./img/6.2-runtime-view-inspection.png" /></a></p>
-<p>The user initiates and <em>inspection</em> of an existing ERC.
-The ERC ...</p>
+<p>The user initiates an <em>inspection</em> of an existing ERC by providing a reference such as <a href="./glossary#doi">DOI</a> or URL.
+<a href="#531-whitebox-microservices"><code>loader</code></a> retrieves the compendium files, saves them locally and loads the contained metadata.
+Then the user can start a new <em>job</em> for the compendium.
+<a href="#531-whitebox-microservices"><code>muncher</code></a> checks the request, creates a new job in the database and returns the job ID.
+The user's client can use the ID to connect to the live logs provided by <a href="#531-whitebox-microservices"><code>informer</code></a>.
+All following steps by muncher regularly update the database, whose change events <code>informer</code> uses to continuously update client via WebSockets.</p>
+<p>The job starts with creating a copy of the compendium's files for the job.
+A <a href="https://en.wikipedia.org/wiki/Copy-on-write">copy-on-write filesystem</a> is advantageous for this step.
+Then the archived runtime image is loaded from the file in the compendium into a runtime repository.
+This repository may be remote (either public or private, e.g. based on <a href="https://github.com/docker/distribution">Docker Registry</a>, <a href="https://aws.amazon.com/ecr/">ECR</a> or <a href="https://docs.gitlab.com/ce/user/project/container_registry.html">GitLab</a>) or simply the local image storage.
+Then all files except the runtime image archive are packed so they can be send to a container runtime.
+The container runtime can be local (e.g. the Docker daemon), or a container orchestration such as <a href="https://en.wikipedia.org/wiki/Kubernetes">Kubernetes</a>.
+It provides log updates as a stream to <code>muncher</code>, which updates the database, whose changes trigger updates of the user interface via <code>informer</code>.
+When the container is finished, <code>muncher</code> compares the created outputs with the ones provided in the compendium and provides the result to the user.</p>
 <div class="admonition note">
 <p class="admonition-title"><em>In the code</em></p>
-<p>The <code>muncher</code> has two core resources: a <em>compendium</em> represents an ERC, a <em>job</em> represents an <em>"execution"</em> or a <em>"run"</em> an ERC, i.e. the building, running, and saving of the runtime environment to create outputs (e.g. a viewable file, plots, or data) from the code and instructions provided in the ERC (script, <a href="./glossary#literate-programming">literate programming document</a>).
-The core function for this is the <code>Executor</code>, which chains a number of steps using <a href="./glossary#javascript-promises">JavaScript Promises</a>, see the <a href="https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306">code</a>.</p>
+<p>The <code>muncher</code> has two core resources: a <em>compendium</em> represents an ERC, a <em>job</em> represents a <em>"run"</em> of an ERC, i.e. the building, running, and saving of the runtime environment including execution of the contained workflow.
+The core function for this is the <code>Executor</code>, which chains a number of steps using <a href="./glossary#javascript-promises">JavaScript Promises</a>, see the <a href="https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306">code</a>.
+The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><code>erc-checker</code></a>.</p>
 </div>
 <hr />
 <h2 id="credits">Credits<a class="headerlink" href="#credits" title="Permanent link">&para;</a></h2>
@@ -687,7 +706,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build ac0275e @ 2018-01-31 15:44:55 +0100</div
+<div class="buildinfo">Build dcdf7fa @ 2018-01-31 15:45:23 +0100</div
               
             </div>
           </div>
@@ -739,5 +758,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-01-31 14:45:57
+Build Date UTC : 2018-01-31 14:46:54
 -->
