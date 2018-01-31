@@ -127,15 +127,15 @@ They can be used to distribute the runtime environments across the execution inf
 
 ##### 5.2.7.1 Blackbox Webserver
 
-A webserver handles all incoming calls to the API and distributes them to the respective microservice.
-A working [nginx](https://nginx.org) configuration is available [in the test setup](https://github.com/o2r-project/o2r-platform/blob/master/test/nginx.conf).
+A webserver handles all incoming calls to the API (`/api/v1/`) via `HTTPS` (`HTTP` is redirected) and distributes them to the respective microservice.
+A working [nginx](https://nginx.org) configuration is available [in the test setup](https://github.com/o2r-project/o2r-platform/blob/master/dev/nginx.conf).
 
 ##### 5.2.7.2 Blackbox UI
 
 The UI is a web application based on [Angular JS](https://angularjs.org/), see [o2r-platform](https://github.com/o2r-project/o2r-platform).
-It connects to an execution microservice (microservice) for real-time WebSocket-based notifications.
+It connects to all microservices via their API and is served using the same webserver as the API.
 
-##### 5.2.7.3 Blackbox microservices
+##### 5.2.7.3 Blackbox Microservices
 
 The reproducibility service uses a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functionality defined by the **[web API specification](http://o2r.info/o2r-web-api)** into manageable units.
 
@@ -147,12 +147,12 @@ The microservices all access one main database and a shared file storage.
 Some functionality is developed as standalone tools and used as such in the microservices instead of re-implementing features.
 These tools are integrated via their command line interface (CLI).
 
-##### 5.2.7.5 Blackbox Database
+##### 5.2.7.5 Blackbox Databases
 
-The main database is the unifying element of the microservice architecture.
-All information shared between microservices or transactions between microservices are made via the database, including session state handling (= authentication).
+The _main document database_ is the unifying element of the microservice architecture.
+All information shared between microservices or transactions between microservices are made via the database, including session state handling for authentication.
 
-A search database/index is used for full-text search and advanced search queries.
+A _search database_ is used for full-text search and advanced queries.
 
 The database's operation log, normally used for synchronization between database nodes, is also used for 
 
@@ -172,12 +172,13 @@ The file structure is known to each microservice and read/write operations happe
 #### 5.3.1 Whitebox microservices
 
 Each microservice is encapsulated as a [Docker](http://docker.com/) container running at its own port on an internal network and only serving its respective API path.
+Internal communication between the webserver and the microservices is unencrypted, i.e. `HTTP`.
 
-For **testing**, the [reference implementation](https://github.com/o2r-project/reference-implementation) provides instructions on running a local instance ofr the microservices and the demonstration UI.
+**Testing**: the [reference implementation](https://github.com/o2r-project/reference-implementation) provides instructions on running a local instance ofr the microservices and the demonstration UI.
 
-For **development** the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see repository file `docker-compose.yml` and the project's `README.md` for instructions.
+**Development**: the [o2r-platform](https://github.com/o2r-project/o2r-platform) GitHub project contains [docker-compose](https://docs.docker.com/compose/compose-file/) configurations to run all microservices, see repository file `docker-compose.yml` and the project's `README.md` for instructions.
 
-##### ERC creation and examination
+The following table describes the microservices, their endpoints, and their features.
 
 **Project** | **API path** | **Language** | **Description**
 ------ | ------ | ------ | ------
