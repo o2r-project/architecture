@@ -23,15 +23,15 @@ It controls the creation workflow.
 The creation from the metadata perspective is as follows:
 
 1. `init` stores the files for a new ERC in a directory.
-1. `extract` uses `metaextract.py` ([docs](https://github.com/o2r-project/o2r-meta#2-metaextract)) to analyse the incoming ERC and creates new files with _raw_ metadata for each of the scanned files. Currently the following types of files will be considered: _.r, .rmd, .shp, "bagit.txt"_. Future releases of the extractor will be likely to consider _.tex, .json (geojson), .jp2, .tiff_ and more.
+1. `extract` uses `metaextract.py` ([docs](https://github.com/o2r-project/o2r-meta#2-metaextract)) to analyse the incoming ERC and creates new files with _raw_ metadata for each of the scanned files. Currently the following types of files will be considered: _.r, .rmd, netcdf, "bagit.txt"_. Future releases of the extractor will be likely to consider _.tex, .json (geojson), .jp2, .tiff_ and more.
 This raw metadata itself is _schema-less_ and non-semantic.
 The processed files are in conceptual competition for the best representative of the working directory's meta information, i.e. there will be only one main output, ideally represented by the most complete set of metadata.
 By default the competing bits of information will also be preserved in `.erc/metadata_raw_<filename>.json` where _filename_ is an identifier based on the original source file.
   - output file: `.erc/metadata_raw.json`
   - database field: `<compendium>.metadata.raw`
 1. `broker` uses `metabroker.py` ([docs](https://github.com/o2r-project/o2r-meta#5-metabroker)) to translate the _raw_ metadata in `json` to _o2r_ metadata in `json` as being compliant to the o2r json-schema.
-  - output file: `.erc/metadata_o2r.json`
-  - database field: `<compendium>.metadata.o2r`
+  - output file: `.erc/metadata_o2r_X.json` (where `X` is the version number as set in the [o2r-map.json](https://github.com/o2r-project/o2r-meta/blob/master/broker/mappings/o2r-map.json) mapping file, e.g. _1_)
+  - database field: `<compendium>.metadata.o2r`
 1. (`harvest` TBD; will connect to third party database endpoint via OAI-PMH to gather additional information for the enrichment of the o2r metadata collected via extraction)
 1. `save` stores the new ERC to the database including the aforementioned metadata fields.
 1. `user check` provides an interactive form to the uploading user to control and edit the suggested metadata.
@@ -54,9 +54,10 @@ It does not do any updating, brokering, or validation.
 
 **destination** | **model** | **format(s)** | **description**
 ------ | ------ | ------ | ------
-`zenodo` | [Deposition metadata](https://zenodo.org/dev#collapse-list16) | `json` | for storing full ERC in the Zenodo data repository; Zenodo also publishes metadata on [DataCite](https://datacite.org/)
-[//]: # (`datacite` | [DataCite Metadata Schema 4.0](http://schema.datacite.org/meta/kernel-4.0/) | `xml` | for metadata export)
+[//]: # (`datacite` | [DataCite Metadata Schema 4.1](http://schema.datacite.org/meta/kernel-4.1/) | `xml` | for metadata export)
 [//]: # (`datacite` | [DataCite Metadata Schema 3.1](http://schema.datacite.org/meta/kernel-3.1/) | `xml` | (still in wide spread use for OAI-PMH))
 [//]: # (`ORCID` (TBD) | [XML for orcid-works](https://members.orcid.org/api/xml-orcid-works) | `xml` | for adding ERC as works to an ORCID profile)
 [//]: # (`CRIS` (TBD) | (local adaptation of the [CERIF model](http://www.eurocris.org/cerif/main-features-cerif) | `xml` | ...)
-[//]: # (`codemeta` (TBD) | [codemeta 1.0](https://github.com/codemeta/codemeta/releases/tag/1.0) | `json` | ...)
+`b2share` | using o2r schema for the o2r community depositions on [b2share](https://b2share.eudat.eu/)  | `json` | ...
+`codemeta` | [codemeta 2.0-rc](https://github.com/codemeta/codemeta/tree/2.0-rc) | `json ld` | ...
+`zenodo` | [Deposition metadata](https://zenodo.org/dev#collapse-list16) | `json` | for storing full ERC in the Zenodo data repository; Zenodo also publishes metadata on [DataCite](https://datacite.org/)
