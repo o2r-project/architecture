@@ -137,15 +137,15 @@ It controls the creation workflow.</p>
 <p>The creation from the metadata perspective is as follows:</p>
 <ol>
 <li><code>init</code> stores the files for a new ERC in a directory.</li>
-<li><code>extract</code> uses <code>metaextract.py</code> (<a href="https://github.com/o2r-project/o2r-meta#2-metaextract">docs</a>) to analyse the incoming ERC and creates new files with <em>raw</em> metadata for each of the scanned files. Currently the following types of files will be considered: <em>.r, .rmd, .shp, "bagit.txt"</em>. Future releases of the extractor will be likely to consider <em>.tex, .json (geojson), .jp2, .tiff</em> and more.
+<li><code>extract</code> uses <code>metaextract.py</code> (<a href="https://github.com/o2r-project/o2r-meta#2-metaextract">docs</a>) to analyse the incoming ERC and creates new files with <em>raw</em> metadata for each of the scanned files. Currently the following types of files will be considered: <em>.r, .rmd, netcdf, "bagit.txt"</em>. Future releases of the extractor will be likely to consider <em>.tex, .json (geojson), .jp2, .tiff</em> and more.
 This raw metadata itself is <em>schema-less</em> and non-semantic.
 The processed files are in conceptual competition for the best representative of the working directory's meta information, i.e. there will be only one main output, ideally represented by the most complete set of metadata.
 By default the competing bits of information will also be preserved in <code>.erc/metadata_raw_&lt;filename&gt;.json</code> where <em>filename</em> is an identifier based on the original source file.</li>
 <li>output file: <code>.erc/metadata_raw.json</code></li>
 <li>database field: <code>&lt;compendium&gt;.metadata.raw</code></li>
-<li><code>broker</code> uses <code>metabroker.py</code> (<a href="https://github.com/o2r-project/o2r-meta#5-metabroker">docs</a>) to translate the <em>raw</em> metadata in <code>json</code> to <em>o2r</em> metadata in <code>json</code> as being compliant to the o2r json-schema.</li>
-<li>output file: <code>.erc/metadata_o2r.json</code></li>
-<li>database field: <code>&lt;compendium&gt;.metadata.o2r</code></li>
+<li><code>broker</code> uses <code>metabroker.py</code> (<a href="https://github.com/o2r-project/o2r-meta#5-metabroker">docs</a>) to translate the <em>raw</em> metadata in <code>json</code> to <em>o2r</em> metadata in <code>json</code> as being compliant to the o2r json-schema.
+  - output file: <code>.erc/metadata_o2r_X.json</code> (where <code>X</code> is the version number as set in the <a href="https://github.com/o2r-project/o2r-meta/blob/master/broker/mappings/o2r-map.json">o2r-map.json</a> mapping file, e.g. <em>1</em>)
+  - database field: <code>&lt;compendium&gt;.metadata.o2r</code></li>
 <li>(<code>harvest</code> TBD; will connect to third party database endpoint via OAI-PMH to gather additional information for the enrichment of the o2r metadata collected via extraction)</li>
 <li><code>save</code> stores the new ERC to the database including the aforementioned metadata fields.</li>
 <li><code>user check</code> provides an interactive form to the uploading user to control and edit the suggested metadata.
@@ -173,13 +173,16 @@ It does not do any updating, brokering, or validation.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>zenodo</code></td>
-<td><a href="https://zenodo.org/dev#collapse-list16">Deposition metadata</a></td>
-<td><code>json</code></td>
-<td>for storing full ERC in the Zenodo data repository; Zenodo also publishes metadata on <a href="https://datacite.org/">DataCite</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
+<p><code>b2share</code> | using o2r schema for the o2r community depositions on <a href="https://b2share.eudat.eu/">b2share</a>  | <code>json</code> | ...
+<code>codemeta</code> | <a href="https://github.com/codemeta/codemeta/tree/2.0-rc">codemeta 2.0-rc</a> | <code>json ld</code> | ...
+<code>zenodo</code> | <a href="https://zenodo.org/dev#collapse-list16">Deposition metadata</a> | <code>json</code> | for storing full ERC in the Zenodo data repository; Zenodo also publishes metadata on <a href="https://datacite.org/">DataCite</a></p>
               
             </div>
           </div>
