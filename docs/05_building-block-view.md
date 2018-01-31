@@ -59,9 +59,11 @@ Integrations are based on the service's public API.
 
 #### 5.2.2 Whitebox ID Provider
 
-The reproducibility service uses [ORCID](http://orcid.org/) to authenticate users and retrieve user and works metadata.
+The reproducibility service uses [ORCID](http://orcid.org/) to authenticate users and retrieve user metadata.
+The reproducibility service does not use the ORCID authorisation to edit ORCID user data or retrieve non-public data from ORCID, thus this process is ([pseudo-authentication using OAuth](https://security.stackexchange.com/questions/44611/difference-between-oauth-openid-and-openid-connect-in-very-simple-term)).
 Internally, the user's public `ORCID` is the main identifier.
 User have different levels, which allow different actions, such as "registered user" or "administrator".
+These levels are stored in the reproducibility service.
 
 #### 5.2.3 Whitebox Execution Infrastructure
 
