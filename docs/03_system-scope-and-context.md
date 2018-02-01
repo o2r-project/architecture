@@ -18,4 +18,4 @@ Communication partner | Exchanged data | Technology/protocol
 
 ### 3.2 Technical context
 
-All components use `HTTP` over cable networks connections for communication of all exchanged data (metadata documents, ERC, Linux containers, etc.).
+All components use `HTTP(S)` over cable networks connections for communication (metadata documents, ERC, Linux containers, etc.).

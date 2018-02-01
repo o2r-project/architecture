@@ -41,8 +41,8 @@ _The client application manages the control flow_ of all user interactions.
 
 ### Tools
 
-If standalone tools are developed, they should provide a command-line interface (CLI).
-The CLI allows integration into microservices when needed and to package tools including their dependencies as containers.
-Thanks to the container architecture and the controlled, we don't need to worry about documentation for or distribution/packaging of these tools.
-It must only be ensured they are correctly installed using the microservice's Dockerfile.
-The only required documentation is for the installation into a container and usage of the CLI.
+If standalone tools are developed, they provide a command-line interface (CLI).
+The CLI allows integration into microservices when needed and to package tools including their dependencies as containers and distributing them using a container registry.
+These _2nd level containers_ are started by the microservices and can run either next to the microservices or in an independent container cluster, providing scalability.
+It must only be ensured they are correctly configured in each microservice.
+The only required documentation is the installation into a container and usage of the CLI.

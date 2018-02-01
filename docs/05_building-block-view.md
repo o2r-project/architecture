@@ -148,7 +148,7 @@ The microservices all access one main database and a shared file storage.
 ##### 5.2.7.4 Blackbox Tools
 
 Some functionality is developed as standalone tools and used as such in the microservices instead of re-implementing features.
-These tools are integrated via their command line interface (CLI).
+These tools are integrated via their command line interface (CLI) and executed as _2nd level containers_ by microservices.
 
 ##### 5.2.7.5 Blackbox Databases
 
@@ -238,6 +238,23 @@ The search index is accessed by clients through the search endpoint provided by 
 ------ | ------ | ------
 [meta](https://github.com/o2r-project/o2r-meta) | Python | scripts for extraction, translation and validation of metadata; for details see [metadata documentation](/metadata)
 [containerit](https://github.com/o2r-project/containerit) | R | generation of Dockerfiles based on R sessions and scripts
+
+Each tool's code repository includes one or more `Dockerfiles`, which are automatically build and published on Docker Hub.
+The microservices use the tool's Docker images to execute the tools instead of installing all their dependencies into the microservices.
+The advantages are a controlled environment for the tool usage, independent development cycles and updating of the tools, smaller independent images for the microservices, and scalability.
+
+#### Meta
+
+Meta provides a CLI for each step of the metadata processing required in the reproducibility service as shown by the following diagram.
+After each step the created metadata is saved as a file per model to a directory in the compendium.
+A detailed view of the meta tool usage in the creation process is provided in the runtime view [ERC Creation](#61-erc-creation).
+
+[![whitebox meta tool](img/5.2-whitebox-meta-tool.png)](img/5.2-whitebox-meta-tool.png)
+
+#### Containerit
+
+The containerit tool extracts required dependencies from ERC main documents and uses the information and external configuration to create a Dockerfile, which executes the full computational workflow when the container is started.
+Its main strategy is to analyse the session at the end of executing the full workflow.
 
 #### 5.3.4 Whitebox ephemeral file storage
 
