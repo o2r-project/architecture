@@ -69,6 +69,8 @@
         
             <li><a class="toctree-l3" href="#6-runtime-view">6. Runtime view</a></li>
         
+            <li><a class="toctree-l3" href="#7-deployment-view">7. Deployment View</a></li>
+        
             <li><a class="toctree-l3" href="#credits">Credits</a></li>
         
             <li><a class="toctree-l3" href="#license">License</a></li>
@@ -318,7 +320,7 @@ This allows different developers to contribute efficiently.</dd>
 <tbody>
 <tr>
 <td><strong>Reproducibility service</strong>, e.g. <a href="http://o2r.info/results">o2r reference implementation</a></td>
-<td>publication platforms utilize creation and examination services for ERC, reproducibility service uses different <em>supporting services</em> to retrieve software artifacts, store runtime environment images, execute workflows, and save complete ERC</td>
+<td>publication platforms utilize creation and examination services for ERC; reproducibility service uses different <em>supporting services</em> to retrieve software artifacts, store runtime environment images, execute workflows, and save complete ERC</td>
 <td><code>HTTP</code> APIs</td>
 </tr>
 <tr>
@@ -326,15 +328,43 @@ This allows different developers to contribute efficiently.</dd>
 <td>users access ERC status and metadata via search results and paper landing pages; review process integrates ERC details and supports manipulation;</td>
 <td>system's API using <code>HTTP</code> with <code>JSON</code> payload</td>
 </tr>
+<tr>
+<td><strong>Collaboration platform</strong></td>
+<td>provide means to collaboratively work on data, code, or text; such platforms support both public and private (shared) digital workspaces</td>
+<td><code>HTTP</code></td>
+</tr>
+<tr>
+<td><strong>ID provider</strong></td>
+<td>retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider</td>
+<td><code>HTTP</code></td>
+</tr>
+<tr>
+<td><strong>Execution infrastructure</strong></td>
+<td>ERC can be executed using a shared/distributed infrastructure</td>
+<td><code>HTTP</code></td>
+</tr>
+<tr>
+<td><strong>Data repository</strong></td>
+<td>the reproducibility service fetches (a) content for ERC creation, or (b) complete ERC, from different sources; it stores created ERC persistently at suitable repositories, which in turn may connect to long-term archives and preservation systems</td>
+<td><code>HTTP</code>, <code>FTP</code>, <code>WebDAV</code>, <code>git</code></td>
+</tr>
+<tr>
+<td><strong>Registry (metadata)</strong></td>
+<td>the reproducibility service can deliver metadata on published ERC to registries/catalogues/search portals directly and mediately via data repositories; the service can also retrieve/harvest contextual metadata during ERC creation to reduce required user inputs; users discover ERC via registries</td>
+<td>(proprietary) <code>HTTP</code> APIs, persistent identifiers (<code>DOI</code>), <code>OAI-PMH</code></td>
+</tr>
+<tr>
+<td><strong>Software repository</strong></td>
+<td>software repository provide software artifacts during ERC creation and store executable runtime environments</td>
+<td><code>HTTP</code> APIs</td>
+</tr>
+<tr>
+<td><strong>Archives and digital preservation systems</strong></td>
+<td>when information is transferred from the private (research group, single researcher) or group domain (collaborations) to a public and persistent domain (archives, repositories), then extended data and metadata management is needed but also different access and re-use is enabled; these concerns are only relevant in so far as <em>data repositories</em> must be supported, but further aspects such as access rights in archives are only mediately relevant for the reproducibility service</td>
+<td>metadata in <code>JSON</code> and <code>XML</code> provided via <code>HTTP</code> or as files</td>
+</tr>
 </tbody>
 </table>
-<p><strong>Collaboration platform</strong> | provide means to collaboratively work on data, code, or text; such platforms support both public and private (shared) digital workspaces | <code>HTTP</code>
-<strong>ID provider</strong> | retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider | <code>HTTP</code>
-<strong>Execution infrastructure</strong> | ERC can be executed using a shared/distributed infrastructure | <code>HTTP</code>
-<strong>Data repository</strong> | the reproducibility service fetches (a) content for ERC creation, or (b) complete ERC, from different sources; it stores created ERC persistently at suitable repositories, which in turn may connect to long-term archives and preservation systems | <code>HTTP</code>, <code>FTP</code>, <code>WebDAV</code>, <code>git</code>
-<strong>Registry (metadata)</strong> | the reproducibility service can deliver metadata on published ERC to registries/catalogues/search portals directly and mediately via data repositories; the service can also retrieve/harvest contextual metadata during ERC creation to reduce required user inputs; users discover ERC via registries | (proprietary) <code>HTTP</code> APIs, persistent identifiers (<code>DOI</code>), <code>OAI-PMH</code>
-<strong>Software repository</strong> | software repository provide software artifacts during ERC creation and store executable runtime environments | <code>HTTP</code> APIs
-<strong>Archives and digital preservation systems</strong> | when information is transferred from the private (research group, single researcher) or group domain (collaborations) to a public and persistent domain (archives, repositories), then extended data and metadata management is needed but also different access and re-use is enabled; these concerns are only relevant in so far as <em>data repositories</em> must be supported, but further aspects such as access rights in archives are only mediately relevant for the reproducibility service | metadata in <code>JSON</code> and <code>XML</code> provided via <code>HTTP</code> or as files</p>
 <h3 id="32-technical-context">3.2 Technical context<a class="headerlink" href="#32-technical-context" title="Permanent link">&para;</a></h3>
 <p>All components use <code>HTTP</code> over cable networks connections for communication of all exchanged data (metadata documents, ERC, Linux containers, etc.).</p>
 <h2 id="4-solution-strategy">4. Solution strategy<a class="headerlink" href="#4-solution-strategy" title="Permanent link">&para;</a></h2>
@@ -409,9 +439,11 @@ To some extend, pre-print servers, for example <a href="https://osf.io/">OSF</a>
 <p>Integration with the reproducibility service can happen via plug-ins to generic software, e.g. <a href="https://pkp.sfu.ca/ojs/">OJS</a>, or by bespoke extensions.
 Integrations are based on the service's public API.</p>
 <h4 id="522-whitebox-id-provider">5.2.2 Whitebox ID Provider<a class="headerlink" href="#522-whitebox-id-provider" title="Permanent link">&para;</a></h4>
-<p>The reproducibility service uses <a href="http://orcid.org/">ORCID</a> to authenticate users and retrieve user and works metadata.
+<p>The reproducibility service uses <a href="http://orcid.org/">ORCID</a> to authenticate users and retrieve user metadata.
+The reproducibility service does not use the ORCID authorisation to edit ORCID user data or retrieve non-public data from ORCID, thus this process is (<a href="https://security.stackexchange.com/questions/44611/difference-between-oauth-openid-and-openid-connect-in-very-simple-term">pseudo-authentication using OAuth</a>).
 Internally, the user's public <code>ORCID</code> is the main identifier.
-User have different levels, which allow different actions, such as "registered user" or "administrator".</p>
+User have different levels, which allow different actions, such as "registered user" or "administrator".
+These levels are stored in the reproducibility service.</p>
 <h4 id="523-whitebox-execution-infrastructure">5.2.3 Whitebox Execution Infrastructure<a class="headerlink" href="#523-whitebox-execution-infrastructure" title="Permanent link">&para;</a></h4>
 <p>Such an infrastructure could be either self-hosted, e.g. <a href="https://www.docker.com/products/docker-swarm">Docker Swarm</a>-based, or use a cloud service provide, such as <a href="https://aws.amazon.com/ec2/">Amazon EC2</a>, <a href="http://cloud.docker.com/">Docker Cloud</a>, or even use continuous integration services such as <a href="https://travis-ci.org/">Travis CI</a> or <a href="https://about.gitlab.com/gitlab-ci/">Gitlab CI</a>.</p>
 <h4 id="524-whitebox-data-repositories">5.2.4 Whitebox Data Repositories<a class="headerlink" href="#524-whitebox-data-repositories" title="Permanent link">&para;</a></h4>
@@ -448,22 +480,22 @@ They can be used to distribute the runtime environments across the execution inf
 <h4 id="527-whitebox-reproducibility-service">5.2.7 Whitebox Reproducibility Service<a class="headerlink" href="#527-whitebox-reproducibility-service" title="Permanent link">&para;</a></h4>
 <p><a href="./img/5.2-whitebox-repro-service.png"><img alt="whitebox reproducibility service" src="./img/5.2-whitebox-repro-service.png" /></a></p>
 <h5 id="5271-blackbox-webserver">5.2.7.1 Blackbox Webserver<a class="headerlink" href="#5271-blackbox-webserver" title="Permanent link">&para;</a></h5>
-<p>A webserver handles all incoming calls to the API and distributes them to the respective microservice.
-A working <a href="https://nginx.org">nginx</a> configuration is available <a href="https://github.com/o2r-project/o2r-platform/blob/master/test/nginx.conf">in the test setup</a>.</p>
+<p>A webserver handles all incoming calls to the API (<code>/api/v1/</code>) via <code>HTTPS</code> (<code>HTTP</code> is redirected) and distributes them to the respective microservice.
+A working <a href="https://nginx.org">nginx</a> configuration is available <a href="https://github.com/o2r-project/o2r-platform/blob/master/dev/nginx.conf">in the test setup</a>.</p>
 <h5 id="5272-blackbox-ui">5.2.7.2 Blackbox UI<a class="headerlink" href="#5272-blackbox-ui" title="Permanent link">&para;</a></h5>
 <p>The UI is a web application based on <a href="https://angularjs.org/">Angular JS</a>, see <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a>.
-It connects to an execution microservice (microservice) for real-time WebSocket-based notifications.</p>
-<h5 id="5273-blackbox-microservices">5.2.7.3 Blackbox microservices<a class="headerlink" href="#5273-blackbox-microservices" title="Permanent link">&para;</a></h5>
+It connects to all microservices via their API and is served using the same webserver as the API.</p>
+<h5 id="5273-blackbox-microservices">5.2.7.3 Blackbox Microservices<a class="headerlink" href="#5273-blackbox-microservices" title="Permanent link">&para;</a></h5>
 <p>The reproducibility service uses a <a href="https://en.wikipedia.org/wiki/Microservices">microservice architecture</a> to separate functionality defined by the <strong><a href="http://o2r.info/o2r-web-api">web API specification</a></strong> into manageable units.</p>
 <p>This allows scalability (selected microservices can be deployed as much as needed) and technology independence for each use case and developer.
 The microservices all access one main database and a shared file storage.</p>
 <h5 id="5274-blackbox-tools">5.2.7.4 Blackbox Tools<a class="headerlink" href="#5274-blackbox-tools" title="Permanent link">&para;</a></h5>
 <p>Some functionality is developed as standalone tools and used as such in the microservices instead of re-implementing features.
 These tools are integrated via their command line interface (CLI).</p>
-<h5 id="5275-blackbox-database">5.2.7.5 Blackbox Database<a class="headerlink" href="#5275-blackbox-database" title="Permanent link">&para;</a></h5>
-<p>The main database is the unifying element of the microservice architecture.
-All information shared between microservices or transactions between microservices are made via the database, including session state handling (= authentication).</p>
-<p>A search database/index is used for full-text search and advanced search queries.</p>
+<h5 id="5275-blackbox-databases">5.2.7.5 Blackbox Databases<a class="headerlink" href="#5275-blackbox-databases" title="Permanent link">&para;</a></h5>
+<p>The <em>main document database</em> is the unifying element of the microservice architecture.
+All information shared between microservices or transactions between microservices are made via the database, including session state handling for authentication.</p>
+<p>A <em>search database</em> is used for full-text search and advanced queries.</p>
 <p>The database's operation log, normally used for synchronization between database nodes, is also used for </p>
 <ul>
 <li>event-driven communication between microservices, and</li>
@@ -478,10 +510,11 @@ All information shared between microservices or transactions between microservic
 The file structure is known to each microservice and read/write operations happen as needed.</p>
 <h3 id="53-refinement-level-3">5.3 Refinement Level 3<a class="headerlink" href="#53-refinement-level-3" title="Permanent link">&para;</a></h3>
 <h4 id="531-whitebox-microservices">5.3.1 Whitebox microservices<a class="headerlink" href="#531-whitebox-microservices" title="Permanent link">&para;</a></h4>
-<p>Each microservice is encapsulated as a <a href="http://docker.com/">Docker</a> container running at its own port on an internal network and only serving its respective API path.</p>
-<p>For <strong>testing</strong>, the <a href="https://github.com/o2r-project/reference-implementation">reference implementation</a> provides instructions on running a local instance ofr the microservices and the demonstration UI.</p>
-<p>For <strong>development</strong> the <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a> GitHub project contains <a href="https://docs.docker.com/compose/compose-file/">docker-compose</a> configurations to run all microservices, see repository file <code>docker-compose.yml</code> and the project's <code>README.md</code> for instructions.</p>
-<h5 id="erc-creation-and-examination">ERC creation and examination<a class="headerlink" href="#erc-creation-and-examination" title="Permanent link">&para;</a></h5>
+<p>Each microservice is encapsulated as a <a href="http://docker.com/">Docker</a> container running at its own port on an internal network and only serving its respective API path.
+Internal communication between the webserver and the microservices is unencrypted, i.e. <code>HTTP</code>.</p>
+<p><strong>Testing</strong>: the <a href="https://github.com/o2r-project/reference-implementation">reference implementation</a> provides instructions on running a local instance ofr the microservices and the demonstration UI.</p>
+<p><strong>Development</strong>: the <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a> GitHub project contains <a href="https://docs.docker.com/compose/compose-file/">docker-compose</a> configurations to run all microservices, see repository file <code>docker-compose.yml</code> and the project's <code>README.md</code> for instructions.</p>
+<p>The following table describes the microservices, their endpoints, and their features.</p>
 <table>
 <thead>
 <tr>
@@ -687,6 +720,43 @@ When the container is finished, <code>muncher</code> compares the created output
 The core function for this is the <code>Executor</code>, which chains a number of steps using <a href="./glossary#javascript-promises">JavaScript Promises</a>, see the <a href="https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306">code</a>.
 The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><code>erc-checker</code></a>.</p>
 </div>
+<h2 id="7-deployment-view">7. Deployment View<a class="headerlink" href="#7-deployment-view" title="Permanent link">&para;</a></h2>
+<h3 id="71-test-server-httpso2runi-muensterde">7.1 Test server <a href="https://o2r.uni-muenster.de">https://o2r.uni-muenster.de</a><a class="headerlink" href="#71-test-server-httpso2runi-muensterde" title="Permanent link">&para;</a></h3>
+<p><a href="./img/7.1-deployment-view-testserver.png"><img alt="deployment view test server" src="./img/7.1-deployment-view-testserver.png" /></a></p>
+<dl>
+<dt>Motivation</dt>
+<dd>
+<p>The o2r infrastructure is driven by the research community's need for user friendly and transparent but also scalable and reliable solutions to increase computational reproducibility in the scientific publication process. To retrieve feedback from the community (public demo) and to increase software quality (controlled non-development environment), the current development state is regularly published on a test server.</p>
+</dd>
+<dt>Quality and/or Performance Features</dt>
+<dd>
+<p>The server is managed completely with <a href="https://www.ansible.com/">Ansible</a> to ensure a well-document setup. The base operating system is CentOS Linux 7. The machine has 4 cores, 8 GB RAM, and a local storage ~100 GB, and runs on a VM host. The one machine in this deployment runs the full o2r reproducibility service, i.e. all microservices and a webserver to serve the user interfaces. It also runs the databases and ancillary services, such as a web traffic statistics service.</p>
+</dd>
+<dt>Mapping of Building Blocks to Infrastructure</dt>
+<dd>
+<p>All building blocks run in their own Docker container using an image provided via and build on <a href="https://hub.docker.com/r/o2rproject/">Docker Hub</a> using a <code>Dockerfile</code> included in <a href="https://github.com/search?q=topic%3Amicroservice+org%3Ao2r-project+fork%3Atrue">each microservice's code repository</a>. The server is managed by the o2r team; external building blocks are managed by the respective organisation/provider.</p>
+</dd>
+</dl>
+<h3 id="72-production-sketch">7.2 Production (sketch)<a class="headerlink" href="#72-production-sketch" title="Permanent link">&para;</a></h3>
+<p><a href="./img/7.2-deployment-view-production-sketch.png"><img alt="deployment view test server" src="./img/7.2-deployment-view-production-sketch.png" /></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This deployment view is a sketch for a potential productive deployment and intends to point out features of the chosen architecture and expected challenges or solutions.</p>
+</div>
+<dl>
+<dt>Motivation</dt>
+<dd>
+<p>A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments to the hosted software and based on containers it naturally uses one of the powerful orchestration engines, such as <a href="https://docs.docker.com/engine/swarm">Docker Swarm</a> or <a href="http://kubernetes.io/">Kubernetes</a>.</p>
+</dd>
+<dt>Quality and/or Performance Features</dt>
+<dd>
+<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters.</p>
+</dd>
+<dt>Mapping of Building Blocks to Infrastructure</dt>
+<dd>
+<p>The o2r reproducibility services is managed by the o2r team similar to the test server. The other big building blocks, like publishing platforms or data repositories, are managed by the respective organisations.</p>
+</dd>
+</dl>
 <hr />
 <h2 id="credits">Credits<a class="headerlink" href="#credits" title="Permanent link">&para;</a></h2>
 <p>This specification and guides are developed by the members of the project Opening Reproducible Research (<a href="https://www.uni-muenster.de/forschungaz/project/9520">Offene Reproduzierbare Forschung</a>) funded by the German Research Foundation (Deutsche Forschungsgemeinschaft (DFG) - Projektnummer <a href="http://gepris.dfg.de/gepris/projekt/274927273">274927273</a>) under grant numbers PE 1632/10-1, KR 3930/3-1, and TR 864/6-1).</p>
@@ -706,7 +776,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build dcdf7fa @ 2018-01-31 15:45:23 +0100</div
+<div class="buildinfo">Build bcf8141 @ 2018-02-01 16:21:03 +0100</div
               
             </div>
           </div>
@@ -758,5 +828,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-01-31 14:46:54
+Build Date UTC : 2018-02-01 15:31:09
 -->

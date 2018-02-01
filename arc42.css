@@ -92,3 +92,7 @@ a:hover, a:focus {
 div[role=main] img {
     max-width: 100%;
 }
+
+.rst-content .note .admonition-title {
+    background: #004286;
+}
