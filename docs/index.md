@@ -12,4 +12,6 @@
 
 {!docs/06_runtime-view.md!}
 
+{!docs/07_deployment-view.md!}
+
 {!docs/credits.md!}
