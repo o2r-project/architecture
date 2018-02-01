@@ -366,7 +366,7 @@ This allows different developers to contribute efficiently.</dd>
 </tbody>
 </table>
 <h3 id="32-technical-context">3.2 Technical context<a class="headerlink" href="#32-technical-context" title="Permanent link">&para;</a></h3>
-<p>All components use <code>HTTP</code> over cable networks connections for communication of all exchanged data (metadata documents, ERC, Linux containers, etc.).</p>
+<p>All components use <code>HTTP(S)</code> over cable networks connections for communication (metadata documents, ERC, Linux containers, etc.).</p>
 <h2 id="4-solution-strategy">4. Solution strategy<a class="headerlink" href="#4-solution-strategy" title="Permanent link">&para;</a></h2>
 <p>This section provides a short overview of architecture decisions and for some the reasoning behind them.</p>
 <h3 id="web-api">Web API<a class="headerlink" href="#web-api" title="Permanent link">&para;</a></h3>
@@ -394,11 +394,11 @@ It uses the RESTful API to control the system.
 This information is shared between all services which require authentication via the database.</p>
 <p><em>The client application manages the control flow</em> of all user interactions.</p>
 <h3 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h3>
-<p>If standalone tools are developed, they should provide a command-line interface (CLI).
-The CLI allows integration into microservices when needed and to package tools including their dependencies as containers.
-Thanks to the container architecture and the controlled, we don't need to worry about documentation for or distribution/packaging of these tools.
-It must only be ensured they are correctly installed using the microservice's Dockerfile.
-The only required documentation is for the installation into a container and usage of the CLI.</p>
+<p>If standalone tools are developed, they provide a command-line interface (CLI).
+The CLI allows integration into microservices when needed and to package tools including their dependencies as containers and distributing them using a container registry.
+These <em>2nd level containers</em> are started by the microservices and can run either next to the microservices or in an independent container cluster, providing scalability.
+It must only be ensured they are correctly configured in each microservice.
+The only required documentation is the installation into a container and usage of the CLI.</p>
 <h2 id="5-building-block-view">5. Building block view<a class="headerlink" href="#5-building-block-view" title="Permanent link">&para;</a></h2>
 <h3 id="51-refinement-level-1">5.1 Refinement Level 1<a class="headerlink" href="#51-refinement-level-1" title="Permanent link">&para;</a></h3>
 <h4 id="511-blackbox-publication-platforms">5.1.1 Blackbox Publication Platforms<a class="headerlink" href="#511-blackbox-publication-platforms" title="Permanent link">&para;</a></h4>
@@ -461,9 +461,13 @@ Allowing access to data repositories reduces data duplication but requires contr
 <p>Protocol: <code>HTTP</code> APIs</p>
 <p>Generic <strong>Repositories</strong>, e.g. <a href="https://zenodo.org/">Zenodo</a>, <a href="https://data.mendeley.com/">Mendeley Data</a>, <a href="http://figshare.com/">Figshare</a>, <a href="https://osf.io/">OSF</a>, provide (a) access to complete ERC stored in repositories for inspection and execution by the reproducibility service, and (b) storage of created ERC. repositories.</p>
 <p>Protocols: (authenticated) <code>HTTP</code> APIs</p>
-<p><strong>Archives</strong> and digital preservation solutions, e.g. using an installation of <a href="https://www.archivematica.org/">Archivematica</a>, might provide long-term preservation of ERC.
-Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.</p>
+<p><strong>Archives</strong> and digital preservation solutions can provide long-term preservation of ERC.
+Preservation either lies in the responsibility of the repository, which might save the hosted content to an archive or an archive harvests a repository, or is a task for one of the involved platform providers, e.g. using an installation of <a href="https://www.archivematica.org/">Archivematica</a>.</p>
 <p>Protocol: <code>HTTP</code> carrying bitstreams and metadata</p>
+<div class="admonition note">
+<p class="admonition-title"><em>Data Curation Continuum</em></p>
+<p>The Data Curation Continuum (cf. <a href="http://andrew.treloar.net/research/diagrams/data_curation_continuum.pdf">diagram by Andre Treloar</a>), describes how data moves from the private domain of a researcher to the public domain of data repositories over the course of conducting research. It describes the properties of data and important aspects of the transitions. In a publishing process based on the reproducibility service, the full migration process is run through. </p>
+</div>
 <h4 id="525-whitebox-registries">5.2.5 Whitebox Registries<a class="headerlink" href="#525-whitebox-registries" title="Permanent link">&para;</a></h4>
 <p>Research data registries and websites, for example (<a href="https://www.uni-muenster.de/FB7_MultimediaSupport/CRIS_Infoseite/Forschungsdatenbank_Infoseite.html">CRIS</a>, <a href="https://www.datacite.org/">DataCite</a>, <a href="https://scholar.google.de/">Google Scholar</a>, <a href="https://www.scopus.com/">Scopus</a>, <a href="https://www.altmetric.com/">Altmetric</a>, to name just a few, collect metadata on publications and provide services with this data.
 Services comprise discovery but also derivation of citation data and creating networks of researchers and publications.</p>
@@ -491,7 +495,7 @@ It connects to all microservices via their API and is served using the same webs
 The microservices all access one main database and a shared file storage.</p>
 <h5 id="5274-blackbox-tools">5.2.7.4 Blackbox Tools<a class="headerlink" href="#5274-blackbox-tools" title="Permanent link">&para;</a></h5>
 <p>Some functionality is developed as standalone tools and used as such in the microservices instead of re-implementing features.
-These tools are integrated via their command line interface (CLI).</p>
+These tools are integrated via their command line interface (CLI) and executed as <em>2nd level containers</em> by microservices.</p>
 <h5 id="5275-blackbox-databases">5.2.7.5 Blackbox Databases<a class="headerlink" href="#5275-blackbox-databases" title="Permanent link">&para;</a></h5>
 <p>The <em>main document database</em> is the unifying element of the microservice architecture.
 All information shared between microservices or transactions between microservices are made via the database, including session state handling for authentication.</p>
@@ -655,6 +659,17 @@ The ids are mapped to support update and delete operations.</p>
 </tr>
 </tbody>
 </table>
+<p>Each tool's code repository includes one or more <code>Dockerfiles</code>, which are automatically build and published on Docker Hub.
+The microservices use the tool's Docker images to execute the tools instead of installing all their dependencies into the microservices.
+The advantages are a controlled environment for the tool usage, independent development cycles and updating of the tools, smaller independent images for the microservices, and scalability.</p>
+<h4 id="meta">Meta<a class="headerlink" href="#meta" title="Permanent link">&para;</a></h4>
+<p>Meta provides a CLI for each step of the metadata processing required in the reproducibility service as shown by the following diagram.
+After each step the created metadata is saved as a file per model to a directory in the compendium.
+A detailed view of the meta tool usage in the creation process is provided in the runtime view <a href="#61-erc-creation">ERC Creation</a>.</p>
+<p><a href="./img/5.2-whitebox-meta-tool.png"><img alt="whitebox meta tool" src="./img/5.2-whitebox-meta-tool.png" /></a></p>
+<h4 id="containerit">Containerit<a class="headerlink" href="#containerit" title="Permanent link">&para;</a></h4>
+<p>The containerit tool extracts required dependencies from ERC main documents and uses the information and external configuration to create a Dockerfile, which executes the full computational workflow when the container is started.
+Its main strategy is to analyse the session at the end of executing the full workflow.</p>
 <h4 id="534-whitebox-ephemeral-file-storage">5.3.4 Whitebox ephemeral file storage<a class="headerlink" href="#534-whitebox-ephemeral-file-storage" title="Permanent link">&para;</a></h4>
 <p>A host directory is mounted into every container to the location <code>/tmp/o2r</code>.</p>
 <h2 id="6-runtime-view">6. Runtime view<a class="headerlink" href="#6-runtime-view" title="Permanent link">&para;</a></h2>
@@ -750,7 +765,7 @@ The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><co
 </dd>
 <dt>Quality and/or Performance Features</dt>
 <dd>
-<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters.</p>
+<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters.</p>
 </dd>
 <dt>Mapping of Building Blocks to Infrastructure</dt>
 <dd>
@@ -776,7 +791,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build bcf8141 @ 2018-02-01 16:21:03 +0100</div
+<div class="buildinfo">Build 6308534 @ 2018-02-01 17:20:40 +0100</div
               
             </div>
           </div>
@@ -828,5 +843,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-02-01 15:31:09
+Build Date UTC : 2018-02-01 16:23:12
 -->
