@@ -93,10 +93,13 @@ Generic **Repositories**, e.g. [Zenodo](https://zenodo.org/), [Mendeley Data](ht
 
 Protocols: (authenticated) `HTTP` APIs
 
-**Archives** and digital preservation solutions, e.g. using an installation of [Archivematica](https://www.archivematica.org/), might provide long-term preservation of ERC.
-Preservation lies in the responsibility of the repository, which might save the hosted content to an archive, or an archive harvests a repository.
+**Archives** and digital preservation solutions can provide long-term preservation of ERC.
+Preservation either lies in the responsibility of the repository, which might save the hosted content to an archive or an archive harvests a repository, or is a task for one of the involved platform providers, e.g. using an installation of [Archivematica](https://www.archivematica.org/).
 
 Protocol: `HTTP` carrying bitstreams and metadata
+
+!!! Note "_Data Curation Continuum_"
+    The Data Curation Continuum (cf. [diagram by Andre Treloar](http://andrew.treloar.net/research/diagrams/data_curation_continuum.pdf)), describes how data moves from the private domain of a researcher to the public domain of data repositories over the course of conducting research. It describes the properties of data and important aspects of the transitions. In a publishing process based on the reproducibility service, the full migration process is run through. 
 
 #### 5.2.5 Whitebox Registries
 
