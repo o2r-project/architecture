@@ -9,13 +9,17 @@ At its core is the concept of the **Executable Research Compendium** (ERC, see [
 The creation and inspection of ERCs are supported by a **reproducibility service**, which is defined by a [web **API** specification](http://o2r.info/o2r-web-api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
 Both are published under open licenses, as is this document.
 
+A PDF version of this document is available for download at [http://o2r.info/architecture/o2r-architecture.pdf](http://o2r.info/architecture/o2r-architecture.pdf).
+The normative specification is given by the [Markdown](https://en.wikipedia.org/wiki/Markdown) in the [project repository](https://github.com/o2r-project/architecture/).
+
 ### 1.2 Quality Goals
 
 Transparency
 : The system must be transparent to allow scrutiny required by a rigorous scientific process.
+All components must be Free and Open Source Software ([FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software)).
 
 Separation of concern
-: The system must integrate with existing services and focus on the core functionality.
+: The system must integrate with existing services and focus on the core functionality: creating interactive reproducible runtime environments for scientific workflows.
 It must not replicate existing functionality such as storage or persistent identification.
 
 Flexibility & modularity
