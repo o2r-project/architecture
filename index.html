@@ -138,7 +138,9 @@
 <h3 id="11-requirements-overview">1.1 Requirements Overview<a class="headerlink" href="#11-requirements-overview" title="Permanent link">&para;</a></h3>
 <p>The system must provide a reliable way to create and examine (e.g. discover, inspect) reproducibility packages of computational research to support reproducible publications.
 This architecture describes the relationship of the reproducibility service with other services from the context of scientific collaboration and publishing and how they can be combined to a new system for scholarly publications.</p>
-<p>At its core is the concept of the <strong>Executable Research Compendium</strong> (ERC, see <a href="http://o2r.info/erc-spec">specification</a> and <a href="https://doi.org/10.1045/january2017-nuest">article</a>), and a supporting reproducibility service, which is defined by a <a href="http://o2r.info/o2r-web-api/">web <strong>API</strong> specification</a> and its <a href="https://github.com/o2r-project/reference-implementation"><strong>reference implementation</strong></a> is published as open source software.</p>
+<p>At its core is the concept of the <strong>Executable Research Compendium</strong> (ERC, see <a href="http://o2r.info/erc-spec">specification</a> and <a href="https://doi.org/10.1045/january2017-nuest">article</a>).
+The creation and inspection of ERCs are supported by a <strong>reproducibility service</strong>, which is defined by a <a href="http://o2r.info/o2r-web-api/">web <strong>API</strong> specification</a> and demonstrated in a <a href="https://github.com/o2r-project/reference-implementation"><strong>reference implementation</strong></a>.
+Both are published under open licenses, as is this document.</p>
 <h3 id="12-quality-goals">1.2 Quality Goals<a class="headerlink" href="#12-quality-goals" title="Permanent link">&para;</a></h3>
 <dl>
 <dt>Transparency</dt>
@@ -375,7 +377,7 @@ These features are provided via a <em>well-defined RESTful API</em>.</p>
 <h3 id="microservices">Microservices<a class="headerlink" href="#microservices" title="Permanent link">&para;</a></h3>
 <p>To allow a dynamic development and support the large variety of skills, all server-side features are developed in independent <em><a href="https://en.wikipedia.org/wiki/Microservices">microservices</a></em>.
 These microservices handle only specific functional parts of the API and allow independent development and deployment cycles.
-Core components are developed using server-side JavaScript based on Node.js while other components are implemented Python.</p>
+Core components are developed using server-side JavaScript based on <a href="https://nodejs.org/">Node.js</a> with <a href="https://expressjs.com/">Express</a> while other components are implemented in Python.</p>
 <p>We accept this diversification <em>increases complexity</em> of both development and testing environments and the deployment of said services.</p>
 <p>Required documentation is minimal. The typical structure should follow common practices.</p>
 <h3 id="storage-and-intra-service-communication">Storage and intra-service communication<a class="headerlink" href="#storage-and-intra-service-communication" title="Permanent link">&para;</a></h3>
@@ -429,8 +431,8 @@ This requires the reproducibility services to translate the internal metadata mo
 <p>They are sources of metadata during ERC creation when the information in the fetched content is used to query registries for additional information which can be offered to the user.</p>
 <h4 id="516-blackbox-software-repositories">5.1.6 Blackbox Software Repositories<a class="headerlink" href="#516-blackbox-software-repositories" title="Permanent link">&para;</a></h4>
 <p>Software repositories are a source and a sink for software at different abstraction levels.
-They are a source for software artifacts or packages, such as system packages in install a library or language-specific extension packages.
-They are a sink for executable images of software, which comprise a number of software artifacts, for a specific ERC instance.</p>
+They are a source for software dependencies, such as system packages for installing a library.
+They are a sink for executable images, which comprise a number of software artifacts and their dependencies, for a specific ERC instance.</p>
 <h3 id="52-refinement-level-2">5.2 Refinement Level 2<a class="headerlink" href="#52-refinement-level-2" title="Permanent link">&para;</a></h3>
 <h4 id="521-whitebox-publication-platforms">5.2.1 Whitebox Publication Platforms<a class="headerlink" href="#521-whitebox-publication-platforms" title="Permanent link">&para;</a></h4>
 <p>Publication platforms can be roughly divided into two groups.
@@ -440,7 +442,7 @@ To some extend, pre-print servers, for example <a href="https://osf.io/">OSF</a>
 Integrations are based on the service's public API.</p>
 <h4 id="522-whitebox-id-provider">5.2.2 Whitebox ID Provider<a class="headerlink" href="#522-whitebox-id-provider" title="Permanent link">&para;</a></h4>
 <p>The reproducibility service uses <a href="http://orcid.org/">ORCID</a> to authenticate users and retrieve user metadata.
-The reproducibility service does not use the ORCID authorisation to edit ORCID user data or retrieve non-public data from ORCID, thus this process is (<a href="https://security.stackexchange.com/questions/44611/difference-between-oauth-openid-and-openid-connect-in-very-simple-term">pseudo-authentication using OAuth</a>).
+The reproducibility service does not use the ORCID authorisation to edit ORCID user data or retrieve non-public data from ORCID, thus this process is <a href="https://security.stackexchange.com/questions/44611/difference-between-oauth-openid-and-openid-connect-in-very-simple-term">pseudo-authentication using OAuth</a>.
 Internally, the user's public <code>ORCID</code> is the main identifier.
 User have different levels, which allow different actions, such as "registered user" or "administrator".
 These levels are stored in the reproducibility service.</p>
@@ -614,6 +616,23 @@ Internal communication between the webserver and the microservices is unencrypte
 <td><code>/api/v1/auth</code>, <code>/api/v1/user/</code></td>
 <td>JavaScript (Node.js)</td>
 <td>authentication service and user management (whoami, level changing)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="supporting-services">Supporting services<a class="headerlink" href="#supporting-services" title="Permanent link">&para;</a></h5>
+<p>Existing software projects can be re-used for common functionality, such as gathering statistics.
+These supporting services run alongside the microservices in their own containers accessible via the main webservice.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Project</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://matomo.org/">Piwik</a></td>
+<td>collect user statistics</td>
 </tr>
 </tbody>
 </table>
@@ -791,7 +810,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build 6308534 @ 2018-02-01 17:20:40 +0100</div
+<div class="buildinfo">Build f58bc8a @ 2018-02-05 13:54:44 +0100</div
               
             </div>
           </div>
@@ -843,5 +862,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-02-01 16:23:12
+Build Date UTC : 2018-02-05 13:02:27
 -->
