@@ -5,7 +5,7 @@
 Andrea turned 29 this year.
 She is always up for a joke and a pot of coffee but is also quite impatient.
 Especially if she has to wait for others or if she hasn’t had any progress for a while.
-However, currently Andrea does his Ph.D in the field of geosciences.
+However, currently Andrea does her Ph.D in the field of geosciences.
 Two years ago she decided to go for a cumulative dissertation, meaning she publishes scientific papers throughout his graduation and summarizes them at the end.
 She already published his first paper a few months ago which is good, actually.
 One of the reviewers was interested in the data and the source-code in order to reproduce the results.
@@ -38,15 +38,15 @@ As the website automatically generates a number of meta information, new search 
 It is not only possible to search for other publications by using keywords, but also by using spatial and temporal properties and constraints.
 It is even possible to constrain the search to hypotheses and research questions having certain vocabulary, thus simplifying search for related work.
 Andrea is quite impressed! She easily finds related papers around her own work.
-She gets a good overview about existing research questions making it easier to identify a research gap he can focus on.
-Andrea doesn’t even have to implement all the code lines for his statistical analysis from scratch, but can build upon existing.
-While reading some of the related papers in the browser, he realizes a couple of user interface widgets besides the incorporated figures.
+She gets a good overview about existing research questions making it easier to identify a research gap she can focus on.
+Andrea doesn’t even have to implement all the code lines for her statistical analysis from scratch, but can build upon existing.
+While reading some of the related papers in the browser, she realizes a couple of user interface widgets besides the incorporated figures.
 He doesn’t know them from traditional, static papers which are typically published as .pdf-files.
 Andrea recognizes that the widgets allow to interact with the diagrams to which the widgets belong.
 They allow to change, for example, thresholds, input variables and constants.
 She is thus able to check the assumptions and conclusions underlying the paper.
 She is a bit overwhelmed by the number of new features, such as exchanging the dataset or the source-code underlying the paper.
-Andrea is quite happy about his new tool.
+Andrea is quite happy about her new tool.
 It provides support for structured work, finding related publications, algorithms and datasets, identifying a research gap, and even tools for interacting with traditional, static papers.
 So, let’s go for the second paper.
 
@@ -78,7 +78,7 @@ After some testing, he feels good to tell his colleagues: looks good to me, let'
 
 ## Olivia the operator
 
-"Olivia is the chancellor of a mid-size state owned university in the US.
+Olivia is the chancellor of a mid-size state owned university in the US.
 She is proud to have been elected to this position a few years ago, and works very hard each day to improve both the university's reputation and the working and learning conditions of her employees and students.
 She had to make some unpleasant first hand experiences with aspects of todays academic life, some of which sadly became almost normal: budget cuts, violence on campus, and plagiarism scandals.
 During all of these upsets, she is happy she never wavered on the importance of personal integrity and credibility of each and every one of the scientists and researchers working on her campus.

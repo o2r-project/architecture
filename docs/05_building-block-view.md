@@ -43,8 +43,8 @@ They are sources of metadata during ERC creation when the information in the fet
 #### 5.1.6 Blackbox Software Repositories
 
 Software repositories are a source and a sink for software at different abstraction levels.
-They are a source for software artifacts or packages, such as system packages in install a library or language-specific extension packages.
-They are a sink for executable images of software, which comprise a number of software artifacts, for a specific ERC instance.
+They are a source for software dependencies, such as system packages for installing a library.
+They are a sink for executable images, which comprise a number of software artifacts and their dependencies, for a specific ERC instance.
 
 ### 5.2 Refinement Level 2
 
@@ -60,7 +60,7 @@ Integrations are based on the service's public API.
 #### 5.2.2 Whitebox ID Provider
 
 The reproducibility service uses [ORCID](http://orcid.org/) to authenticate users and retrieve user metadata.
-The reproducibility service does not use the ORCID authorisation to edit ORCID user data or retrieve non-public data from ORCID, thus this process is ([pseudo-authentication using OAuth](https://security.stackexchange.com/questions/44611/difference-between-oauth-openid-and-openid-connect-in-very-simple-term)).
+The reproducibility service does not use the ORCID authorisation to edit ORCID user data or retrieve non-public data from ORCID, thus this process is [pseudo-authentication using OAuth](https://security.stackexchange.com/questions/44611/difference-between-oauth-openid-and-openid-connect-in-very-simple-term).
 Internally, the user's public `ORCID` is the main identifier.
 User have different levels, which allow different actions, such as "registered user" or "administrator".
 These levels are stored in the reproducibility service.
@@ -205,6 +205,15 @@ The following table describes the microservices, their endpoints, and their feat
 **Project** | **API path** | **Language** | **Description**
 ------ | ------ | ------ | ------
 [bouncer](https://github.com/o2r-project/o2r-bouncer) | `/api/v1/auth`, `/api/v1/user/` | JavaScript (Node.js) | authentication service and user management (whoami, level changing)
+
+##### Supporting services
+
+Existing software projects can be re-used for common functionality, such as gathering statistics.
+These supporting services run alongside the microservices in their own containers accessible via the main webservice.
+
+**Project** | **Description**
+------ | ------
+[Piwik](https://matomo.org/) | collect user statistics
 
 #### 5.3.2 Whitebox database
 

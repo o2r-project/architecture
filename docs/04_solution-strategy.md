@@ -11,7 +11,7 @@ These features are provided via a _well-defined RESTful API_.
 
 To allow a dynamic development and support the large variety of skills, all server-side features are developed in independent _[microservices](https://en.wikipedia.org/wiki/Microservices)_.
 These microservices handle only specific functional parts of the API and allow independent development and deployment cycles.
-Core components are developed using server-side JavaScript based on Node.js while other components are implemented Python.
+Core components are developed using server-side JavaScript based on [Node.js](https://nodejs.org/) with [Express](https://expressjs.com/) while other components are implemented in Python.
 
 We accept this diversification _increases complexity_ of both development and testing environments and the deployment of said services.
 

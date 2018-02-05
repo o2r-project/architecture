@@ -5,7 +5,9 @@
 The system must provide a reliable way to create and examine (e.g. discover, inspect) reproducibility packages of computational research to support reproducible publications.
 This architecture describes the relationship of the reproducibility service with other services from the context of scientific collaboration and publishing and how they can be combined to a new system for scholarly publications.
 
-At its core is the concept of the **Executable Research Compendium** (ERC, see [specification](http://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)), and a supporting reproducibility service, which is defined by a [web **API** specification](http://o2r.info/o2r-web-api/) and its [**reference implementation**](https://github.com/o2r-project/reference-implementation) is published as open source software.
+At its core is the concept of the **Executable Research Compendium** (ERC, see [specification](http://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)).
+The creation and inspection of ERCs are supported by a **reproducibility service**, which is defined by a [web **API** specification](http://o2r.info/o2r-web-api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
+Both are published under open licenses, as is this document.
 
 ### 1.2 Quality Goals
 
