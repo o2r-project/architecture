@@ -9,6 +9,7 @@ pages:
 theme: readthedocs
 site_author: o2r project
 site_dir: site
+site_url: http://o2r.info/architecture/ 
 theme_dir: custom_theme
 extra_css: [arc42.css]
 repo_url: https://github.com/o2r-project/architecture
