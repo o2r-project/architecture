@@ -32,6 +32,9 @@ mkdocs build --clean
   sed -i "s/@@TIMESTAMP@@/$CURRENT_DATE/g" site/index.html
 )
 
+# Make the pdf
+make pdf
+
 # Commit and push the documentation to gh-pages
 (
   cd site

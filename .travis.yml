@@ -6,6 +6,8 @@ install:
   - "pip install mkdocs"
   - "pip install mkdocs-cinder"
   - "pip install markdown-include"
+  - "wget https://bitbucket.org/wkhtmltopdf/wkhtmltopdf/downloads/wkhtmltox-0.13.0-alpha-7b36694_linux-trusty-amd64.deb"
+  - "sudo dpkg -it wkhtml*.deb"
 after_success:
   - if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then ./.deploy.sh ; fi
 env:
