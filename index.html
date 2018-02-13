@@ -136,18 +136,22 @@
                 <h1 id="software-architecture-for-opening-reproducible-research">Software architecture for Opening Reproducible Research<a class="headerlink" href="#software-architecture-for-opening-reproducible-research" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduction-and-goals">1. Introduction and Goals<a class="headerlink" href="#1-introduction-and-goals" title="Permanent link">&para;</a></h2>
 <h3 id="11-requirements-overview">1.1 Requirements Overview<a class="headerlink" href="#11-requirements-overview" title="Permanent link">&para;</a></h3>
-<p>The system must provide a reliable way to create and examine (e.g. discover, inspect) reproducibility packages of computational research to support reproducible publications.
-This architecture describes the relationship of the reproducibility service with other services from the context of scientific collaboration and publishing and how they can be combined to a new system for scholarly publications.</p>
-<p>At its core is the concept of the <strong>Executable Research Compendium</strong> (ERC, see <a href="http://o2r.info/erc-spec">specification</a> and <a href="https://doi.org/10.1045/january2017-nuest">article</a>).
-The creation and inspection of ERCs are supported by a <strong>reproducibility service</strong>, which is defined by a <a href="http://o2r.info/o2r-web-api/">web <strong>API</strong> specification</a> and demonstrated in a <a href="https://github.com/o2r-project/reference-implementation"><strong>reference implementation</strong></a>.
-Both are published under open licenses, as is this document.</p>
-<p>A PDF version of this document is available for download at <a href="http://o2r.info/architecture/o2r-architecture.pdf">http://o2r.info/architecture/o2r-architecture.pdf</a>.
-The normative specification is given by the <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> in the <a href="https://github.com/o2r-project/architecture/">project repository</a>.</p>
+<p>This architecture describes the relationship of a <strong>reproducibility service</strong> with other services from the context of scientific collaboration, publishing, and preservation.
+Together these services can be combined into a new system for transparent and reproducible scholarly publications.</p>
+<p>The reproducibility service must provide a reliable way to create and inspect packages of computational research to support reproducible publications.
+<em>Creation</em> comprises uploading of a researcher's workspace with code, data, and documentation for building a reproducible runtime environment.
+This runtime environment forms the basis for <em>inspection</em>, i.e. discovering, examining details, and manipulating workflows on an online platform.</p>
+<p>The packaging of research workflows is based on the concept of the <strong>Executable Research Compendium</strong> (ERC, see <a href="http://o2r.info/erc-spec">specification</a> and <a href="https://doi.org/10.1045/january2017-nuest">article</a>).
+The reproducibility service is defined by a <a href="http://o2r.info/o2r-web-api/">web <strong>API</strong> specification</a> and demonstrated in a <a href="https://github.com/o2r-project/reference-implementation"><strong>reference implementation</strong></a>.
+Both are published under permissive open licenses, as is this document.</p>
+<p>The normative specification is given in the <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> formatted files in the <a href="https://github.com/o2r-project/architecture/">project repository</a>, which form the basis for readable PDF and HTML versions of the architecture.
+A HTML and PDF version of this document are available at <a href="http://o2r.info/architecture/">http://o2r.info/architecture/</a> and <a href="http://o2r.info/architecture/o2r-architecture.pdf">http://o2r.info/architecture/o2r-architecture.pdf</a> respectively.</p>
 <h3 id="12-quality-goals">1.2 Quality Goals<a class="headerlink" href="#12-quality-goals" title="Permanent link">&para;</a></h3>
 <dl>
 <dt>Transparency</dt>
-<dd>The system must be transparent to allow scrutiny required by a rigorous scientific process.
-All components must be Free and Open Source Software (<a href="https://en.wikipedia.org/wiki/Free_and_open-source_software">FOSS</a>).</dd>
+<dd>The system must be transparent to allow a scrutiny demanded by a rigorous scientific process.
+All software components must be Free and Open Source Software (<a href="https://en.wikipedia.org/wiki/Free_and_open-source_software">FOSS</a>).
+All text and specification must be available under a permissive <a href="https://en.wikipedia.org/wiki/Public_copyright_license">public copyright license</a>.</dd>
 <dt>Separation of concern</dt>
 <dd>The system must integrate with existing services and focus on the core functionality: creating interactive reproducible runtime environments for scientific workflows.
 It must not replicate existing functionality such as storage or persistent identification.</dd>
@@ -209,7 +213,8 @@ This allows different developers to contribute efficiently.</dd>
 </table>
 <p>Some of the stakeholders are accompanied by <a href="user-scenarios/">user scenarios</a> in prose.</p>
 <h2 id="2-architecture-constraints">2. Architecture constraints<a class="headerlink" href="#2-architecture-constraints" title="Permanent link">&para;</a></h2>
-<p>The few constraints on this project are reflected in the final solution. This section shows them and if applicable, their motivation. (based on <a href="https://biking.michael-simons.eu/docs/index.html#section-architecture-constraints">biking2</a>)</p>
+<p>This section shows constraints on this project given by involved parties or conscious decisions made to ensure the longevity and transparency of the architecture and its implementations.
+If applicable, a motivation for constraints is given. (based on <a href="https://biking.michael-simons.eu/docs/index.html#section-architecture-constraints">biking2</a>)</p>
 <h3 id="21-technical-constraints">2.1 Technical constraints<a class="headerlink" href="#21-technical-constraints" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -269,8 +274,8 @@ This allows different developers to contribute efficiently.</dd>
 </tr>
 <tr>
 <td>ORG.5</td>
-<td>Transfer from group domain to persistent domain</td>
-<td>The ERC bundles artifacts coming from a private or group domain for a transfer to a public and persistent domain (cf. <a href="http://www.forschungsdaten.org/index.php/Curation_Domain_Model">Curation Domain Model</a>), which imposes requirements on the availability and enrichment of metadata</td>
+<td>Acknowledge transfer from group domain to persistent domain</td>
+<td>The ERC bundles artifacts coming from a private or group domain for a transfer to a public and persistent domain (cf. <a href="http://www.forschungsdaten.org/index.php/Curation_Domain_Model">Curation Domain Model</a> (in German)), which imposes requirements on the incorporated metadata.</td>
 </tr>
 </tbody>
 </table>
@@ -286,23 +291,23 @@ This allows different developers to contribute efficiently.</dd>
 <tbody>
 <tr>
 <td>CONV.1</td>
-<td>Provide architecture documentation</td>
+<td>Provide formal architecture documentation</td>
 <td>Based on <a href="http://arc42.org/">arc42</a> (template version 7.0).</td>
 </tr>
 <tr>
 <td>CONV.2</td>
-<td>Reasonably follow coding conventions</td>
+<td>Follow coding conventions</td>
 <td>Typical project layout and coding conventions of the respective used language should be followed as far as possible. However, we explicitly accept the research project context and do <em>not</em> provide full tests suites or documentation beyond what is needed by project team members.</td>
 </tr>
 <tr>
 <td>CONV.3</td>
-<td>Documentation is English</td>
-<td>International research project, must be understandable by anyone interested.</td>
+<td>Documentation language is British English</td>
+<td>International research project must be understandable by anyone interested; consistency increases readability.</td>
 </tr>
 <tr>
 <td>CONV.4</td>
-<td>Use subjectivization for server component names</td>
-<td>Server-side components are named using personalized verbs or professions: <em>muncher</em>, <em>loader</em>, <em>transporter</em>. All git repositories for software use an <code>o2r-</code> prefix, in case of server-side components e.g. <code>o2r-shipper</code>.</td>
+<td>Use subjectivisation for server component names</td>
+<td>Server-side components are named using personalized verbs or (ideally) professions: <em>muncher</em>, <em>loader</em>, <em>transporter</em>. All git repositories for software use an <code>o2r-</code> prefix, in case of server-side components e.g. <code>o2r-shipper</code>.</td>
 </tr>
 <tr>
 <td>CONV.5</td>
@@ -365,8 +370,8 @@ This allows different developers to contribute efficiently.</dd>
 </tr>
 <tr>
 <td><strong>Archives and digital preservation systems</strong></td>
-<td>when information is transferred from the private (research group, single researcher) or group domain (collaborations) to a public and persistent domain (archives, repositories), then extended data and metadata management is needed but also different access and re-use is enabled; these concerns are only relevant in so far as <em>data repositories</em> must be supported, but further aspects such as access rights in archives are only mediately relevant for the reproducibility service</td>
-<td>metadata in <code>JSON</code> and <code>XML</code> provided via <code>HTTP</code> or as files</td>
+<td>saving ERCs in preservation systems includes extended data and metadata management (cf. private/group domain vs. persistent domain in the <a href="http://www.forschungsdaten.org/index.php/Curation_Domain_Model">Curation Domain Model</a> (in German)), because a different kind of access and re-use is of concern for these systems; these concerns are relevant in so far as the intermediary <em>data repositories</em> must be supported, but further aspects, e.g. long-term access rights, are only mediately relevant for the reproducibility service</td>
+<td>metadata in <code>JSON</code> and <code>XML</code> provided as part of <code>HTTP</code> requests or as files within payloads</td>
 </tr>
 </tbody>
 </table>
@@ -467,7 +472,9 @@ Allowing access to data repositories reduces data duplication but requires contr
 <p>Generic <strong>Repositories</strong>, e.g. <a href="https://zenodo.org/">Zenodo</a>, <a href="https://data.mendeley.com/">Mendeley Data</a>, <a href="http://figshare.com/">Figshare</a>, <a href="https://osf.io/">OSF</a>, provide (a) access to complete ERC stored in repositories for inspection and execution by the reproducibility service, and (b) storage of created ERC. repositories.</p>
 <p>Protocols: (authenticated) <code>HTTP</code> APIs</p>
 <p><strong>Archives</strong> and digital preservation solutions can provide long-term preservation of ERC.
-Preservation either lies in the responsibility of the repository, which might save the hosted content to an archive or an archive harvests a repository, or is a task for one of the involved platform providers, e.g. using an installation of <a href="https://www.archivematica.org/">Archivematica</a>.</p>
+The data repository and/or one of the involved platform providers are responsible for preservation.
+A data repository might save the hosted content to an archive, be regularly harvested by an archive, or be part of a distributed dark archive, e.g. <a href="https://www.clockss.org">CLOCKSS</a>.
+A platform provider might supply a digital preservation service, e.g. an installation of <a href="https://www.archivematica.org/">Archivematica</a>.</p>
 <p>Protocol: <code>HTTP</code> carrying bitstreams and metadata</p>
 <div class="admonition note">
 <p class="admonition-title"><em>Data Curation Continuum</em></p>
@@ -718,17 +725,19 @@ It cannot cover all potential cases and focusses on the following main scenarios
 <h3 id="61-erc-creation">6.1 ERC Creation<a class="headerlink" href="#61-erc-creation" title="Permanent link">&para;</a></h3>
 <p><a href="./img/6.1-runtime-view-creation.png"><img alt="runtime view ERC creation" src="./img/6.1-runtime-view-creation.png" /></a></p>
 <p>First, the user initiates a <em>creation</em> of a new ERC based on a workspace containing at least a viewable file (e.g. an HTML document or a plot) based on the code and instructions provided in a either a script or <a href="./glossary#literate-programming">literate programming document</a>), and any other data.
-The <a href="#531-whitebox-microservices"><code>loader</code></a> fetches the files, runs some checks, starts metadata extraction, starts metadata brokering from the raw metadata to o2r metadata, and saves the compendium, as a non-public candidate which only the uploading user can see, to the database.
+The <a href="#531-whitebox-microservices"><code>loader</code></a> runs a series of steps: fetching the files, checking the incoming workspace structure, extracting raw metadata from the workspace, brokering raw metadata to o2r metadata, and saving the compendium to the database.
+The compendium is now a non-public <em>candidate</em>, meaning only the uploading user or admin users can see and edit it.
 All metadata processing is based on the tool <a href="#533-whitebox-tools"><code>meta</code></a>.</p>
-<p>Then the user opens the candidate compendium, checks and completes the metadata.
-<a href="#531-whitebox-microservices"><code>muncher</code></a> triggers a metadata validation and brokering to several output formats (also using <a href="#533-whitebox-tools"><code>meta</code></a>), and loads the brokered metadata from the files to save a copy in the database for better <a href="#532-whitebox-database">searchability</a>.</p>
+<p>Then the user opens the candidate compendium, reviews and completes the metadata, and saves it.
+Saving triggers a metadata validation in <a href="#531-whitebox-microservices"><code>muncher</code></a>.
+If the validation succeeds, the metadata is brokered to several output formats as files within the compendium using <a href="#533-whitebox-tools"><code>meta</code></a>, and then re-loaded to the database for better <a href="#532-whitebox-database">searchability</a>.</p>
 <p>Next, the user must start a <em>job</em> to add the ERC configuration and runtime environment to the workspace, which are core elements of an ERC.
 The ERC configuration is a file generated from the user-provided metadata (see <a href="http://o2r.info/erc-spec/spec/#erc-configuration-file">ERC specification</a>).
 The runtime environment consists of two parts: (a) the runtime manifest, which is created by executing the workflow once in a container based on the tool <a href="#533-whitebox-tools"><code>containerit</code></a>; and (b) the runtime image, which is built from the runtime manifest.
 A user may provide the ERC configuration file and the runtime manifest with the workspace for fine-grained control; the generation steps are skipped then.</p>
 <p>Finally the user starts a shipment of the compendium to a data repository.
 The <a href="#531-whitebox-microservices"><code>shipper</code></a> manages this two step process.
-The separate "create" and "publish" steps allow checking the shipped files, and avoid unintentional shipments, because a published shipment creates a unique public resource, which potentially cannot be unpublished.</p>
+The separate "create" and "publish" steps allow checking the shipped files and avoid unintentional shipments, because a published shipment creates an non-erasable public resource.</p>
 <div class="admonition note">
 <p class="admonition-title"><em>In the code</em></p>
 <p>The <code>loader</code> has two core controllers for direct <em>upload</em> and <em>load</em> from a collaboration platform.
@@ -813,7 +822,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build 5df1ea9 @ 2018-02-05T17:26:49Z</div
+<div class="buildinfo">Build e2447f2 @ 2018-02-13T15:36:50Z</div
               
             </div>
           </div>
@@ -865,5 +874,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-02-05 17:26:49
+Build Date UTC : 2018-02-13 15:36:50
 -->
