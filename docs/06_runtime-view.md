@@ -13,11 +13,13 @@ ERC Inspection | The most important workflow for a reviewer or reader is executi
 [![runtime view ERC creation](img/6.1-runtime-view-creation.png)](img/6.1-runtime-view-creation.png)
 
 First, the user initiates a _creation_ of a new ERC based on a workspace containing at least a viewable file (e.g. an HTML document or a plot) based on the code and instructions provided in a either a script or [literate programming document](/glossary#literate-programming)), and any other data.
-The [`loader`](#531-whitebox-microservices) fetches the files, runs some checks, starts metadata extraction, starts metadata brokering from the raw metadata to o2r metadata, and saves the compendium, as a non-public candidate which only the uploading user can see, to the database.
+The [`loader`](#531-whitebox-microservices) runs a series of steps: fetching the files, checking the incoming workspace structure, extracting raw metadata from the workspace, brokering raw metadata to o2r metadata, and saving the compendium to the database.
+The compendium is now a non-public _candidate_, meaning only the uploading user or admin users can see and edit it.
 All metadata processing is based on the tool [`meta`](#533-whitebox-tools).
 
-Then the user opens the candidate compendium, checks and completes the metadata.
-[`muncher`](#531-whitebox-microservices) triggers a metadata validation and brokering to several output formats (also using [`meta`](#533-whitebox-tools)), and loads the brokered metadata from the files to save a copy in the database for better [searchability](#532-whitebox-database).
+Then the user opens the candidate compendium, reviews and completes the metadata, and saves it.
+Saving triggers a metadata validation in [`muncher`](#531-whitebox-microservices).
+If the validation succeeds, the metadata is brokered to several output formats as files within the compendium using [`meta`](#533-whitebox-tools), and then re-loaded to the database for better [searchability](#532-whitebox-database).
 
 Next, the user must start a _job_ to add the ERC configuration and runtime environment to the workspace, which are core elements of an ERC.
 The ERC configuration is a file generated from the user-provided metadata (see [ERC specification](http://o2r.info/erc-spec/spec/#erc-configuration-file)).
@@ -26,7 +28,7 @@ A user may provide the ERC configuration file and the runtime manifest with the 
 
 Finally the user starts a shipment of the compendium to a data repository.
 The [`shipper`](#531-whitebox-microservices) manages this two step process.
-The separate "create" and "publish" steps allow checking the shipped files, and avoid unintentional shipments, because a published shipment creates a unique public resource, which potentially cannot be unpublished.
+The separate "create" and "publish" steps allow checking the shipped files and avoid unintentional shipments, because a published shipment creates an non-erasable public resource.
 
 !!! Note "_In the code_"
     The `loader` has two core controllers for direct _upload_ and _load_ from a collaboration platform.

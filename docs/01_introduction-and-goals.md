@@ -2,21 +2,26 @@
 
 ### 1.1 Requirements Overview
 
-The system must provide a reliable way to create and examine (e.g. discover, inspect) reproducibility packages of computational research to support reproducible publications.
-This architecture describes the relationship of the reproducibility service with other services from the context of scientific collaboration and publishing and how they can be combined to a new system for scholarly publications.
+This architecture describes the relationship of a **reproducibility service** with other services from the context of scientific collaboration, publishing, and preservation.
+Together these services can be combined into a new system for transparent and reproducible scholarly publications.
 
-At its core is the concept of the **Executable Research Compendium** (ERC, see [specification](http://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)).
-The creation and inspection of ERCs are supported by a **reproducibility service**, which is defined by a [web **API** specification](http://o2r.info/o2r-web-api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
-Both are published under open licenses, as is this document.
+The reproducibility service must provide a reliable way to create and inspect packages of computational research to support reproducible publications.
+_Creation_ comprises uploading of a researcher's workspace with code, data, and documentation for building a reproducible runtime environment.
+This runtime environment forms the basis for _inspection_, i.e. discovering, examining details, and manipulating workflows on an online platform.
 
-A PDF version of this document is available for download at [http://o2r.info/architecture/o2r-architecture.pdf](http://o2r.info/architecture/o2r-architecture.pdf).
-The normative specification is given by the [Markdown](https://en.wikipedia.org/wiki/Markdown) in the [project repository](https://github.com/o2r-project/architecture/).
+The packaging of research workflows is based on the concept of the **Executable Research Compendium** (ERC, see [specification](http://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)).
+The reproducibility service is defined by a [web **API** specification](http://o2r.info/o2r-web-api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
+Both are published under permissive open licenses, as is this document.
+
+The normative specification is given in the [Markdown](https://en.wikipedia.org/wiki/Markdown) formatted files in the [project repository](https://github.com/o2r-project/architecture/), which form the basis for readable PDF and HTML versions of the architecture.
+A HTML and PDF version of this document are available at [http://o2r.info/architecture/](http://o2r.info/architecture/) and [http://o2r.info/architecture/o2r-architecture.pdf](http://o2r.info/architecture/o2r-architecture.pdf) respectively.
 
 ### 1.2 Quality Goals
 
 Transparency
-: The system must be transparent to allow scrutiny required by a rigorous scientific process.
-All components must be Free and Open Source Software ([FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software)).
+: The system must be transparent to allow a scrutiny demanded by a rigorous scientific process.
+All software components must be Free and Open Source Software ([FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software)).
+All text and specification must be available under a permissive [public copyright license](https://en.wikipedia.org/wiki/Public_copyright_license).
 
 Separation of concern
 : The system must integrate with existing services and focus on the core functionality: creating interactive reproducible runtime environments for scientific workflows.

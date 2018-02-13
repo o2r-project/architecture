@@ -94,7 +94,9 @@ Generic **Repositories**, e.g. [Zenodo](https://zenodo.org/), [Mendeley Data](ht
 Protocols: (authenticated) `HTTP` APIs
 
 **Archives** and digital preservation solutions can provide long-term preservation of ERC.
-Preservation either lies in the responsibility of the repository, which might save the hosted content to an archive or an archive harvests a repository, or is a task for one of the involved platform providers, e.g. using an installation of [Archivematica](https://www.archivematica.org/).
+The data repository and/or one of the involved platform providers are responsible for preservation.
+A data repository might save the hosted content to an archive, be regularly harvested by an archive, or be part of a distributed dark archive, e.g. [CLOCKSS](https://www.clockss.org).
+A platform provider might supply a digital preservation service, e.g. an installation of [Archivematica](https://www.archivematica.org/).
 
 Protocol: `HTTP` carrying bitstreams and metadata
 
