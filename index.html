@@ -157,7 +157,8 @@ All text and specification must be available under a permissive <a href="https:/
 It must not replicate existing functionality such as storage or persistent identification.</dd>
 <dt>Flexibility &amp; modularity</dt>
 <dd>In regard to the research project setting, the system components must be well separated, so functions can be developed independently, e.g. using different programming languages.
-This allows different developers to contribute efficiently.</dd>
+This allows different developers to contribute efficiently.
+It must be possible to provide various computational configurations required by specific ERC which are outside of the included runtime.</dd>
 </dl>
 <h3 id="13-stakeholders">1.3 Stakeholders<a class="headerlink" href="#13-stakeholders" title="Permanent link">&para;</a></h3>
 <table>
@@ -239,6 +240,11 @@ If applicable, a motivation for constraints is given. (based on <a href="https:/
 <td>TECH.3</td>
 <td>Do not store secure information</td>
 <td>The team members experience and available resources do not allow for handling information with security concerns, so no critical data, such as user passwords but also data with privacy concerns, must be stored in the system.</td>
+</tr>
+<tr>
+<td>TECH.4</td>
+<td>Configurations for ERC runtimes</td>
+<td>ERCs include the runtime environment in form of a binary archive. The architecture must support executing this runtime environment and must be able to provide different configurations outside it, for example <a href="./glossary#computer-architecture">computer architectures</a> or operating system <a href="./glossary#kernel">kernels</a>. The minimum requirements for the containerisation solution regarding architecture and kernel apply.</td>
 </tr>
 </tbody>
 </table>
@@ -387,14 +393,15 @@ These features are provided via a <em>well-defined RESTful API</em>.</p>
 These microservices handle only specific functional parts of the API and allow independent development and deployment cycles.
 Core components are developed using server-side JavaScript based on <a href="https://nodejs.org/">Node.js</a> with <a href="https://expressjs.com/">Express</a> while other components are implemented in Python.</p>
 <p>We accept this diversification <em>increases complexity</em> of both development and testing environments and the deployment of said services.</p>
-<p>Required documentation is minimal. The typical structure should follow common practices.</p>
+<p>Required documentation is minimal.
+The typical structure should follow common practices of the respective language and tools.</p>
 <h3 id="storage-and-intra-service-communication">Storage and intra-service communication<a class="headerlink" href="#storage-and-intra-service-communication" title="Permanent link">&para;</a></h3>
 <p>In accordance with the system scope, there is no reliable storage solution implemented.
 The microservices simply share a common pointer to a local file system path.
 Storage of ERC is only implemented to make the solution independent during development and for the needs of core functionality (temporal storage), but it is not a feature the solution will eventually provide.</p>
 <p>The unifying component of the architecture is the <em>database</em>.
 It is known to all microservices.</p>
-<p>Some microservices communicate via an eventing mechanism for real-time updates, such as the search database and the component providing live updates to the user via WebSockets-
+<p>Some microservices communicate via an eventing mechanism for real-time updates, such as the search database and the component providing live updates to the user via WebSockets.
 The eventing is based on the operation log of the database (which is normally used to synchronise database nodes).
 This is a clear <em>misuse of an internal feature</em>, but a lot simpler than maintaining a full-blown eventing solution.</p>
 <h3 id="demonstration-user-data-authentication">Demonstration, user data &amp; authentication<a class="headerlink" href="#demonstration-user-data-authentication" title="Permanent link">&para;</a></h3>
@@ -425,7 +432,8 @@ Users examine publications, e.g. browsing, searching, reading, downloading, or r
 <p>Persistent identifiers for artifacts in the reproducibility service itself are <em>not required</em>, as these are provided by data storage and registries.
 However, services such as <a href="http://www.pidconsortium.eu/">ePIC</a> could allow to retrieve persistent IDs.</p>
 <h4 id="513-blackbox-execution-infrastructure">5.1.3 Blackbox Execution Infrastructure<a class="headerlink" href="#513-blackbox-execution-infrastructure" title="Permanent link">&para;</a></h4>
-<p>The execution infrastructure provides CPU time and temporary result storage space for execution of ERC, both "as is" and with manipulation, i.e. changed parameters.</p>
+<p>The execution infrastructure provides CPU time and temporary result storage space for execution of ERC, both "as is" and with manipulation, i.e. changed parameters.
+It also provides different <a href="./glossary#architecture">architectures</a> and <a href="./glossary#kernel">operating system kernel</a> configurations which are outside of the scope of ERC's runtime environments based on containers.</p>
 <h4 id="514-blackbox-data-repositories">5.1.4 Blackbox Data Repositories<a class="headerlink" href="#514-blackbox-data-repositories" title="Permanent link">&para;</a></h4>
 <p>Data repositories are all services storing data but not software.
 More specifically, they may store software "as data", but not with software-specific features such as code versioning or installation binaries for different computer architectures.
@@ -455,7 +463,10 @@ Internally, the user's public <code>ORCID</code> is the main identifier.
 User have different levels, which allow different actions, such as "registered user" or "administrator".
 These levels are stored in the reproducibility service.</p>
 <h4 id="523-whitebox-execution-infrastructure">5.2.3 Whitebox Execution Infrastructure<a class="headerlink" href="#523-whitebox-execution-infrastructure" title="Permanent link">&para;</a></h4>
-<p>Such an infrastructure could be either self-hosted, e.g. <a href="https://www.docker.com/products/docker-swarm">Docker Swarm</a>-based, or use a cloud service provide, such as <a href="https://aws.amazon.com/ec2/">Amazon EC2</a>, <a href="http://cloud.docker.com/">Docker Cloud</a>, or even use continuous integration services such as <a href="https://travis-ci.org/">Travis CI</a> or <a href="https://about.gitlab.com/gitlab-ci/">Gitlab CI</a>.</p>
+<p>Such an infrastructure could be either self-hosted, e.g. <a href="https://www.docker.com/products/docker-swarm">Docker Swarm</a>-based, use a cloud service provider, such as <a href="https://aws.amazon.com/ec2/">Amazon EC2</a>, <a href="http://cloud.docker.com/">Docker Cloud</a>, or even use continuous integration services such as <a href="https://travis-ci.org/">Travis CI</a> or <a href="https://about.gitlab.com/gitlab-ci/">Gitlab CI</a>.
+Or it could use a combination of these.</p>
+<p>Not all of these options provide the flexibility to provide configurations outside of containers, for example specific operating system kernels.
+An implementing system must manage these independently, for example by mapping ERC requirements like an operating system, to a part of the execution infrastructure that supports it.</p>
 <h4 id="524-whitebox-data-repositories">5.2.4 Whitebox Data Repositories<a class="headerlink" href="#524-whitebox-data-repositories" title="Permanent link">&para;</a></h4>
 <p><a href="./img/5.2-whitebox-data-repos.png"><img alt="whitebox data repositories" src="./img/5.2-whitebox-data-repos.png" /></a></p>
 <p>The reproducibility service <em>does not persistently store anything</em>.
@@ -792,15 +803,15 @@ The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><co
 <dl>
 <dt>Motivation</dt>
 <dd>
-<p>A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments to the hosted software and based on containers it naturally uses one of the powerful orchestration engines, such as <a href="https://docs.docker.com/engine/swarm">Docker Swarm</a> or <a href="http://kubernetes.io/">Kubernetes</a>.</p>
+<p>A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments of the reproducibility service's microservices. Being based on containers it naturally uses one of the powerful orchestration engines, such as <a href="https://docs.docker.com/engine/swarm">Docker Swarm</a> or <a href="http://kubernetes.io/">Kubernetes</a>. It can also include multiple execution infrastructures to support different architectures and kernels.</p>
 </dd>
 <dt>Quality and/or Performance Features</dt>
 <dd>
-<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters.</p>
+<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters. The diversity of supported ERCs can be increased by providing different architectures and kernels, potentially on demand using virtualisation.</p>
 </dd>
 <dt>Mapping of Building Blocks to Infrastructure</dt>
 <dd>
-<p>The o2r reproducibility services is managed by the o2r team similar to the test server. The other big building blocks, like publishing platforms or data repositories, are managed by the respective organisations.</p>
+<p>The o2r reproducibility service and execution infrastructures are managed by the o2r team similar to the test server. The other big building blocks, like publishing platforms or data repositories, are managed by the respective organisations.</p>
 </dd>
 </dl>
 <hr />
@@ -822,7 +833,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build e2447f2 @ 2018-02-13T15:36:50Z</div
+<div class="buildinfo">Build 3049592 @ 2018-02-21T17:08:40Z</div
               
             </div>
           </div>
@@ -874,5 +885,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-02-13 15:36:50
+Build Date UTC : 2018-02-21 17:08:41
 -->
