@@ -22,6 +22,7 @@ However, services such as [ePIC](http://www.pidconsortium.eu/) could allow to re
 #### 5.1.3 Blackbox Execution Infrastructure
 
 The execution infrastructure provides CPU time and temporary result storage space for execution of ERC, both "as is" and with manipulation, i.e. changed parameters.
+It also provides different [architectures](/glossary#architecture) and [operating system kernel](/glossary#kernel) configurations which are outside of the scope of ERC's runtime environments based on containers.
 
 #### 5.1.4 Blackbox Data Repositories
 
@@ -67,7 +68,11 @@ These levels are stored in the reproducibility service.
 
 #### 5.2.3 Whitebox Execution Infrastructure
 
-Such an infrastructure could be either self-hosted, e.g. [Docker Swarm](https://www.docker.com/products/docker-swarm)-based, or use a cloud service provide, such as [Amazon EC2](https://aws.amazon.com/ec2/), [Docker Cloud](http://cloud.docker.com/), or even use continuous integration services such as [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/gitlab-ci/).
+Such an infrastructure could be either self-hosted, e.g. [Docker Swarm](https://www.docker.com/products/docker-swarm)-based, use a cloud service provider, such as [Amazon EC2](https://aws.amazon.com/ec2/), [Docker Cloud](http://cloud.docker.com/), or even use continuous integration services such as [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/gitlab-ci/).
+Or it could use a combination of these.
+
+Not all of these options provide the flexibility to provide configurations outside of containers, for example specific operating system kernels.
+An implementing system must manage these independently, for example by mapping ERC requirements like an operating system, to a part of the execution infrastructure that supports it.
 
 #### 5.2.4 Whitebox Data Repositories
 

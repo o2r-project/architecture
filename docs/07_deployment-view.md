@@ -25,12 +25,12 @@ Mapping of Building Blocks to Infrastructure
 
 Motivation
 
-:   A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments to the hosted software and based on containers it naturally uses one of the powerful orchestration engines, such as [Docker Swarm](https://docs.docker.com/engine/swarm) or [Kubernetes](http://kubernetes.io/).
+:   A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments of the reproducibility service's microservices. Being based on containers it naturally uses one of the powerful orchestration engines, such as [Docker Swarm](https://docs.docker.com/engine/swarm) or [Kubernetes](http://kubernetes.io/). It can also include multiple execution infrastructures to support different architectures and kernels.
 
 Quality and/or Performance Features
 
-:   The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters.
+:   The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters. The diversity of supported ERCs can be increased by providing different architectures and kernels, potentially on demand using virtualisation.
 
 Mapping of Building Blocks to Infrastructure
 
-:   The o2r reproducibility services is managed by the o2r team similar to the test server. The other big building blocks, like publishing platforms or data repositories, are managed by the respective organisations.
+:   The o2r reproducibility service and execution infrastructures are managed by the o2r team similar to the test server. The other big building blocks, like publishing platforms or data repositories, are managed by the respective organisations.

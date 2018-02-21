@@ -10,6 +10,7 @@ If applicable, a motivation for constraints is given. (based on [biking2](https:
 TECH.1 | Only open licenses | All third party software or used data must be available under a suitable code license, i.e. either [OSI-approved](https://opensource.org/licenses) or [ODC license](https://opendatacommons.org/licenses).
 TECH.2 | OS independent development and deployment | Server applications must run in well defined [Docker](https://docker.com) containers to allow installation on any host system and to not limit developers to a specific language or environment.
 TECH.3 | Do not store secure information | The team members experience and available resources do not allow for handling information with security concerns, so no critical data, such as user passwords but also data with privacy concerns, must be stored in the system.
+TECH.4 | Configurations for ERC runtimes | ERCs include the runtime environment in form of a binary archive. The architecture must support executing this runtime environment and must be able to provide different configurations outside it, for example [computer architectures](/glossary#computer-architecture) or operating system [kernels](/glossary#kernel). The minimum requirements for the containerisation solution regarding architecture and kernel apply.
 
 ### 2.2 Organizational constraints
 
