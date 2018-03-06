@@ -787,7 +787,7 @@ The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><co
 </dd>
 <dt>Quality and/or Performance Features</dt>
 <dd>
-<p>The server is managed completely with <a href="https://www.ansible.com/">Ansible</a> to ensure a well-document setup. The base operating system is CentOS Linux 7. The machine has 4 cores, 8 GB RAM, and a local storage ~100 GB, and runs on a VM host. The one machine in this deployment runs the full o2r reproducibility service, i.e. all microservices and a webserver to serve the user interfaces. It also runs the databases and ancillary services, such as a web traffic statistics service.</p>
+<p>The server is managed completely with <a href="https://www.ansible.com/">Ansible</a> to ensure a well-document setup. The base operating system is CentOS Linux 7. The machine has 4 cores, 8 GB RAM, and a local storage ~100 GB, and runs on a VM host. The one machine in this deployment runs the full o2r reproducibility service, i.e. all microservices and a webserver to serve the user interfaces. It also runs the databases and ancillary services, such as a web traffic statistics service. When executing a compendium, the compendium workspace is packaged in a tarball and send to the Docker daemon. This allows easy switching to remote machines, but also has a performance disadvantage.</p>
 </dd>
 <dt>Mapping of Building Blocks to Infrastructure</dt>
 <dd>
@@ -798,16 +798,17 @@ The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><co
 <p><a href="./img/7.2-deployment-view-production-sketch.png"><img alt="deployment view test server" src="./img/7.2-deployment-view-production-sketch.png" /></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This deployment view is a sketch for a potential productive deployment and intends to point out features of the chosen architecture and expected challenges or solutions.</p>
+<p>This deployment view is a sketch for a potential productive deployment and intends to point out features of the chosen architecture and expected challenges or solutions.
+<em>It is not implemented at the moment!</em></p>
 </div>
 <dl>
 <dt>Motivation</dt>
 <dd>
-<p>A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments of the reproducibility service's microservices. Being based on containers it naturally uses one of the powerful orchestration engines, such as <a href="https://docs.docker.com/engine/swarm">Docker Swarm</a> or <a href="http://kubernetes.io/">Kubernetes</a>. It can also include multiple execution infrastructures to support different architectures and kernels.</p>
+<p>A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments of the reproducibility service's microservices. Being based on containers it naturally uses one of the powerful orchestration engines, such as <a href="https://docs.docker.com/engine/swarm">Docker Swarm</a> or <a href="http://kubernetes.io/">Kubernetes</a>. It can also include multiple execution infrastructures to support multiple container software versions, different architectures, kernels, GPUs, or even specialised hardware. Operators of a reproducibility service can separate themselves from other operators by offering specific hardware or versions.</p>
 </dd>
 <dt>Quality and/or Performance Features</dt>
 <dd>
-<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters. The diversity of supported ERCs can be increased by providing different architectures and kernels, potentially on demand using virtualisation.</p>
+<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters. The diversity of supported ERCs can be increased by providing different architectures and kernels, and hardware. Some requirements could be met on demand using virtualisation, such as a specific operating system version.</p>
 </dd>
 <dt>Mapping of Building Blocks to Infrastructure</dt>
 <dd>
@@ -833,7 +834,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build 3049592 @ 2018-02-21T17:08:40Z</div
+<div class="buildinfo">Build 90d5a33 @ 2018-03-06T10:15:05Z</div
               
             </div>
           </div>
@@ -885,5 +886,5 @@ This work is published from: Germany.</p>
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-02-21 17:08:41
+Build Date UTC : 2018-03-06 10:15:05
 -->
