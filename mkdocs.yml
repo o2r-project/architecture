@@ -6,6 +6,7 @@ pages:
   - User scenarios: user-scenarios.md
   - Glossary: glossary.md
   - Metadata: metadata.md
+  - Zenodo integration: zenodo.md
 theme: readthedocs
 site_author: o2r project
 site_dir: site
