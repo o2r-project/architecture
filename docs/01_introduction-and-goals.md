@@ -9,12 +9,12 @@ The reproducibility service must provide a reliable way to create and inspect pa
 _Creation_ comprises uploading of a researcher's workspace with code, data, and documentation for building a reproducible runtime environment.
 This runtime environment forms the basis for _inspection_, i.e. discovering, examining details, and manipulating workflows on an online platform.
 
-The packaging of research workflows is based on the concept of the **Executable Research Compendium** (ERC, see [specification](http://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)).
-The reproducibility service is defined by a [web **API** specification](http://o2r.info/o2r-web-api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
+The packaging of research workflows is based on the concept of the **Executable Research Compendium** (ERC, see [specification](https://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)).
+The reproducibility service is defined by a [web **API** specification](https://o2r.info/api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
 Both are published under permissive open licenses, as is this document.
 
 The normative specification is given in the [Markdown](https://en.wikipedia.org/wiki/Markdown) formatted files in the [project repository](https://github.com/o2r-project/architecture/), which form the basis for readable PDF and HTML versions of the architecture.
-A HTML and PDF version of this document are available at [http://o2r.info/architecture/](http://o2r.info/architecture/) and [http://o2r.info/architecture/o2r-architecture.pdf](http://o2r.info/architecture/o2r-architecture.pdf) respectively.
+A HTML and PDF version of this document are available at [https://o2r.info/architecture/](https://o2r.info/architecture/) and [https://o2r.info/architecture/o2r-architecture.pdf](https://o2r.info/architecture/o2r-architecture.pdf) respectively.
 
 ### 1.2 Quality Goals
 

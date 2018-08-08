@@ -16,7 +16,7 @@ TECH.4 | Configurations for ERC runtimes | ERCs include the runtime environment 
 
 &nbsp; | Constraint | Background and/or motivation
 ------ | ---------- | ----------------------------
-ORG.1 | Team and schedule | [http://o2r.info/about](http://o2r.info/about)
+ORG.1 | Team and schedule | [https://o2r.info/about](https://o2r.info/about)
 ORG.2 | Do not interfere with existing well-established peer-review process | This software is _not_ going to change how scientific publishing works, nor should it. While intentioned to support public peer-reviews, open science etc., the software should be agnostic of these aspects.
 ORG.3 | Only open licenses | All created software must be available under an [OSI-approved](https://opensource.org/licenses) license, documentation and specification under a [CC license](https://creativecommons.org/licenses).
 ORG.4 | Version control/management | Code must be versioned using `git` and published on [GitHub](https://github.com/o2r-project).

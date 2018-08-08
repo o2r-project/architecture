@@ -6,7 +6,7 @@
 
 Communication partner | Exchanged data | Technology/protocol
 --------------------- | ------ | -------
-**Reproducibility service**, e.g. [o2r reference implementation](http://o2r.info/results) | publication platforms utilize creation and examination services for ERC; reproducibility service uses different _supporting services_ to retrieve software artifacts, store runtime environment images, execute workflows, and save complete ERC | `HTTP` APIs |
+**Reproducibility service**, e.g. [o2r reference implementation](https://o2r.info/results) | publication platforms utilize creation and examination services for ERC; reproducibility service uses different _supporting services_ to retrieve software artifacts, store runtime environment images, execute workflows, and save complete ERC | `HTTP` APIs |
 **Publishing platform**, e.g. online journal website or review system | users access ERC status and metadata via search results and paper landing pages; review process integrates ERC details and supports manipulation; | system's API using `HTTP` with `JSON` payload
 **Collaboration platform** | provide means to collaboratively work on data, code, or text; such platforms support both public and private (shared) digital workspaces | `HTTP`
 **ID provider** | retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider | `HTTP`

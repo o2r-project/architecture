@@ -1,7 +1,7 @@
 # Metadata workflows
 
 This document describes the internal processes handling metadata for ERC.
-For information on the metadata model for ERC as part of the o2r web API please see [the API specification](http://o2r.info/o2r-web-api/compendium/metadata).
+For information on the metadata model for ERC as part of the o2r web API please see [the API specification](https://o2r.info/api/compendium/metadata).
 
 The remainder of this document describes _who_ handles metadata _when_ and _how_ within the [o2r architecture](/).
 

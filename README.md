@@ -1,8 +1,8 @@
 # Software architecture for Opening Reproducible Research
 
-Project website: [http://o2r.info](http://o2r.info)
+Project website: [https://o2r.info](https://o2r.info)
 
-**Read architecture description online: [http://o2r.info/architecture](http://o2r.info/architecture)**
+**Read architecture description online: [https://o2r.info/architecture](https://o2r.info/architecture)**
 
 ## The project
 

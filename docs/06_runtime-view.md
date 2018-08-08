@@ -22,7 +22,7 @@ Saving triggers a metadata validation in [`muncher`](#531-whitebox-microservices
 If the validation succeeds, the metadata is brokered to several output formats as files within the compendium using [`meta`](#533-whitebox-tools), and then re-loaded to the database for better [searchability](#532-whitebox-database).
 
 Next, the user must start a _job_ to add the ERC configuration and runtime environment to the workspace, which are core elements of an ERC.
-The ERC configuration is a file generated from the user-provided metadata (see [ERC specification](http://o2r.info/erc-spec/spec/#erc-configuration-file)).
+The ERC configuration is a file generated from the user-provided metadata (see [ERC specification](https://o2r.info/erc-spec/spec/#erc-configuration-file)).
 The runtime environment consists of two parts: (a) the runtime manifest, which is created by executing the workflow once in a container based on the tool [`containerit`](#533-whitebox-tools); and (b) the runtime image, which is built from the runtime manifest.
 A user may provide the ERC configuration file and the runtime manifest with the workspace for fine-grained control; the generation steps are skipped then.
 

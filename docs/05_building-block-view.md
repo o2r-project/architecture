@@ -147,7 +147,7 @@ It connects to all microservices via their API and is served using the same webs
 
 ##### 5.2.7.3 Blackbox Microservices
 
-The reproducibility service uses a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functionality defined by the **[web API specification](http://o2r.info/o2r-web-api)** into manageable units.
+The reproducibility service uses a [microservice architecture](https://en.wikipedia.org/wiki/Microservices) to separate functionality defined by the **[web API specification](https://o2r.info/api)** into manageable units.
 
 This allows scalability (selected microservices can be deployed as much as needed) and technology independence for each use case and developer.
 The microservices all access one main database and a shared file storage.
