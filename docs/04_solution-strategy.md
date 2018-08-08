@@ -15,7 +15,8 @@ Core components are developed using server-side JavaScript based on [Node.js](ht
 
 We accept this diversification _increases complexity_ of both development and testing environments and the deployment of said services.
 
-Required documentation is minimal. The typical structure should follow common practices.
+Required documentation is minimal.
+The typical structure should follow common practices of the respective language and tools.
 
 ### Storage and intra-service communication
 
@@ -26,7 +27,7 @@ Storage of ERC is only implemented to make the solution independent during devel
 The unifying component of the architecture is the _database_.
 It is known to all microservices.
 
-Some microservices communicate via an eventing mechanism for real-time updates, such as the search database and the component providing live updates to the user via WebSockets-
+Some microservices communicate via an eventing mechanism for real-time updates, such as the search database and the component providing live updates to the user via WebSockets.
 The eventing is based on the operation log of the database (which is normally used to synchronise database nodes).
 This is a clear _misuse of an internal feature_, but a lot simpler than maintaining a full-blown eventing solution.
 

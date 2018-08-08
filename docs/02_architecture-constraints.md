@@ -10,12 +10,13 @@ If applicable, a motivation for constraints is given. (based on [biking2](https:
 TECH.1 | Only open licenses | All third party software or used data must be available under a suitable code license, i.e. either [OSI-approved](https://opensource.org/licenses) or [ODC license](https://opendatacommons.org/licenses).
 TECH.2 | OS independent development and deployment | Server applications must run in well defined [Docker](https://docker.com) containers to allow installation on any host system and to not limit developers to a specific language or environment.
 TECH.3 | Do not store secure information | The team members experience and available resources do not allow for handling information with security concerns, so no critical data, such as user passwords but also data with privacy concerns, must be stored in the system.
+TECH.4 | Configurations for ERC runtimes | ERCs include the runtime environment in form of a binary archive. The architecture must support executing this runtime environment and must be able to provide different configurations outside it, for example [computer architectures](/glossary#computer-architecture) or operating system [kernels](/glossary#kernel). The minimum requirements for the containerisation solution regarding architecture and kernel apply.
 
 ### 2.2 Organizational constraints
 
 &nbsp; | Constraint | Background and/or motivation
 ------ | ---------- | ----------------------------
-ORG.1 | Team and schedule | [http://o2r.info/about](http://o2r.info/about)
+ORG.1 | Team and schedule | [https://o2r.info/about](https://o2r.info/about)
 ORG.2 | Do not interfere with existing well-established peer-review process | This software is _not_ going to change how scientific publishing works, nor should it. While intentioned to support public peer-reviews, open science etc., the software should be agnostic of these aspects.
 ORG.3 | Only open licenses | All created software must be available under an [OSI-approved](https://opensource.org/licenses) license, documentation and specification under a [CC license](https://creativecommons.org/licenses).
 ORG.4 | Version control/management | Code must be versioned using `git` and published on [GitHub](https://github.com/o2r-project).
