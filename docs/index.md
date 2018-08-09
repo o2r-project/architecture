@@ -1,4 +1,4 @@
-# Software architecture for Opening Reproducible Research
+# Opening Reproducible Research System Architecture
 
 {!docs/01_introduction-and-goals.md!}
 

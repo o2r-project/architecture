@@ -1,5 +1,14 @@
 ## 1. Introduction and Goals
 
+### Preamble
+
+The packaging of research workflows is based on the concept of the **Executable Research Compendium** (ERC, see [specification](https://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)).
+The reproducibility service is defined by a [web **API** specification](https://o2r.info/api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
+Both are published under permissive open licenses, as is this document.
+
+The normative specification is given in the [Markdown](https://en.wikipedia.org/wiki/Markdown) formatted files in the [project repository](https://github.com/o2r-project/architecture/), which form the basis for readable PDF and HTML versions of the architecture.
+A HTML and PDF version of this document are available at [https://o2r.info/architecture/](https://o2r.info/architecture/) and [https://o2r.info/architecture/o2r-architecture.pdf](https://o2r.info/architecture/o2r-architecture.pdf) respectively.
+
 ### 1.1 Requirements Overview
 
 This architecture describes the relationship of a **reproducibility service** with other services from the context of scientific collaboration, publishing, and preservation.
@@ -8,13 +17,6 @@ Together these services can be combined into a new system for transparent and re
 The reproducibility service must provide a reliable way to create and inspect packages of computational research to support reproducible publications.
 _Creation_ comprises uploading of a researcher's workspace with code, data, and documentation for building a reproducible runtime environment.
 This runtime environment forms the basis for _inspection_, i.e. discovering, examining details, and manipulating workflows on an online platform.
-
-The packaging of research workflows is based on the concept of the **Executable Research Compendium** (ERC, see [specification](https://o2r.info/erc-spec) and [article](https://doi.org/10.1045/january2017-nuest)).
-The reproducibility service is defined by a [web **API** specification](https://o2r.info/api/) and demonstrated in a [**reference implementation**](https://github.com/o2r-project/reference-implementation).
-Both are published under permissive open licenses, as is this document.
-
-The normative specification is given in the [Markdown](https://en.wikipedia.org/wiki/Markdown) formatted files in the [project repository](https://github.com/o2r-project/architecture/), which form the basis for readable PDF and HTML versions of the architecture.
-A HTML and PDF version of this document are available at [https://o2r.info/architecture/](https://o2r.info/architecture/) and [https://o2r.info/architecture/o2r-architecture.pdf](https://o2r.info/architecture/o2r-architecture.pdf) respectively.
 
 ### 1.2 Quality Goals
 

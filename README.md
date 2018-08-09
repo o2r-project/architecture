@@ -1,4 +1,4 @@
-# Software architecture for Opening Reproducible Research
+# Opening Reproducible Research System Architecture
 
 Project website: [https://o2r.info](https://o2r.info)
 
