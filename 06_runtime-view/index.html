@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="o2r project">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>06 runtime view - o2r Architecture</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../arc42.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "06 runtime view";
+    var mkdocs_page_input_path = "06_runtime-view.md";
+    var mkdocs_page_url = "/architecture/06_runtime-view/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> o2r Architecture</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Architecture</span>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../user-scenarios/">User scenarios</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../glossary/">Glossary</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../metadata/">Metadata</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../zenodo/">Zenodo integration</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">o2r Architecture</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>06 runtime view</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/o2r-project/architecture/tree/master/docs/06_runtime-view.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="6-runtime-view">6. Runtime view<a class="headerlink" href="#6-runtime-view" title="Permanent link">&para;</a></h2>
+<p>The runtime view describes the interaction between the static building blocks.
+It cannot cover all potential cases and focusses on the following main scenarios.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Scenario</strong></th>
+<th><strong>Purpose and overview</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ERC Creation</td>
+<td>The most important workflow for an author is creating an ERC from his workspace of data, code and documentation. The author can provide these resources as a direct upload, but a more comfortable process is loading the files from a collaboration platform. Three microservices are core to this scenario: <code>loader</code>, <code>muncher</code>, and <code>shipper</code>.</td>
+</tr>
+<tr>
+<td>ERC Inspection</td>
+<td>The most important workflow for a reviewer or reader is executing the analysis encapsulated in an ERC. The execution comprises creation of configuration files (if missing) from metadata, compiling the a display file using the actual analysis, and saving the used runtime environment. The core microservice for this scenario is <code>muncher</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="61-erc-creation">6.1 ERC Creation<a class="headerlink" href="#61-erc-creation" title="Permanent link">&para;</a></h3>
+<p><a href="../img/6.1-runtime-view-creation.png"><img alt="runtime view ERC creation" src="../img/6.1-runtime-view-creation.png" /></a></p>
+<p>First, the user initiates a <em>creation</em> of a new ERC based on a workspace containing at least a viewable file (e.g. an HTML document or a plot) based on the code and instructions provided in a either a script or <a href="/glossary#literate-programming">literate programming document</a>), and any other data.
+The <a href="#531-whitebox-microservices"><code>loader</code></a> runs a series of steps: fetching the files, checking the incoming workspace structure, extracting raw metadata from the workspace, brokering raw metadata to o2r metadata, and saving the compendium to the database.
+The compendium is now a non-public <em>candidate</em>, meaning only the uploading user or admin users can see and edit it.
+All metadata processing is based on the tool <a href="#533-whitebox-tools"><code>meta</code></a>.</p>
+<p>Then the user opens the candidate compendium, reviews and completes the metadata, and saves it.
+Saving triggers a metadata validation in <a href="#531-whitebox-microservices"><code>muncher</code></a>.
+If the validation succeeds, the metadata is brokered to several output formats as files within the compendium using <a href="#533-whitebox-tools"><code>meta</code></a>, and then re-loaded to the database for better <a href="#532-whitebox-database">searchability</a>.</p>
+<p>Next, the user must start a <em>job</em> to add the ERC configuration and runtime environment to the workspace, which are core elements of an ERC.
+The ERC configuration is a file generated from the user-provided metadata (see <a href="https://o2r.info/erc-spec/spec/#erc-configuration-file">ERC specification</a>).
+The runtime environment consists of two parts: (a) the runtime manifest, which is created by executing the workflow once in a container based on the tool <a href="#533-whitebox-tools"><code>containerit</code></a>; and (b) the runtime image, which is built from the runtime manifest.
+A user may provide the ERC configuration file and the runtime manifest with the workspace for fine-grained control; the generation steps are skipped then.</p>
+<p>Finally the user starts a shipment of the compendium to a data repository.
+The <a href="#531-whitebox-microservices"><code>shipper</code></a> manages this two step process.
+The separate "create" and "publish" steps allow checking the shipped files and avoid unintentional shipments, because a published shipment creates an non-erasable public resource.</p>
+<div class="admonition note">
+<p class="admonition-title"><em>In the code</em></p>
+<p>The <code>loader</code> has two core controllers for direct <em>upload</em> and <em>load</em> from a collaboration platform.
+Their core chain of functions are realised as <a href="/glossary#javascript-promises">JavaScript Promises</a>, see the code for <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/loader.js#L48">loader</a> and <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/uploader.js#L44">uploader</a> respectively.
+The respective steps are shared between these two cases where possible, i.e. starting with the step <code>stripSingleBasedir</code>.</p>
+</div>
+<h3 id="62-erc-inspection">6.2 ERC Inspection<a class="headerlink" href="#62-erc-inspection" title="Permanent link">&para;</a></h3>
+<p><a href="../img/6.2-runtime-view-inspection.png"><img alt="runtime view ERC inspection" src="../img/6.2-runtime-view-inspection.png" /></a></p>
+<p>The user initiates an <em>inspection</em> of an existing ERC by providing a reference such as <a href="/glossary#doi">DOI</a> or URL.
+<a href="#531-whitebox-microservices"><code>loader</code></a> retrieves the compendium files, saves them locally and loads the contained metadata.
+Then the user can start a new <em>job</em> for the compendium.
+<a href="#531-whitebox-microservices"><code>muncher</code></a> checks the request, creates a new job in the database and returns the job ID.
+The user's client can use the ID to connect to the live logs provided by <a href="#531-whitebox-microservices"><code>informer</code></a>.
+All following steps by muncher regularly update the database, whose change events <code>informer</code> uses to continuously update client via WebSockets.</p>
+<p>The job starts with creating a copy of the compendium's files for the job.
+A <a href="https://en.wikipedia.org/wiki/Copy-on-write">copy-on-write filesystem</a> is advantageous for this step.
+Then the archived runtime image is loaded from the file in the compendium into a runtime repository.
+This repository may be remote (either public or private, e.g. based on <a href="https://github.com/docker/distribution">Docker Registry</a>, <a href="https://aws.amazon.com/ecr/">ECR</a> or <a href="https://docs.gitlab.com/ce/user/project/container_registry.html">GitLab</a>) or simply the local image storage.
+Then all files except the runtime image archive are packed so they can be send to a container runtime.
+The container runtime can be local (e.g. the Docker daemon), or a container orchestration such as <a href="https://en.wikipedia.org/wiki/Kubernetes">Kubernetes</a>.
+It provides log updates as a stream to <code>muncher</code>, which updates the database, whose changes trigger updates of the user interface via <code>informer</code>.
+When the container is finished, <code>muncher</code> compares the created outputs with the ones provided in the compendium and provides the result to the user.</p>
+<div class="admonition note">
+<p class="admonition-title"><em>In the code</em></p>
+<p>The <code>muncher</code> has two core resources: a <em>compendium</em> represents an ERC, a <em>job</em> represents a <em>"run"</em> of an ERC, i.e. the building, running, and saving of the runtime environment including execution of the contained workflow.
+The core function for this is the <code>Executor</code>, which chains a number of steps using <a href="/glossary#javascript-promises">JavaScript Promises</a>, see the <a href="https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306">code</a>.
+The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><code>erc-checker</code></a>.</p>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

@@ -5,27 +5,28 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Software architecture for Opening Reproducible Research">
+  <meta name="description" content="Opening Reproducible Research System Architecture">
   <meta name="author" content="o2r project">
-  <link rel="shortcut icon" href="./img/favicon.ico">
-  <title>Architecture - Architecture for o2r</title>
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>Architecture - o2r Architecture</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="./css/highlight.css">
-  <link href="./arc42.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="arc42.css" rel="stylesheet">
   
   <script>
     // Current page data
     var mkdocs_page_name = "Architecture";
     var mkdocs_page_input_path = "index.md";
-    var mkdocs_page_url = "/";
+    var mkdocs_page_url = "/architecture/";
   </script>
   
-  <script src="./js/jquery-2.1.1.min.js"></script>
-  <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -36,10 +37,10 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> Architecture for o2r</a>
+        <a href="." class="icon icon-home"> o2r Architecture</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -50,10 +51,10 @@
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href=".">Architecture</a>
+    <span class="caption-text">Architecture</span>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#software-architecture-for-opening-reproducible-research">Software architecture for Opening Reproducible Research</a></li>
+    <li class="toctree-l2"><a href="#opening-reproducible-research-system-architecture">Opening Reproducible Research System Architecture</a></li>
     
         <ul>
         
@@ -98,6 +99,11 @@
     <a class="" href="metadata/">Metadata</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="zenodo/">Zenodo integration</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -108,7 +114,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">Architecture for o2r</a>
+        <a href=".">o2r Architecture</a>
       </nav>
 
       
@@ -133,19 +139,20 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="software-architecture-for-opening-reproducible-research">Software architecture for Opening Reproducible Research<a class="headerlink" href="#software-architecture-for-opening-reproducible-research" title="Permanent link">&para;</a></h1>
+                <h1 id="opening-reproducible-research-system-architecture">Opening Reproducible Research System Architecture<a class="headerlink" href="#opening-reproducible-research-system-architecture" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduction-and-goals">1. Introduction and Goals<a class="headerlink" href="#1-introduction-and-goals" title="Permanent link">&para;</a></h2>
+<h3 id="preamble">Preamble<a class="headerlink" href="#preamble" title="Permanent link">&para;</a></h3>
+<p>The packaging of research workflows is based on the concept of the <strong>Executable Research Compendium</strong> (ERC, see <a href="https://o2r.info/erc-spec">specification</a> and <a href="https://doi.org/10.1045/january2017-nuest">article</a>).
+The reproducibility service is defined by a <a href="https://o2r.info/api/">web <strong>API</strong> specification</a> and demonstrated in a <a href="https://github.com/o2r-project/reference-implementation"><strong>reference implementation</strong></a>.
+Both are published under permissive open licenses, as is this document.</p>
+<p>The normative specification is given in the <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> formatted files in the <a href="https://github.com/o2r-project/architecture/">project repository</a>, which form the basis for readable PDF and HTML versions of the architecture.
+A HTML and PDF version of this document are available at <a href="https://o2r.info/architecture/">https://o2r.info/architecture/</a> and <a href="https://o2r.info/architecture/o2r-architecture.pdf">https://o2r.info/architecture/o2r-architecture.pdf</a> respectively.</p>
 <h3 id="11-requirements-overview">1.1 Requirements Overview<a class="headerlink" href="#11-requirements-overview" title="Permanent link">&para;</a></h3>
 <p>This architecture describes the relationship of a <strong>reproducibility service</strong> with other services from the context of scientific collaboration, publishing, and preservation.
 Together these services can be combined into a new system for transparent and reproducible scholarly publications.</p>
 <p>The reproducibility service must provide a reliable way to create and inspect packages of computational research to support reproducible publications.
 <em>Creation</em> comprises uploading of a researcher's workspace with code, data, and documentation for building a reproducible runtime environment.
 This runtime environment forms the basis for <em>inspection</em>, i.e. discovering, examining details, and manipulating workflows on an online platform.</p>
-<p>The packaging of research workflows is based on the concept of the <strong>Executable Research Compendium</strong> (ERC, see <a href="http://o2r.info/erc-spec">specification</a> and <a href="https://doi.org/10.1045/january2017-nuest">article</a>).
-The reproducibility service is defined by a <a href="http://o2r.info/o2r-web-api/">web <strong>API</strong> specification</a> and demonstrated in a <a href="https://github.com/o2r-project/reference-implementation"><strong>reference implementation</strong></a>.
-Both are published under permissive open licenses, as is this document.</p>
-<p>The normative specification is given in the <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> formatted files in the <a href="https://github.com/o2r-project/architecture/">project repository</a>, which form the basis for readable PDF and HTML versions of the architecture.
-A HTML and PDF version of this document are available at <a href="http://o2r.info/architecture/">http://o2r.info/architecture/</a> and <a href="http://o2r.info/architecture/o2r-architecture.pdf">http://o2r.info/architecture/o2r-architecture.pdf</a> respectively.</p>
 <h3 id="12-quality-goals">1.2 Quality Goals<a class="headerlink" href="#12-quality-goals" title="Permanent link">&para;</a></h3>
 <dl>
 <dt>Transparency</dt>
@@ -244,7 +251,7 @@ If applicable, a motivation for constraints is given. (based on <a href="https:/
 <tr>
 <td>TECH.4</td>
 <td>Configurations for ERC runtimes</td>
-<td>ERCs include the runtime environment in form of a binary archive. The architecture must support executing this runtime environment and must be able to provide different configurations outside it, for example <a href="./glossary#computer-architecture">computer architectures</a> or operating system <a href="./glossary#kernel">kernels</a>. The minimum requirements for the containerisation solution regarding architecture and kernel apply.</td>
+<td>ERCs include the runtime environment in form of a binary archive. The architecture must support executing this runtime environment and must be able to provide different configurations outside it, for example <a href="/glossary#computer-architecture">computer architectures</a> or operating system <a href="/glossary#kernel">kernels</a>. The minimum requirements for the containerisation solution regarding architecture and kernel apply.</td>
 </tr>
 </tbody>
 </table>
@@ -261,7 +268,7 @@ If applicable, a motivation for constraints is given. (based on <a href="https:/
 <tr>
 <td>ORG.1</td>
 <td>Team and schedule</td>
-<td><a href="http://o2r.info/about">http://o2r.info/about</a></td>
+<td><a href="https://o2r.info/about">https://o2r.info/about</a></td>
 </tr>
 <tr>
 <td>ORG.2</td>
@@ -324,7 +331,7 @@ If applicable, a motivation for constraints is given. (based on <a href="https:/
 </table>
 <h2 id="3-system-scope-and-context">3. System scope and context<a class="headerlink" href="#3-system-scope-and-context" title="Permanent link">&para;</a></h2>
 <h3 id="31-business-context">3.1 Business context<a class="headerlink" href="#31-business-context" title="Permanent link">&para;</a></h3>
-<p><a href="./img/3.1-business-context.png"><img alt="business context" src="./img/3.1-business-context.png" /></a></p>
+<p><a href="img/3.1-business-context.png"><img alt="business context" src="img/3.1-business-context.png" /></a></p>
 <table>
 <thead>
 <tr>
@@ -335,7 +342,7 @@ If applicable, a motivation for constraints is given. (based on <a href="https:/
 </thead>
 <tbody>
 <tr>
-<td><strong>Reproducibility service</strong>, e.g. <a href="http://o2r.info/results">o2r reference implementation</a></td>
+<td><strong>Reproducibility service</strong>, e.g. <a href="https://o2r.info/results">o2r reference implementation</a></td>
 <td>publication platforms utilize creation and examination services for ERC; reproducibility service uses different <em>supporting services</em> to retrieve software artifacts, store runtime environment images, execute workflows, and save complete ERC</td>
 <td><code>HTTP</code> APIs</td>
 </tr>
@@ -433,7 +440,7 @@ Users examine publications, e.g. browsing, searching, reading, downloading, or r
 However, services such as <a href="http://www.pidconsortium.eu/">ePIC</a> could allow to retrieve persistent IDs.</p>
 <h4 id="513-blackbox-execution-infrastructure">5.1.3 Blackbox Execution Infrastructure<a class="headerlink" href="#513-blackbox-execution-infrastructure" title="Permanent link">&para;</a></h4>
 <p>The execution infrastructure provides CPU time and temporary result storage space for execution of ERC, both "as is" and with manipulation, i.e. changed parameters.
-It also provides different <a href="./glossary#architecture">architectures</a> and <a href="./glossary#kernel">operating system kernel</a> configurations which are outside of the scope of ERC's runtime environments based on containers.</p>
+It also provides different <a href="/glossary#architecture">architectures</a> and <a href="/glossary#kernel">operating system kernel</a> configurations which are outside of the scope of ERC's runtime environments based on containers.</p>
 <h4 id="514-blackbox-data-repositories">5.1.4 Blackbox Data Repositories<a class="headerlink" href="#514-blackbox-data-repositories" title="Permanent link">&para;</a></h4>
 <p>Data repositories are all services storing data but not software.
 More specifically, they may store software "as data", but not with software-specific features such as code versioning or installation binaries for different computer architectures.
@@ -468,7 +475,7 @@ Or it could use a combination of these.</p>
 <p>Not all of these options provide the flexibility to provide configurations outside of containers, for example specific operating system kernels.
 An implementing system must manage these independently, for example by mapping ERC requirements like an operating system, to a part of the execution infrastructure that supports it.</p>
 <h4 id="524-whitebox-data-repositories">5.2.4 Whitebox Data Repositories<a class="headerlink" href="#524-whitebox-data-repositories" title="Permanent link">&para;</a></h4>
-<p><a href="./img/5.2-whitebox-data-repos.png"><img alt="whitebox data repositories" src="./img/5.2-whitebox-data-repos.png" /></a></p>
+<p><a href="img/5.2-whitebox-data-repos.png"><img alt="whitebox data repositories" src="img/5.2-whitebox-data-repos.png" /></a></p>
 <p>The reproducibility service <em>does not persistently store anything</em>.
 It only keeps copies of files during creation and inspection.
 So where are ERCs saved and where is their data coming from?</p>
@@ -498,14 +505,14 @@ Services comprise discovery but also derivation of citation data and creating ne
 Some of the registries offer a public, well-defined API to retrieve structured metadata and to create new records.</p>
 <p>Protocol: <code>HTTP</code> APIs</p>
 <h4 id="526-whitebox-software-repositories">5.2.6 Whitebox Software Repositories<a class="headerlink" href="#526-whitebox-software-repositories" title="Permanent link">&para;</a></h4>
-<p><a href="./img/5.2-whitebox-software-repos.png"><img alt="whitebox software repositories" src="./img/5.2-whitebox-software-repos.png" /></a></p>
+<p><a href="img/5.2-whitebox-software-repos.png"><img alt="whitebox software repositories" src="img/5.2-whitebox-software-repos.png" /></a></p>
 <h5 id="5261-blackbox-package-repositories">5.2.6.1 Blackbox Package repositories<a class="headerlink" href="#5261-blackbox-package-repositories" title="Permanent link">&para;</a></h5>
 <p>Package repositories are used during ERC creation to download and install software artifacts for specific operating systems, e.g. <a href="https://wiki.debian.org/Apt">Debian APT</a> or <a href="https://launchpad.net/ubuntu">Ubuntu Launchpad</a>, for specific programming languages or environments, e.g. <a href="https://cran.r-project.org/">CRAN</a>, or from source, e.g. <a href="https://github.com/">GitHub</a>.</p>
 <h5 id="5262-blackbox-container-registries">5.2.6.2 Blackbox Container registries<a class="headerlink" href="#5262-blackbox-container-registries" title="Permanent link">&para;</a></h5>
 <p>Container registries such as <a href="https://hub.docker.com/">Docker Hub</a>, <a href="https://quay.io/">Quay</a>, self-hosted <a href="https://github.com/docker/distribution">Docker Registry 2.0</a> or <a href="https://aws.amazon.com/de/ecr/">Amazon ERC</a>, store executable images of runtime environments.
 They can be used to distribute the runtime environments across the execution infrastructure and provide an intermediate ephemeral storage for the reproducibility service.</p>
 <h4 id="527-whitebox-reproducibility-service">5.2.7 Whitebox Reproducibility Service<a class="headerlink" href="#527-whitebox-reproducibility-service" title="Permanent link">&para;</a></h4>
-<p><a href="./img/5.2-whitebox-repro-service.png"><img alt="whitebox reproducibility service" src="./img/5.2-whitebox-repro-service.png" /></a></p>
+<p><a href="img/5.2-whitebox-repro-service.png"><img alt="whitebox reproducibility service" src="img/5.2-whitebox-repro-service.png" /></a></p>
 <h5 id="5271-blackbox-webserver">5.2.7.1 Blackbox Webserver<a class="headerlink" href="#5271-blackbox-webserver" title="Permanent link">&para;</a></h5>
 <p>A webserver handles all incoming calls to the API (<code>/api/v1/</code>) via <code>HTTPS</code> (<code>HTTP</code> is redirected) and distributes them to the respective microservice.
 A working <a href="https://nginx.org">nginx</a> configuration is available <a href="https://github.com/o2r-project/o2r-platform/blob/master/dev/nginx.conf">in the test setup</a>.</p>
@@ -513,7 +520,7 @@ A working <a href="https://nginx.org">nginx</a> configuration is available <a hr
 <p>The UI is a web application based on <a href="https://angularjs.org/">Angular JS</a>, see <a href="https://github.com/o2r-project/o2r-platform">o2r-platform</a>.
 It connects to all microservices via their API and is served using the same webserver as the API.</p>
 <h5 id="5273-blackbox-microservices">5.2.7.3 Blackbox Microservices<a class="headerlink" href="#5273-blackbox-microservices" title="Permanent link">&para;</a></h5>
-<p>The reproducibility service uses a <a href="https://en.wikipedia.org/wiki/Microservices">microservice architecture</a> to separate functionality defined by the <strong><a href="http://o2r.info/o2r-web-api">web API specification</a></strong> into manageable units.</p>
+<p>The reproducibility service uses a <a href="https://en.wikipedia.org/wiki/Microservices">microservice architecture</a> to separate functionality defined by the <strong><a href="https://o2r.info/api">web API specification</a></strong> into manageable units.</p>
 <p>This allows scalability (selected microservices can be deployed as much as needed) and technology independence for each use case and developer.
 The microservices all access one main database and a shared file storage.</p>
 <h5 id="5274-blackbox-tools">5.2.7.4 Blackbox Tools<a class="headerlink" href="#5274-blackbox-tools" title="Permanent link">&para;</a></h5>
@@ -690,7 +697,7 @@ The ids are mapped to support update and delete operations.</p>
 <tr>
 <td><a href="https://github.com/o2r-project/o2r-meta">meta</a></td>
 <td>Python</td>
-<td>scripts for extraction, translation and validation of metadata; for details see <a href="./metadata">metadata documentation</a></td>
+<td>scripts for extraction, translation and validation of metadata; for details see <a href="/metadata">metadata documentation</a></td>
 </tr>
 <tr>
 <td><a href="https://github.com/o2r-project/containerit">containerit</a></td>
@@ -706,7 +713,7 @@ The advantages are a controlled environment for the tool usage, independent deve
 <p>Meta provides a CLI for each step of the metadata processing required in the reproducibility service as shown by the following diagram.
 After each step the created metadata is saved as a file per model to a directory in the compendium.
 A detailed view of the meta tool usage in the creation process is provided in the runtime view <a href="#61-erc-creation">ERC Creation</a>.</p>
-<p><a href="./img/5.2-whitebox-meta-tool.png"><img alt="whitebox meta tool" src="./img/5.2-whitebox-meta-tool.png" /></a></p>
+<p><a href="img/5.2-whitebox-meta-tool.png"><img alt="whitebox meta tool" src="img/5.2-whitebox-meta-tool.png" /></a></p>
 <h4 id="containerit">Containerit<a class="headerlink" href="#containerit" title="Permanent link">&para;</a></h4>
 <p>The containerit tool extracts required dependencies from ERC main documents and uses the information and external configuration to create a Dockerfile, which executes the full computational workflow when the container is started.
 Its main strategy is to analyse the session at the end of executing the full workflow.</p>
@@ -734,8 +741,8 @@ It cannot cover all potential cases and focusses on the following main scenarios
 </tbody>
 </table>
 <h3 id="61-erc-creation">6.1 ERC Creation<a class="headerlink" href="#61-erc-creation" title="Permanent link">&para;</a></h3>
-<p><a href="./img/6.1-runtime-view-creation.png"><img alt="runtime view ERC creation" src="./img/6.1-runtime-view-creation.png" /></a></p>
-<p>First, the user initiates a <em>creation</em> of a new ERC based on a workspace containing at least a viewable file (e.g. an HTML document or a plot) based on the code and instructions provided in a either a script or <a href="./glossary#literate-programming">literate programming document</a>), and any other data.
+<p><a href="img/6.1-runtime-view-creation.png"><img alt="runtime view ERC creation" src="img/6.1-runtime-view-creation.png" /></a></p>
+<p>First, the user initiates a <em>creation</em> of a new ERC based on a workspace containing at least a viewable file (e.g. an HTML document or a plot) based on the code and instructions provided in a either a script or <a href="/glossary#literate-programming">literate programming document</a>), and any other data.
 The <a href="#531-whitebox-microservices"><code>loader</code></a> runs a series of steps: fetching the files, checking the incoming workspace structure, extracting raw metadata from the workspace, brokering raw metadata to o2r metadata, and saving the compendium to the database.
 The compendium is now a non-public <em>candidate</em>, meaning only the uploading user or admin users can see and edit it.
 All metadata processing is based on the tool <a href="#533-whitebox-tools"><code>meta</code></a>.</p>
@@ -743,7 +750,7 @@ All metadata processing is based on the tool <a href="#533-whitebox-tools"><code
 Saving triggers a metadata validation in <a href="#531-whitebox-microservices"><code>muncher</code></a>.
 If the validation succeeds, the metadata is brokered to several output formats as files within the compendium using <a href="#533-whitebox-tools"><code>meta</code></a>, and then re-loaded to the database for better <a href="#532-whitebox-database">searchability</a>.</p>
 <p>Next, the user must start a <em>job</em> to add the ERC configuration and runtime environment to the workspace, which are core elements of an ERC.
-The ERC configuration is a file generated from the user-provided metadata (see <a href="http://o2r.info/erc-spec/spec/#erc-configuration-file">ERC specification</a>).
+The ERC configuration is a file generated from the user-provided metadata (see <a href="https://o2r.info/erc-spec/spec/#erc-configuration-file">ERC specification</a>).
 The runtime environment consists of two parts: (a) the runtime manifest, which is created by executing the workflow once in a container based on the tool <a href="#533-whitebox-tools"><code>containerit</code></a>; and (b) the runtime image, which is built from the runtime manifest.
 A user may provide the ERC configuration file and the runtime manifest with the workspace for fine-grained control; the generation steps are skipped then.</p>
 <p>Finally the user starts a shipment of the compendium to a data repository.
@@ -752,12 +759,12 @@ The separate "create" and "publish" steps allow checking the shipped files and a
 <div class="admonition note">
 <p class="admonition-title"><em>In the code</em></p>
 <p>The <code>loader</code> has two core controllers for direct <em>upload</em> and <em>load</em> from a collaboration platform.
-Their core chain of functions are realised as <a href="./glossary#javascript-promises">JavaScript Promises</a>, see the code for <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/loader.js#L48">loader</a> and <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/uploader.js#L44">uploader</a> respectively.
+Their core chain of functions are realised as <a href="/glossary#javascript-promises">JavaScript Promises</a>, see the code for <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/loader.js#L48">loader</a> and <a href="https://github.com/o2r-project/o2r-loader/blob/master/lib/uploader.js#L44">uploader</a> respectively.
 The respective steps are shared between these two cases where possible, i.e. starting with the step <code>stripSingleBasedir</code>.</p>
 </div>
 <h3 id="62-erc-inspection">6.2 ERC Inspection<a class="headerlink" href="#62-erc-inspection" title="Permanent link">&para;</a></h3>
-<p><a href="./img/6.2-runtime-view-inspection.png"><img alt="runtime view ERC inspection" src="./img/6.2-runtime-view-inspection.png" /></a></p>
-<p>The user initiates an <em>inspection</em> of an existing ERC by providing a reference such as <a href="./glossary#doi">DOI</a> or URL.
+<p><a href="img/6.2-runtime-view-inspection.png"><img alt="runtime view ERC inspection" src="img/6.2-runtime-view-inspection.png" /></a></p>
+<p>The user initiates an <em>inspection</em> of an existing ERC by providing a reference such as <a href="/glossary#doi">DOI</a> or URL.
 <a href="#531-whitebox-microservices"><code>loader</code></a> retrieves the compendium files, saves them locally and loads the contained metadata.
 Then the user can start a new <em>job</em> for the compendium.
 <a href="#531-whitebox-microservices"><code>muncher</code></a> checks the request, creates a new job in the database and returns the job ID.
@@ -774,12 +781,12 @@ When the container is finished, <code>muncher</code> compares the created output
 <div class="admonition note">
 <p class="admonition-title"><em>In the code</em></p>
 <p>The <code>muncher</code> has two core resources: a <em>compendium</em> represents an ERC, a <em>job</em> represents a <em>"run"</em> of an ERC, i.e. the building, running, and saving of the runtime environment including execution of the contained workflow.
-The core function for this is the <code>Executor</code>, which chains a number of steps using <a href="./glossary#javascript-promises">JavaScript Promises</a>, see the <a href="https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306">code</a>.
+The core function for this is the <code>Executor</code>, which chains a number of steps using <a href="/glossary#javascript-promises">JavaScript Promises</a>, see the <a href="https://github.com/o2r-project/o2r-muncher/blob/master/lib/executor.js#L1306">code</a>.
 The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><code>erc-checker</code></a>.</p>
 </div>
 <h2 id="7-deployment-view">7. Deployment View<a class="headerlink" href="#7-deployment-view" title="Permanent link">&para;</a></h2>
 <h3 id="71-test-server-httpso2runi-muensterde">7.1 Test server <a href="https://o2r.uni-muenster.de">https://o2r.uni-muenster.de</a><a class="headerlink" href="#71-test-server-httpso2runi-muensterde" title="Permanent link">&para;</a></h3>
-<p><a href="./img/7.1-deployment-view-testserver.png"><img alt="deployment view test server" src="./img/7.1-deployment-view-testserver.png" /></a></p>
+<p><a href="img/7.1-deployment-view-testserver.png"><img alt="deployment view test server" src="img/7.1-deployment-view-testserver.png" /></a></p>
 <dl>
 <dt>Motivation</dt>
 <dd>
@@ -795,7 +802,7 @@ The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><co
 </dd>
 </dl>
 <h3 id="72-production-sketch">7.2 Production (sketch)<a class="headerlink" href="#72-production-sketch" title="Permanent link">&para;</a></h3>
-<p><a href="./img/7.2-deployment-view-production-sketch.png"><img alt="deployment view test server" src="./img/7.2-deployment-view-production-sketch.png" /></a></p>
+<p><a href="img/7.2-deployment-view-production-sketch.png"><img alt="deployment view test server" src="img/7.2-deployment-view-production-sketch.png" /></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This deployment view is a sketch for a potential productive deployment and intends to point out features of the chosen architecture and expected challenges or solutions.
@@ -819,8 +826,8 @@ The check uses the tool <a href="https://github.com/o2r-project/erc-checker"><co
 <h2 id="credits">Credits<a class="headerlink" href="#credits" title="Permanent link">&para;</a></h2>
 <p>This specification and guides are developed by the members of the project Opening Reproducible Research (<a href="https://www.uni-muenster.de/forschungaz/project/9520">Offene Reproduzierbare Forschung</a>) funded by the German Research Foundation (Deutsche Forschungsgemeinschaft (DFG) - Projektnummer <a href="http://gepris.dfg.de/gepris/projekt/274927273">274927273</a>) under grant numbers PE 1632/10-1, KR 3930/3-1, and TR 864/6-1).</p>
 <blockquote>
-<p><a href="http://o2r.info"><img alt="Opening Reproducible Research" src="./img/o2r-logo.png" /></a></p>
-<p><em>Opening Reproducible Research (o2r, <a href="http://o2r.info/about">http://o2r.info/about</a>) is a DFG-funded research project by Institute for Geoinformatics (<a href="http://www.uni-muenster.de/Geoinformatics/">ifgi</a>) and University and Regional Library (<a href="https://www.ulb.uni-muenster.de/">ULB</a>), University of Münster, Germany. Building on recent advances in mainstream IT, o2r envisions a new architecture for storing, executing and interacting with the original analysis environment alongside the corresponding research data and manuscript. This architecture evolves around so called Executable Research Compendia (ERC) as the container for both research, review, and archival.</em></p>
+<p><a href="https://o2r.info"><img alt="Opening Reproducible Research" src="img/o2r-logo.png" /></a></p>
+<p><em>Opening Reproducible Research (o2r, <a href="https://o2r.info/about">https://o2r.info/about</a>) is a DFG-funded research project by Institute for Geoinformatics (<a href="http://www.uni-muenster.de/Geoinformatics/">ifgi</a>) and University and Regional Library (<a href="https://www.ulb.uni-muenster.de/">ULB</a>), University of Münster, Germany. Building on recent advances in mainstream IT, o2r envisions a new architecture for storing, executing and interacting with the original analysis environment alongside the corresponding research data and manuscript. This architecture evolves around so called Executable Research Compendia (ERC) as the container for both research, review, and archival.</em></p>
 </blockquote>
 <hr />
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
@@ -834,7 +841,7 @@ This work is published from: Germany.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
 <p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build 90d5a33 @ 2018-03-06T10:15:05Z</div
+<div class="buildinfo">Build eaf33f2 @ 2018-08-09T12:06:47Z</div
               
             </div>
           </div>
@@ -877,14 +884,13 @@ This work is published from: Germany.</p>
     </span>
 </div>
     <script>var base_url = '.';</script>
-    <script src="./js/theme.js"></script>
-      <script src="./search/require.js"></script>
-      <script src="./search/search.js"></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 0.17.2
-Build Date UTC : 2018-03-06 10:15:05
+MkDocs version : 1.0
+Build Date UTC : 2018-08-09 12:06:48
 -->

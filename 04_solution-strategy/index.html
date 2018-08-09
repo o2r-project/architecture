@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="o2r project">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>04 solution strategy - o2r Architecture</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../arc42.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "04 solution strategy";
+    var mkdocs_page_input_path = "04_solution-strategy.md";
+    var mkdocs_page_url = "/architecture/04_solution-strategy/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> o2r Architecture</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Architecture</span>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../user-scenarios/">User scenarios</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../glossary/">Glossary</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../metadata/">Metadata</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../zenodo/">Zenodo integration</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">o2r Architecture</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>04 solution strategy</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/o2r-project/architecture/tree/master/docs/04_solution-strategy.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="4-solution-strategy">4. Solution strategy<a class="headerlink" href="#4-solution-strategy" title="Permanent link">&para;</a></h2>
+<p>This section provides a short overview of architecture decisions and for some the reasoning behind them.</p>
+<h3 id="web-api">Web API<a class="headerlink" href="#web-api" title="Permanent link">&para;</a></h3>
+<p>The developed solution is set in an existing system of services, and first and foremost must integrate well with these systems, focussing on the specific missing features of building and running ERCs.
+These features are provided via a <em>well-defined RESTful API</em>.</p>
+<h3 id="microservices">Microservices<a class="headerlink" href="#microservices" title="Permanent link">&para;</a></h3>
+<p>To allow a dynamic development and support the large variety of skills, all server-side features are developed in independent <em><a href="https://en.wikipedia.org/wiki/Microservices">microservices</a></em>.
+These microservices handle only specific functional parts of the API and allow independent development and deployment cycles.
+Core components are developed using server-side JavaScript based on <a href="https://nodejs.org/">Node.js</a> with <a href="https://expressjs.com/">Express</a> while other components are implemented in Python.</p>
+<p>We accept this diversification <em>increases complexity</em> of both development and testing environments and the deployment of said services.</p>
+<p>Required documentation is minimal.
+The typical structure should follow common practices of the respective language and tools.</p>
+<h3 id="storage-and-intra-service-communication">Storage and intra-service communication<a class="headerlink" href="#storage-and-intra-service-communication" title="Permanent link">&para;</a></h3>
+<p>In accordance with the system scope, there is no reliable storage solution implemented.
+The microservices simply share a common pointer to a local file system path.
+Storage of ERC is only implemented to make the solution independent during development and for the needs of core functionality (temporal storage), but it is not a feature the solution will eventually provide.</p>
+<p>The unifying component of the architecture is the <em>database</em>.
+It is known to all microservices.</p>
+<p>Some microservices communicate via an eventing mechanism for real-time updates, such as the search database and the component providing live updates to the user via WebSockets.
+The eventing is based on the operation log of the database (which is normally used to synchronise database nodes).
+This is a clear <em>misuse of an internal feature</em>, but a lot simpler than maintaining a full-blown eventing solution.</p>
+<h3 id="demonstration-user-data-authentication">Demonstration, user data &amp; authentication<a class="headerlink" href="#demonstration-user-data-authentication" title="Permanent link">&para;</a></h3>
+<p>To be able to demonstrate the system, a <em>browser-based client application</em> is developed.
+It uses the RESTful API to control the system.
+<em>OAuth 2.0</em> is used for authentication and minimal information, which is already public, is stored for each user.
+This information is shared between all services which require authentication via the database.</p>
+<p><em>The client application manages the control flow</em> of all user interactions.</p>
+<h3 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h3>
+<p>If standalone tools are developed, they provide a command-line interface (CLI).
+The CLI allows integration into microservices when needed and to package tools including their dependencies as containers and distributing them using a container registry.
+These <em>2nd level containers</em> are started by the microservices and can run either next to the microservices or in an independent container cluster, providing scalability.
+It must only be ensured they are correctly configured in each microservice.
+The only required documentation is the installation into a container and usage of the CLI.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

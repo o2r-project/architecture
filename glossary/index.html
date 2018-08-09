@@ -8,24 +8,25 @@
   
   <meta name="author" content="o2r project">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Glossary - Architecture for o2r</title>
+  <title>Glossary - o2r Architecture</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../css/highlight.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   <link href="../arc42.css" rel="stylesheet">
   
   <script>
     // Current page data
     var mkdocs_page_name = "Glossary";
     var mkdocs_page_input_path = "glossary.md";
-    var mkdocs_page_url = "/glossary/";
+    var mkdocs_page_url = "/architecture/glossary/";
   </script>
   
-  <script src="../js/jquery-2.1.1.min.js"></script>
-  <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -36,10 +37,10 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> Architecture for o2r</a>
+        <a href=".." class="icon icon-home"> o2r Architecture</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -50,7 +51,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="..">Architecture</a>
+    <span class="caption-text">Architecture</span>
 	    </li>
           
             <li class="toctree-l1">
@@ -98,6 +99,11 @@
     <a class="" href="../metadata/">Metadata</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../zenodo/">Zenodo integration</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -108,7 +114,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">Architecture for o2r</a>
+        <a href="..">o2r Architecture</a>
       </nav>
 
       
@@ -168,7 +174,7 @@ Image: golang
 via <a href="https://en.wikipedia.org/wiki/Digital_object_identifier">Wikipedia</a>, see also <a href="https://doi.org">https://doi.org</a></p>
 </blockquote>
 <h2 id="erc">ERC<a class="headerlink" href="#erc" title="Permanent link">&para;</a></h2>
-<p>Executable Research Compendium, see this <a href="https://doi.org/10.1045/january2017-nuest">scientific article</a> for concepts and the <a href="http://o2r.info/erc-spec">specification</a> for technical documentation.</p>
+<p>Executable Research Compendium, see this <a href="https://doi.org/10.1045/january2017-nuest">scientific article</a> for concepts and the <a href="https://o2r.info/erc-spec">specification</a> for technical documentation.</p>
 <h2 id="executable-research-compendium">Executable Research Compendium<a class="headerlink" href="#executable-research-compendium" title="Permanent link">&para;</a></h2>
 <p>See <a href="#erc">ERC</a>.</p>
 <h2 id="javascript-promises">JavaScript Promises<a class="headerlink" href="#javascript-promises" title="Permanent link">&para;</a></h2>
@@ -233,9 +239,8 @@ via <a href="https://en.wikipedia.org/wiki/Literate_programming">Wikipedia</a></
     </span>
 </div>
     <script>var base_url = '..';</script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/require.js"></script>
-      <script src="../search/search.js"></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
 
 </body>
 </html>

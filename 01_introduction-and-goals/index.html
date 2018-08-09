@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="o2r project">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>01 introduction and goals - o2r Architecture</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../arc42.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "01 introduction and goals";
+    var mkdocs_page_input_path = "01_introduction-and-goals.md";
+    var mkdocs_page_url = "/architecture/01_introduction-and-goals/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> o2r Architecture</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Architecture</span>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../user-scenarios/">User scenarios</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../glossary/">Glossary</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../metadata/">Metadata</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../zenodo/">Zenodo integration</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">o2r Architecture</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>01 introduction and goals</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/o2r-project/architecture/tree/master/docs/01_introduction-and-goals.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="1-introduction-and-goals">1. Introduction and Goals<a class="headerlink" href="#1-introduction-and-goals" title="Permanent link">&para;</a></h2>
+<h3 id="preamble">Preamble<a class="headerlink" href="#preamble" title="Permanent link">&para;</a></h3>
+<p>The packaging of research workflows is based on the concept of the <strong>Executable Research Compendium</strong> (ERC, see <a href="https://o2r.info/erc-spec">specification</a> and <a href="https://doi.org/10.1045/january2017-nuest">article</a>).
+The reproducibility service is defined by a <a href="https://o2r.info/api/">web <strong>API</strong> specification</a> and demonstrated in a <a href="https://github.com/o2r-project/reference-implementation"><strong>reference implementation</strong></a>.
+Both are published under permissive open licenses, as is this document.</p>
+<p>The normative specification is given in the <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> formatted files in the <a href="https://github.com/o2r-project/architecture/">project repository</a>, which form the basis for readable PDF and HTML versions of the architecture.
+A HTML and PDF version of this document are available at <a href="https://o2r.info/architecture/">https://o2r.info/architecture/</a> and <a href="https://o2r.info/architecture/o2r-architecture.pdf">https://o2r.info/architecture/o2r-architecture.pdf</a> respectively.</p>
+<h3 id="11-requirements-overview">1.1 Requirements Overview<a class="headerlink" href="#11-requirements-overview" title="Permanent link">&para;</a></h3>
+<p>This architecture describes the relationship of a <strong>reproducibility service</strong> with other services from the context of scientific collaboration, publishing, and preservation.
+Together these services can be combined into a new system for transparent and reproducible scholarly publications.</p>
+<p>The reproducibility service must provide a reliable way to create and inspect packages of computational research to support reproducible publications.
+<em>Creation</em> comprises uploading of a researcher's workspace with code, data, and documentation for building a reproducible runtime environment.
+This runtime environment forms the basis for <em>inspection</em>, i.e. discovering, examining details, and manipulating workflows on an online platform.</p>
+<h3 id="12-quality-goals">1.2 Quality Goals<a class="headerlink" href="#12-quality-goals" title="Permanent link">&para;</a></h3>
+<dl>
+<dt>Transparency</dt>
+<dd>The system must be transparent to allow a scrutiny demanded by a rigorous scientific process.
+All software components must be Free and Open Source Software (<a href="https://en.wikipedia.org/wiki/Free_and_open-source_software">FOSS</a>).
+All text and specification must be available under a permissive <a href="https://en.wikipedia.org/wiki/Public_copyright_license">public copyright license</a>.</dd>
+<dt>Separation of concern</dt>
+<dd>The system must integrate with existing services and focus on the core functionality: creating interactive reproducible runtime environments for scientific workflows.
+It must not replicate existing functionality such as storage or persistent identification.</dd>
+<dt>Flexibility &amp; modularity</dt>
+<dd>In regard to the research project setting, the system components must be well separated, so functions can be developed independently, e.g. using different programming languages.
+This allows different developers to contribute efficiently.
+It must be possible to provide various computational configurations required by specific ERC which are outside of the included runtime.</dd>
+</dl>
+<h3 id="13-stakeholders">1.3 Stakeholders<a class="headerlink" href="#13-stakeholders" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Role/Name</th>
+<th>Goal/point of contact</th>
+<th>Required interaction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author (scientist)</td>
+<td>publish ERC as part of a scientific publication process</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Reviewer (scientist)</td>
+<td>examine ERC during a review process</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Co-author (scientist)</td>
+<td>contribute to ERC during research (e.g. cloud based)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Reader (scientist)</td>
+<td>view and interact with ERC on a journal website</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Publisher</td>
+<td>increase quality of publications in journals with ERC</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Curator/preservationist</td>
+<td>ensure research is complete and archivable using ERC</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Operator</td>
+<td>provide infrastructure to researchers at my university to collaborate and conduct high-quality research using ERC</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Developer</td>
+<td>use and extend the tools around ERC</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Some of the stakeholders are accompanied by <a href="../user-scenarios/">user scenarios</a> in prose.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

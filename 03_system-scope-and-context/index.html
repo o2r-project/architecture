@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="o2r project">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>03 system scope and context - o2r Architecture</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../arc42.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "03 system scope and context";
+    var mkdocs_page_input_path = "03_system-scope-and-context.md";
+    var mkdocs_page_url = "/architecture/03_system-scope-and-context/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> o2r Architecture</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Architecture</span>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../user-scenarios/">User scenarios</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../glossary/">Glossary</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../metadata/">Metadata</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../zenodo/">Zenodo integration</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">o2r Architecture</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>03 system scope and context</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/o2r-project/architecture/tree/master/docs/03_system-scope-and-context.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="3-system-scope-and-context">3. System scope and context<a class="headerlink" href="#3-system-scope-and-context" title="Permanent link">&para;</a></h2>
+<h3 id="31-business-context">3.1 Business context<a class="headerlink" href="#31-business-context" title="Permanent link">&para;</a></h3>
+<p><a href="../img/3.1-business-context.png"><img alt="business context" src="../img/3.1-business-context.png" /></a></p>
+<table>
+<thead>
+<tr>
+<th>Communication partner</th>
+<th>Exchanged data</th>
+<th>Technology/protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reproducibility service</strong>, e.g. <a href="https://o2r.info/results">o2r reference implementation</a></td>
+<td>publication platforms utilize creation and examination services for ERC; reproducibility service uses different <em>supporting services</em> to retrieve software artifacts, store runtime environment images, execute workflows, and save complete ERC</td>
+<td><code>HTTP</code> APIs</td>
+</tr>
+<tr>
+<td><strong>Publishing platform</strong>, e.g. online journal website or review system</td>
+<td>users access ERC status and metadata via search results and paper landing pages; review process integrates ERC details and supports manipulation;</td>
+<td>system's API using <code>HTTP</code> with <code>JSON</code> payload</td>
+</tr>
+<tr>
+<td><strong>Collaboration platform</strong></td>
+<td>provide means to collaboratively work on data, code, or text; such platforms support both public and private (shared) digital workspaces</td>
+<td><code>HTTP</code></td>
+</tr>
+<tr>
+<td><strong>ID provider</strong></td>
+<td>retrieve unique user IDs, user metadata, and authentication tokens; user must log in with the provider</td>
+<td><code>HTTP</code></td>
+</tr>
+<tr>
+<td><strong>Execution infrastructure</strong></td>
+<td>ERC can be executed using a shared/distributed infrastructure</td>
+<td><code>HTTP</code></td>
+</tr>
+<tr>
+<td><strong>Data repository</strong></td>
+<td>the reproducibility service fetches (a) content for ERC creation, or (b) complete ERC, from different sources; it stores created ERC persistently at suitable repositories, which in turn may connect to long-term archives and preservation systems</td>
+<td><code>HTTP</code>, <code>FTP</code>, <code>WebDAV</code>, <code>git</code></td>
+</tr>
+<tr>
+<td><strong>Registry (metadata)</strong></td>
+<td>the reproducibility service can deliver metadata on published ERC to registries/catalogues/search portals directly and mediately via data repositories; the service can also retrieve/harvest contextual metadata during ERC creation to reduce required user inputs; users discover ERC via registries</td>
+<td>(proprietary) <code>HTTP</code> APIs, persistent identifiers (<code>DOI</code>), <code>OAI-PMH</code></td>
+</tr>
+<tr>
+<td><strong>Software repository</strong></td>
+<td>software repository provide software artifacts during ERC creation and store executable runtime environments</td>
+<td><code>HTTP</code> APIs</td>
+</tr>
+<tr>
+<td><strong>Archives and digital preservation systems</strong></td>
+<td>saving ERCs in preservation systems includes extended data and metadata management (cf. private/group domain vs. persistent domain in the <a href="http://www.forschungsdaten.org/index.php/Curation_Domain_Model">Curation Domain Model</a> (in German)), because a different kind of access and re-use is of concern for these systems; these concerns are relevant in so far as the intermediary <em>data repositories</em> must be supported, but further aspects, e.g. long-term access rights, are only mediately relevant for the reproducibility service</td>
+<td>metadata in <code>JSON</code> and <code>XML</code> provided as part of <code>HTTP</code> requests or as files within payloads</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-technical-context">3.2 Technical context<a class="headerlink" href="#32-technical-context" title="Permanent link">&para;</a></h3>
+<p>All components use <code>HTTP(S)</code> over cable networks connections for communication (metadata documents, ERC, Linux containers, etc.).</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="o2r project">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>07 deployment view - o2r Architecture</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../arc42.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "07 deployment view";
+    var mkdocs_page_input_path = "07_deployment-view.md";
+    var mkdocs_page_url = "/architecture/07_deployment-view/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> o2r Architecture</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Architecture</span>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../user-scenarios/">User scenarios</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../glossary/">Glossary</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../metadata/">Metadata</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../zenodo/">Zenodo integration</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">o2r Architecture</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>07 deployment view</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/o2r-project/architecture/tree/master/docs/07_deployment-view.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="7-deployment-view">7. Deployment View<a class="headerlink" href="#7-deployment-view" title="Permanent link">&para;</a></h2>
+<h3 id="71-test-server-httpso2runi-muensterde">7.1 Test server <a href="https://o2r.uni-muenster.de">https://o2r.uni-muenster.de</a><a class="headerlink" href="#71-test-server-httpso2runi-muensterde" title="Permanent link">&para;</a></h3>
+<p><a href="../img/7.1-deployment-view-testserver.png"><img alt="deployment view test server" src="../img/7.1-deployment-view-testserver.png" /></a></p>
+<dl>
+<dt>Motivation</dt>
+<dd>
+<p>The o2r infrastructure is driven by the research community's need for user friendly and transparent but also scalable and reliable solutions to increase computational reproducibility in the scientific publication process. To retrieve feedback from the community (public demo) and to increase software quality (controlled non-development environment), the current development state is regularly published on a test server.</p>
+</dd>
+<dt>Quality and/or Performance Features</dt>
+<dd>
+<p>The server is managed completely with <a href="https://www.ansible.com/">Ansible</a> to ensure a well-document setup. The base operating system is CentOS Linux 7. The machine has 4 cores, 8 GB RAM, and a local storage ~100 GB, and runs on a VM host. The one machine in this deployment runs the full o2r reproducibility service, i.e. all microservices and a webserver to serve the user interfaces. It also runs the databases and ancillary services, such as a web traffic statistics service. When executing a compendium, the compendium workspace is packaged in a tarball and send to the Docker daemon. This allows easy switching to remote machines, but also has a performance disadvantage.</p>
+</dd>
+<dt>Mapping of Building Blocks to Infrastructure</dt>
+<dd>
+<p>All building blocks run in their own Docker container using an image provided via and build on <a href="https://hub.docker.com/r/o2rproject/">Docker Hub</a> using a <code>Dockerfile</code> included in <a href="https://github.com/search?q=topic%3Amicroservice+org%3Ao2r-project+fork%3Atrue">each microservice's code repository</a>. The server is managed by the o2r team; external building blocks are managed by the respective organisation/provider.</p>
+</dd>
+</dl>
+<h3 id="72-production-sketch">7.2 Production (sketch)<a class="headerlink" href="#72-production-sketch" title="Permanent link">&para;</a></h3>
+<p><a href="../img/7.2-deployment-view-production-sketch.png"><img alt="deployment view test server" src="../img/7.2-deployment-view-production-sketch.png" /></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This deployment view is a sketch for a potential productive deployment and intends to point out features of the chosen architecture and expected challenges or solutions.
+<em>It is not implemented at the moment!</em></p>
+</div>
+<dl>
+<dt>Motivation</dt>
+<dd>
+<p>A productive system must be reliable and scalable providing a single reproducibility service API endpoint. It must also adopt the distribution and deployments of the reproducibility service's microservices. Being based on containers it naturally uses one of the powerful orchestration engines, such as <a href="https://docs.docker.com/engine/swarm">Docker Swarm</a> or <a href="http://kubernetes.io/">Kubernetes</a>. It can also include multiple execution infrastructures to support multiple container software versions, different architectures, kernels, GPUs, or even specialised hardware. Operators of a reproducibility service can separate themselves from other operators by offering specific hardware or versions.</p>
+</dd>
+<dt>Quality and/or Performance Features</dt>
+<dd>
+<p>The services are redundantly provided via separated clusters of nodes for (a) running the reproducibility service's microservices and ancillary services, (b) running the document and search databases, (c) running ERC executions. Separating the clusters allows common security protocols, e.g. the tool and execution cluster should not be able to contact arbitrary websites. The software in the data cluster can run in containers or bare metal. The clusters for app and compendia have access to a common shared file storage, a potential bottleneck. Performance of microservices can be easily scaled by adding nodes to the respective clusters. The diversity of supported ERCs can be increased by providing different architectures and kernels, and hardware. Some requirements could be met on demand using virtualisation, such as a specific operating system version.</p>
+</dd>
+<dt>Mapping of Building Blocks to Infrastructure</dt>
+<dd>
+<p>The o2r reproducibility service and execution infrastructures are managed by the o2r team similar to the test server. The other big building blocks, like publishing platforms or data repositories, are managed by the respective organisations.</p>
+</dd>
+</dl>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
