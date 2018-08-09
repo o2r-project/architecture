@@ -6,7 +6,7 @@ install:
   - "pip install mkdocs"
   - "pip install mkdocs-cinder"
   - "pip install markdown-include"
-  - "sudo apt-get install xfonts-base xfonts-75dpi"
+  - "sudo apt-get install xfonts-encodings"
   - "wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz"
   - "tar -xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz"
   - "sudo mv wkhtmltox/bin/wkhtmltopdf /usr/bin/wkhtmltopdf"
