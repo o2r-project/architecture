@@ -11,6 +11,7 @@ install:
   - "tar -xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz"
   - "sudo mv wkhtmltox/bin/wkhtmltopdf /usr/bin/wkhtmltopdf"
   - "wkhtmltopdf --version"
+  - "mkdocs --version"
 after_success:
   - if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then ./.deploy.sh ; fi
 env:

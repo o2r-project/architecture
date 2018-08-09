@@ -1,17 +1,18 @@
-site_name: Architecture for o2r
-site_description: Software architecture for Opening Reproducible Research
+site_name: o2r Architecture
+site_description: Opening Reproducible Research System Architecture
 site_author: "Daniel Nüst, Matthias Schutzeichel, Jörg Lorenz"
-pages:
+nav:
   - Architecture: index.md
-  - User scenarios: user-scenarios.md
+  - 'User scenarios': user-scenarios.md
   - Glossary: glossary.md
   - Metadata: metadata.md
   - Zenodo integration: zenodo.md
-theme: readthedocs
+theme:
+    name: readthedocs
+    custom_dir: custom_theme
 site_author: o2r project
 site_dir: site
 site_url: https://o2r.info/architecture/ 
-theme_dir: custom_theme
 extra_css: [arc42.css]
 repo_url: https://github.com/o2r-project/architecture
 repo_name: GitHub
