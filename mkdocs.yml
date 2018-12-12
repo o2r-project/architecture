@@ -21,4 +21,5 @@ markdown_extensions:
   - markdown_include.include
   - markdown.extensions.admonition
   - def_list
-  - toc(permalink=true)
+  - toc:
+      permalink: true
