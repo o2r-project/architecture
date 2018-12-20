@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://o2r.info/architecture/</loc>
-     <lastmod>2018-12-12</lastmod>
+     <lastmod>2018-12-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://o2r.info/architecture/user-scenarios/</loc>
-     <lastmod>2018-12-12</lastmod>
+     <lastmod>2018-12-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://o2r.info/architecture/glossary/</loc>
-     <lastmod>2018-12-12</lastmod>
+     <lastmod>2018-12-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://o2r.info/architecture/metadata/</loc>
-     <lastmod>2018-12-12</lastmod>
+     <lastmod>2018-12-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://o2r.info/architecture/zenodo/</loc>
-     <lastmod>2018-12-12</lastmod>
+     <lastmod>2018-12-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
