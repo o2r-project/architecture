@@ -1,6 +1,7 @@
 site_name: o2r Architecture
 site_description: Opening Reproducible Research System Architecture
 site_author: "Daniel Nüst, Matthias Schutzeichel, Jörg Lorenz"
+copyright: "Licensed under Creative Commons CC0 1.0 Universal License."
 nav:
   - Architecture: index.md
   - 'User scenarios': user-scenarios.md
