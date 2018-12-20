@@ -8,6 +8,12 @@ This specification and guides are developed by the members of the project Openin
 > 
 > _Opening Reproducible Research (o2r, [https://o2r.info/about](https://o2r.info/about)) is a DFG-funded research project by Institute for Geoinformatics ([ifgi](http://www.uni-muenster.de/Geoinformatics/)) and University and Regional Library ([ULB](https://www.ulb.uni-muenster.de/)), University of Münster, Germany. Building on recent advances in mainstream IT, o2r envisions a new architecture for storing, executing and interacting with the original analysis environment alongside the corresponding research data and manuscript. This architecture evolves around so called Executable Research Compendia (ERC) as the container for both research, review, and archival._
 
+To cite this specification please use
+
+> _Nüst, Daniel, 2018. Reproducibility Service for Executable Research Compendia: Technical Specifications and Reference Implementation. Zenodo. doi:[10.5281/zenodo.2203844](http://doi.org/10.5281/zenodo.2203844)_
+
+For a complete list of publications, posters, presentations, and software projects from th2 o2r project please visit [https://o2r.info/results/](https://o2r.info/results/).
+
 ------
 
 ## License
