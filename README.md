@@ -14,9 +14,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Build
 
-This specification is written in [Markdown](https://daringfireball.net/projects/markdown/), rendered with [MkDocs](http://www.mkdocs.org/) using a few [Python Markdown extensions](https://pythonhosted.org/Markdown/extensions/index.html), and deployed automatically using Travis CI.
+This specification is written in [Markdown](https://daringfireball.net/projects/markdown/), rendered with [MkDocs](http://www.mkdocs.org/) using a few [Python Markdown extensions](https://pythonhosted.org/Markdown/extensions/index.html), and deployed automatically using a Github Action.
 
-[![Build Status](https://travis-ci.org/o2r-project/architecture.svg?branch=master)](https://travis-ci.org/o2r-project/architecture)
+![badge for workflow status](https://github.com/o2r-project/architecture/actions/workflows/generate_pdf.yml/badge.svg)
 
 Use `mkdocs` to render it locally.
 
@@ -26,21 +26,9 @@ mkdocs serve
 ```
 
 ### Automated Builds
+The `deploy_site.yml` will run the `mkdocs` command on every direct commit or merge on the master branch and deploy the rendered HTML documents to the `gh-pages` branch in this repository.
 
-Our combination of the `.travis.yml` and `.deploy.sh` will run the `mkdocs` command on every direct commit or merge on the master branch and deploy the rendered HTML documents to the `gh-pages` branch in this repository.
-
-Travis authenticates its push to the `gh-pages` branch using a [personal access token](https://github.com/settings/tokens) of the user [@o2r-user](https://github.com/o2r-user), who has write access to this repository.
-The access token is encrypted in the `.travis.yml` [using Travis CLI](https://docs.travis-ci.com/user/encryption-keys/) and is specific to this repository.
-
-```bash
-travis encrypt GH_TOKEN=<token here>
-```
-
-The variable `GH_TOKEN` is used in the deploy script.
-The token generated on the GitHub website should not be stored anywhere, simply generate a new one if needed.
-
-This has some security risks, as described [here](https://gist.github.com/domenic/ec8b0fc8ab45f39403dd#sign-up-for-travis-and-add-your-project).
-To mitigate these risks, the option "Build pull requests" on the [Travis configuration page for this repo](https://travis-ci.org/o2r-project/erc-spec/settings) must be disabled so malicious changes to the Travis configuration file will not be build before maintainer inspection.
+The action authenticates its push to the `gh-pages` branch using the [checkout action](https://github.com/actions/checkout) and the credentials of the user [@o2r-user](https://github.com/o2r-user), who has write access to this repository. It is finalized through the [github pages deploy action](https://github.com/marketplace/actions/deploy-to-github-pages).
 
 ## Diagrams
 
