@@ -16,7 +16,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 This specification is written in [Markdown](https://daringfireball.net/projects/markdown/), rendered with [MkDocs](http://www.mkdocs.org/) using a few [Python Markdown extensions](https://pythonhosted.org/Markdown/extensions/index.html), and deployed automatically using a Github Action.
 
-![badge for workflow status](https://github.com/o2r-project/architecture/actions/workflows/generate_pdf.yml/badge.svg)
+![badge for workflow status](https://github.com/o2r-project/architecture/actions/workflows/deploy_site.yml/badge.svg)
 
 Use `mkdocs` to render it locally.
 

@@ -36,11 +36,6 @@ jobs:
           wkhtmltopdf --version
           mkdocs --version
 
-    - name: Initialize gh-pages checkout
-      run: |
-          mkdir -p site
-          cd site
-
     - name: Build the documentation
       run: mkdocs build --clean
 
