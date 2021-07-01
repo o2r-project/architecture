@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <meta name="author" content="o2r project">
+  <link rel="canonical" href="https://o2r.info/architecture/glossary/">
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Glossary - o2r Architecture</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../arc42.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../arc42.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,9 +26,8 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -36,77 +36,61 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> o2r Architecture</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="..">Architecture</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../user-scenarios/">User scenarios</a>
-	    </li>
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href="./">Glossary</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#glossary">Glossary</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#architecture">Architecture</a></li>
-        
-            <li><a class="toctree-l3" href="#computer-architecture">Computer Architecture</a></li>
-        
-            <li><a class="toctree-l3" href="#crud">CRUD</a></li>
-        
-            <li><a class="toctree-l3" href="#digital-object-identifier">Digital Object Identifier</a></li>
-        
-            <li><a class="toctree-l3" href="#doi">DOI</a></li>
-        
-            <li><a class="toctree-l3" href="#erc">ERC</a></li>
-        
-            <li><a class="toctree-l3" href="#executable-research-compendium">Executable Research Compendium</a></li>
-        
-            <li><a class="toctree-l3" href="#javascript-promises">JavaScript Promises</a></li>
-        
-            <li><a class="toctree-l3" href="#kernel">Kernel</a></li>
-        
-            <li><a class="toctree-l3" href="#literate-programming">Literate Programming</a></li>
-        
-        </ul>
-    
-
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Architecture</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../user-scenarios/">User scenarios</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Glossary</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#computer-architecture">Computer Architecture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#crud">CRUD</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#digital-object-identifier">Digital Object Identifier</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#doi">DOI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#erc">ERC</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#executable-research-compendium">Executable Research Compendium</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#javascript-promises">JavaScript Promises</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#kernel">Kernel</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#literate-programming">Literate Programming</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../metadata/">Metadata</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../zenodo/">Zenodo integration</a>
-	    </li>
-          
-        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../metadata/">Metadata</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../zenodo/">Zenodo integration</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -134,8 +118,10 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -149,7 +135,7 @@ via <a href="https://en.wikipedia.org/wiki/Computer_architecture">Wikipedia</a><
 </blockquote>
 <p>Common architectures are <code>amd64</code> or <code>x86_64</code>.</p>
 <p>You can find out the operating system + architecture combinations supported by a specific Docker image, e.g. <code>golang</code>, with</p>
-<pre><code class="bash">$ docker run mplatform/mquery golang
+<pre><code class="language-bash">$ docker run mplatform/mquery golang
 Image: golang
  * Manifest List: Yes
  * Supported platforms:
@@ -162,7 +148,6 @@ Image: golang
    - windows/amd64:10.0.14393.2068
    - windows/amd64:10.0.16299.248
 </code></pre>
-
 <h2 id="crud">CRUD<a class="headerlink" href="#crud" title="Permanent link">&para;</a></h2>
 <p>Basic operations on a digital artefact are create, read, update, and delete, often abbreviated to "<a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a>".</p>
 <h2 id="digital-object-identifier">Digital Object Identifier<a class="headerlink" href="#digital-object-identifier" title="Permanent link">&para;</a></h2>
@@ -217,7 +202,7 @@ via <a href="https://en.wikipedia.org/wiki/Literate_programming">Wikipedia</a></
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -227,22 +212,30 @@ via <a href="https://en.wikipedia.org/wiki/Literate_programming">Wikipedia</a></
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-        <span><a href="../user-scenarios/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../metadata/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../user-scenarios/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../metadata/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

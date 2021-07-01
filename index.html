@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Opening Reproducible Research System Architecture">
   <meta name="author" content="o2r project">
+  <link rel="canonical" href="https://o2r.info/architecture/">
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Architecture - o2r Architecture</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <title>o2r Architecture</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="arc42.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="arc42.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,9 +26,8 @@
   
   <script src="js/jquery-2.1.1.min.js" defer></script>
   <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -36,77 +36,161 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="." class="icon icon-home"> o2r Architecture</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href=".">Architecture</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#opening-reproducible-research-system-architecture">Opening Reproducible Research System Architecture</a></li>
-    
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href=".">Architecture</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-introduction-and-goals">1. Introduction and Goals</a>
         <ul>
-        
-            <li><a class="toctree-l3" href="#1-introduction-and-goals">1. Introduction and Goals</a></li>
-        
-            <li><a class="toctree-l3" href="#2-architecture-constraints">2. Architecture constraints</a></li>
-        
-            <li><a class="toctree-l3" href="#3-system-scope-and-context">3. System scope and context</a></li>
-        
-            <li><a class="toctree-l3" href="#4-solution-strategy">4. Solution strategy</a></li>
-        
-            <li><a class="toctree-l3" href="#5-building-block-view">5. Building block view</a></li>
-        
-            <li><a class="toctree-l3" href="#6-runtime-view">6. Runtime view</a></li>
-        
-            <li><a class="toctree-l3" href="#7-deployment-view">7. Deployment View</a></li>
-        
-            <li><a class="toctree-l3" href="#credits">Credits</a></li>
-        
-            <li><a class="toctree-l3" href="#license">License</a></li>
-        
-            <li><a class="toctree-l3" href="#about-arc42">About arc42</a></li>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#preamble">Preamble</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#11-requirements-overview">1.1 Requirements Overview</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-quality-goals">1.2 Quality Goals</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13-stakeholders">1.3 Stakeholders</a>
+    </li>
         </ul>
-    
-
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-architecture-constraints">2. Architecture constraints</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-technical-constraints">2.1 Technical constraints</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-organizational-constraints">2.2 Organizational constraints</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23-conventions">2.3 Conventions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-system-scope-and-context">3. System scope and context</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31-business-context">3.1 Business context</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32-technical-context">3.2 Technical context</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-solution-strategy">4. Solution strategy</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#web-api">Web API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#microservices">Microservices</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#storage-and-intra-service-communication">Storage and intra-service communication</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#demonstration-user-data-authentication">Demonstration, user data &amp; authentication</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-building-block-view">5. Building block view</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51-refinement-level-1">5.1 Refinement Level 1</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#511-blackbox-publication-platforms">5.1.1 Blackbox Publication Platforms</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#512-blackbox-id-provider">5.1.2 Blackbox ID Provider</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#513-blackbox-execution-infrastructure">5.1.3 Blackbox Execution Infrastructure</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#514-blackbox-data-repositories">5.1.4 Blackbox Data Repositories</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#515-blackbox-registries">5.1.5 Blackbox Registries</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#516-blackbox-software-repositories">5.1.6 Blackbox Software Repositories</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52-refinement-level-2">5.2 Refinement Level 2</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521-whitebox-publication-platforms">5.2.1 Whitebox Publication Platforms</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522-whitebox-id-provider">5.2.2 Whitebox ID Provider</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#523-whitebox-execution-infrastructure">5.2.3 Whitebox Execution Infrastructure</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#524-whitebox-data-repositories">5.2.4 Whitebox Data Repositories</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#525-whitebox-registries">5.2.5 Whitebox Registries</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#526-whitebox-software-repositories">5.2.6 Whitebox Software Repositories</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#527-whitebox-reproducibility-service">5.2.7 Whitebox Reproducibility Service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53-refinement-level-3">5.3 Refinement Level 3</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#531-whitebox-microservices">5.3.1 Whitebox microservices</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#532-whitebox-database">5.3.2 Whitebox database</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#533-whitebox-tools">5.3.3 Whitebox tools</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#meta">Meta</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#containerit">Containerit</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#534-whitebox-ephemeral-file-storage">5.3.4 Whitebox ephemeral file storage</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-runtime-view">6. Runtime view</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61-erc-creation">6.1 ERC Creation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62-erc-inspection">6.2 ERC Inspection</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-deployment-view">7. Deployment View</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71-test-server-httpso2runi-muensterde">7.1 Test server https://o2r.uni-muenster.de</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72-production-sketch">7.2 Production (sketch)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#about-arc42">About arc42</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="user-scenarios/">User scenarios</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="glossary/">Glossary</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="metadata/">Metadata</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="zenodo/">Zenodo integration</a>
-	    </li>
-          
-        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="user-scenarios/">User scenarios</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="glossary/">Glossary</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="metadata/">Metadata</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="zenodo/">Zenodo integration</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -134,8 +218,10 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -845,8 +931,9 @@ This work is published from: Germany.</p>
 <p>arc42, the Template for documentation of software and system architecture.</p>
 <p>By Dr. Gernot Starke, Dr. Peter Hruschka and contributors.</p>
 <p>Template Revision: 7.0 EN (based on asciidoc), January 2017</p>
-<p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke</p>
-<div class="buildinfo">Build b3bc683 @ 2018-12-20T12:20:45Z</div
+<p>© We acknowledge that this document uses material from the arc 42 architecture template, <a href="http://www.arc42.de">http://www.arc42.de</a>. Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
+<hr />
+<div class="buildinfo">Build 0d60d5e @ 2021-07-01 11:54:09 +0200</div>
               
             </div>
           </div>
@@ -869,7 +956,7 @@ This work is published from: Germany.</p>
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -879,25 +966,33 @@ This work is published from: Germany.</p>
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-      
-        <span style="margin-left: 15px"><a href="user-scenarios/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+      <span><a href="user-scenarios/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
     <script src="js/theme.js" defer></script>
       <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 1.0.4
-Build Date UTC : 2018-12-20 12:20:45
+MkDocs version : 1.2.1
+Build Date UTC : 2021-07-01 09:54:54.156119+00:00
 -->

@@ -1,28 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://o2r.info/architecture/</loc>
-     <lastmod>2018-12-20</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://o2r.info/architecture/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://o2r.info/architecture/user-scenarios/</loc>
-     <lastmod>2018-12-20</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://o2r.info/architecture/01_introduction-and-goals/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://o2r.info/architecture/glossary/</loc>
-     <lastmod>2018-12-20</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://o2r.info/architecture/02_architecture-constraints/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://o2r.info/architecture/metadata/</loc>
-     <lastmod>2018-12-20</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://o2r.info/architecture/03_system-scope-and-context/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://o2r.info/architecture/zenodo/</loc>
-     <lastmod>2018-12-20</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://o2r.info/architecture/04_solution-strategy/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/05_building-block-view/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/06_runtime-view/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/07_deployment-view/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/arc42/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/credits/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/glossary/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/metadata/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/user-scenarios/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://o2r.info/architecture/zenodo/</loc>
+         <lastmod>2021-07-01</lastmod>
+         <changefreq>daily</changefreq>
     </url>
 </urlset>

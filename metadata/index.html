@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <meta name="author" content="o2r project">
+  <link rel="canonical" href="https://o2r.info/architecture/metadata/">
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Metadata - o2r Architecture</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../arc42.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../arc42.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,9 +26,8 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -36,65 +36,49 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> o2r Architecture</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="..">Architecture</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../user-scenarios/">User scenarios</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../glossary/">Glossary</a>
-	    </li>
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href="./">Metadata</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#metadata-workflows">Metadata workflows</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#files-vs-database">Files vs. database</a></li>
-        
-            <li><a class="toctree-l3" href="#metadata-extraction-and-brokering-during-creation">Metadata extraction and brokering during creation</a></li>
-        
-            <li><a class="toctree-l3" href="#metadata-for-shipments">Metadata for shipments</a></li>
-        
-            <li><a class="toctree-l3" href="#metadata-mappings">Metadata mappings</a></li>
-        
-        </ul>
-    
-
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Architecture</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../user-scenarios/">User scenarios</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Metadata</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#files-vs-database">Files vs. database</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#metadata-extraction-and-brokering-during-creation">Metadata extraction and brokering during creation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#metadata-for-shipments">Metadata for shipments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#metadata-mappings">Metadata mappings</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../zenodo/">Zenodo integration</a>
-	    </li>
-          
-        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../zenodo/">Zenodo integration</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -122,8 +106,10 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -179,16 +165,49 @@ It does not do any updating, brokering, or validation.</p>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>[//]: # (<code>datacite</code></td>
+<td><a href="http://schema.datacite.org/meta/kernel-4.1/">DataCite Metadata Schema 4.1</a></td>
+<td><code>xml</code></td>
+<td>for metadata export)</td>
+</tr>
+<tr>
+<td>[//]: # (<code>datacite</code></td>
+<td><a href="http://schema.datacite.org/meta/kernel-3.1/">DataCite Metadata Schema 3.1</a></td>
+<td><code>xml</code></td>
+<td>(still in wide spread use for OAI-PMH))</td>
+</tr>
+<tr>
+<td>[//]: # (<code>ORCID</code> (TBD)</td>
+<td><a href="https://members.orcid.org/api/xml-orcid-works">XML for orcid-works</a></td>
+<td><code>xml</code></td>
+<td>for adding ERC as works to an ORCID profile)</td>
+</tr>
+<tr>
+<td>[//]: # (<code>CRIS</code> (TBD)</td>
+<td>(local adaptation of the <a href="http://www.eurocris.org/cerif/main-features-cerif">CERIF model</a></td>
+<td><code>xml</code></td>
+<td>...)</td>
+</tr>
+<tr>
+<td><code>b2share</code></td>
+<td>using o2r schema for the o2r community depositions on <a href="https://b2share.eudat.eu/">b2share</a></td>
+<td><code>json</code></td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>codemeta</code></td>
+<td><a href="https://github.com/codemeta/codemeta/tree/2.0-rc">codemeta 2.0-rc</a></td>
+<td><code>json ld</code></td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>zenodo</code></td>
+<td><a href="https://zenodo.org/dev#collapse-list16">Deposition metadata</a></td>
+<td><code>json</code></td>
+<td>for storing full ERC in the Zenodo data repository; Zenodo also publishes metadata on <a href="https://datacite.org/">DataCite</a></td>
 </tr>
 </tbody>
 </table>
-<p><code>b2share</code> | using o2r schema for the o2r community depositions on <a href="https://b2share.eudat.eu/">b2share</a>  | <code>json</code> | ...
-<code>codemeta</code> | <a href="https://github.com/codemeta/codemeta/tree/2.0-rc">codemeta 2.0-rc</a> | <code>json ld</code> | ...
-<code>zenodo</code> | <a href="https://zenodo.org/dev#collapse-list16">Deposition metadata</a> | <code>json</code> | for storing full ERC in the Zenodo data repository; Zenodo also publishes metadata on <a href="https://datacite.org/">DataCite</a></p>
               
             </div>
           </div>
@@ -213,7 +232,7 @@ It does not do any updating, brokering, or validation.</p>
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -223,22 +242,30 @@ It does not do any updating, brokering, or validation.</p>
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-        <span><a href="../glossary/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../zenodo/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/o2r-project/architecture/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../glossary/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../zenodo/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
