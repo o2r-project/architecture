@@ -1,0 +1,71 @@
+name: Deploy site
+
+on:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+
+jobs:
+  render-pdf:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    
+    # Action for collection of short branchname in commit mesage
+    - name: Inject short variables
+      uses: rlespinasse/github-slug-action@v3.x
+
+    - name: Install python packages
+      run: |
+          sudo apt update 
+          wget --version 
+          pip install mkdocs
+          pip install mkdocs-cinder
+          pip install markdown-include
+          sudo apt-get -y install xfonts-encodings libxrender-dev libfontconfig-dev libxext-dev
+          wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+          sudo apt -y install ./wkhtmltox_0.12.6-1.focal_amd64.deb
+          wkhtmltopdf --version
+          mkdocs --version
+
+    - name: Build the documentation
+      run: mkdocs build --clean
+
+    - name: Replace current build version and date
+      run: |
+          CURRENT_VERSION=$(git log --pretty=format:'%h' -n 1)
+          CURRENT_DATE=$(git show -s --format=%ci $CURRENT_VERSION)
+          echo $CURRENT_VERSION "@" $CURRENT_DATE
+          sed -i "s/@@VERSION@@/$CURRENT_VERSION/g" site/index.html
+          sed -i "s/@@TIMESTAMP@@/$CURRENT_DATE/g" site/index.html
+
+    - name: Make the pdf 
+      run: |
+          VCS_REF=$(git rev-parse --short HEAD)
+          CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          FILE_NAME_PDF=$(echo o2r-architecture-$VCS_REF.pdf)
+          # update version in cover page, if not already done
+          sed -i 's/@@VERSION@@/$VCS_REF/g' site/index.html
+          sed -i 's/@@TIMESTAMP@@/$CURRENT_DATE/g' site/index.html
+          # fix protocol relative URLs, see https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2713
+          find site/ -type f -name '*.html' | xargs sed -i 's|href="//|href="https://|g'
+          find site/ -type f -name '*.html' | xargs sed -i 's|src="//|src="https://|g'
+          # create PDF
+          sudo wkhtmltopdf --margin-top 20mm --load-error-handling ignore --enable-local-file-access --no-background $( pwd)/site/index.html site/o2r-architecture.pdf
+
+    - name: Deploy to Github pages
+      uses: JamesIves/github-pages-deploy-action@4.1.3
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: site # The folder the action should deploy.
+        commit-message: Rebuild pages at ${{github.sha}} with branch ${{ env.GITHUB_REF_SLUG }}
+        git-config-name: Build bot <o2r.projekt@uni-muenster.de>
+        git-config-email: o2r.projekt@uni-muenster.de
