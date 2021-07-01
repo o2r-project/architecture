@@ -28,4 +28,6 @@ This work is published from: Germany.
 
 {!docs/arc42.md!}
 
+------
+
 <div class="buildinfo">Build @@VERSION@@ @ @@TIMESTAMP@@</div>
